@@ -8,5 +8,10 @@ language: en
 role: admin
 token: f37e11350e6a4a24210033f20fb00ef1d49ad20e
 history:
+  - home/ready-to-buy
+  - home/testimonials
+  - null
   - home
-  - home/section-why
+  - home/how-does-it-work/experience-amazing
+firstname:
+lastname:

@@ -36,6 +36,5 @@
     ?>
 </div>
 
-<!--<?php echo html($page->text()) ?>-->
 
 <?php snippet('footer') ?>

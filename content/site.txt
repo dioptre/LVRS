@@ -1,16 +1,12 @@
-Title: Kirby Starterkit
+Title: Verve
 
 ----
 
-Author: Bastian Allgeier GmbH
+Author: Verve Startup
 
 ----
 
 Description: This is Kirby's Starterkit.
-
-----
-
-Keywords: Kirby, CMS, file-based
 
 ----
 

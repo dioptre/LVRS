@@ -5,7 +5,7 @@
             <?php echo html($data->title()) ?>
         </h2>
         <p class="intro text-center">
-            <?php echo html($data->text()) ?>
+            <?php echo html($data->subtitle()) ?>
         </p>
 
         <!-- Render sub templates -->
@@ -20,4 +20,4 @@
             <p><a class="btn btn-cta btn-cta-secondary" href="features.html">Take a Tour</a></p>
         </div>
     </div>
-</div>
+</section>

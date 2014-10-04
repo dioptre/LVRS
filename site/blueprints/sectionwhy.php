@@ -9,6 +9,6 @@ fields:
   title:
     label: Title
     type:  text
-  text:
-    label: Text
+  subtitle:
+    label: Subtitle
     type:  text
