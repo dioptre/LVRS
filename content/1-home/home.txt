@@ -1,0 +1,21 @@
+Title: Home
+
+----
+
+Bodyid: home-page
+
+----
+
+Coverbtn: Try for free
+
+----
+
+Coverpic: bg-header-1.jpg
+
+----
+
+Covertitle: Bring Back The Butterflies
+
+----
+
+Coversubtitle: Tailored experiences designed specifically to reignite the passion</b> in a relationship, delivered to you every month.
