@@ -21,7 +21,7 @@
 	//echo (string)serialize($user->properties->stripe_id);
 	if(!$valid_token or !isset($_POST['stripeToken'])){
 		//echo "Invalid token";
-		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/failed_transaction');
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/failed-transaction');
 		die();
 	}else {
 		// Set your secret key: remember to change this to your live secret key in production
@@ -88,7 +88,7 @@
 		// );
 		
 		//echo "Successful Payment";
-		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/successful_transaction');
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/successful-transaction');
 		die();
 
 	}
