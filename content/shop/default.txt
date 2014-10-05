@@ -18,7 +18,7 @@ Text: <script type="text/x-handlebars">
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Ember &amp; UserApp</a>
+          <a class="navbar-brand" href="#">Verve Shop</a>
         </div>
         <div class="navbar-collapse collapse">
           {{#if user.authenticated}}
