@@ -8,6 +8,7 @@
 	// Token: https://help.userapp.io/customer/portal/articles/1364103-how-do-i-create-an-api-token-
 
 	$GLOBALS['userAppId'] = "542f6b2c8ea22";
+	$GLOBALS['userAppToken'] = "qKXq1OUfSQaB3GZiGGNtuw";
 	User::setAppId($GLOBALS['userAppId']);
 	
 	require_once('./lib/Stripe.php');

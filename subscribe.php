@@ -20,7 +20,9 @@
 	}
 	//echo (string)serialize($user->properties->stripe_id);
 	if(!$valid_token or !isset($_POST['stripeToken'])){
-		echo "Invalid token";
+		//echo "Invalid token";
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/failed_transaction');
+		die();
 	}else {
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here https://dashboard.stripe.com/account
@@ -29,7 +31,7 @@
 
 		$sid = null;
 		
-		$api = new \UserApp\API($GLOBALS['userAppId'], "qKXq1OUfSQaB3GZiGGNtuw");
+		$api = new \UserApp\API($GLOBALS['userAppId'], $GLOBALS['userAppToken']);
 
 		$result = $api->user->get(array(
 			"user_id" => $user->user_id
@@ -84,8 +86,11 @@
 		  // "plan" => "VERVE1",
 		  // "email" => "payinguser@example.com")
 		// );
-
-		echo '<h1>Successfully charged AUD $250.00!</h1>';
+		
+		//echo "Successful Payment";
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/successful_transaction');
+		die();
 
 	}
+
 ?>
