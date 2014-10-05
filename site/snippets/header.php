@@ -13,19 +13,40 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    <!-- Plugins CSS -->
-    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="assets/css/styles-9.css">
-    <link rel="stylesheet" href="assets/css/custom-verve.css">
+
+    <!-- CSS files -->
+    <?php echo css(array(
+      "assets/plugins/bootstrap/css/bootstrap.min.css",
+      "assets/plugins/font-awesome/css/font-awesome.css",
+      "assets/plugins/flexslider/flexslider.css",
+      "assets/plugins/rrssb/css/rrssb.css",
+      "assets/css/styles-9.css",
+      "assets/css/custom-verve.css"
+    )); ?>
+
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <?php echo js(array(
+      "assets/plugins/jquery-1.11.1.min.js",
+      "assets/plugins/jquery-migrate-1.2.1.min.js",
+      "assets/plugins/bootstrap/js/bootstrap.min.js",
+      "assets/plugins/bootstrap-hover-dropdown.min.js",
+      "assets/plugins/back-to-top.js",
+      "assets/plugins/jquery-placeholder/jquery.placeholder.js",
+      "assets/plugins/FitVids/jquery.fitvids.js",
+      "assets/plugins/flexslider/jquery.flexslider-min.js",
+      "assets/plugins/imagesloaded/imagesloaded.pkgd.min.js",
+      "assets/plugins/masonry.pkgd.min.js",
+      "assets/js/blog.js",
+      "assets/js/main.js"
+    )); ?>
+
 
     <script>
       // mixpanel

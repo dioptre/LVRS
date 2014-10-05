@@ -1,0 +1,13 @@
+body {
+    font-family: 'futura';
+}
+
+.promo .title {
+    font-size: 60px;
+}
+
+
+section.section.why .quote-profile > img {
+    max-width: 70px;
+    max-height: 70px;
+}

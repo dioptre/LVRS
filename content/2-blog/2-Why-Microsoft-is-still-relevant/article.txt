@@ -1,0 +1,44 @@
+Title: Why Microsoft is still relevant
+----
+Author: andrew-grosser
+----
+Releasedate: 2014-07-08
+----
+Text: I’m sitting in the Microsoft Australian Partner conference with a ticket I swindled from a good friend. I’ve just been asked to leave the lunch table by a group of salespeople from my ex-competitor Oakton. I feel a little uncomfortable and more than a little out of place.
+Businesses here are buzzing about migrating existing off-the shelf box products onto cloud services. It might usher a new era for service providers or it could spell the beginning of the end for them as they migrate themselves out of existence. In truth I hope it's the latter. 
+
+I'm impetuous. I want to build solutions to problems without the additional problem of a middle man. I'm fast moving. I’m a startup. and for the first time in a long time Microsoft seems to be doing something that I want. They're listening and things are getting easier for us startups and tech implementers. 
+
+>I'm not a Microsoft lover, nor a hater. I'm pragmatic. I use a Mac for travel, my docs are in Google, my phone is Android, but my development services are on Windows. 
+
+Something piqued my interest just a month ago. I got heckled by a couple of up and coming developers in the valley (Silicon Valley, HQ for nerds) for using Microsoft technology, when over there Big-Data, Node.js and Amazon are as fashionable as Ray-Bans. "No one uses microsoft here any more" was their adage. They didn’t have a reason for their distaste at the time, so I thought I should justify why I think Microsoft is still relevant instead.
+
+
+###Nerds being Nerds
+I'm resident in an incubator in Australia called ilab. it's a great place for startups to begin, but I have seen a lot of them fail to succeed as people struggle with execution. I believe its due to Nerds. Nerds (like me) love new tech, but with that comes a caveat that its hard and sometimes impossible (especially if its too expensive) to maintain if your prize nerd moves on or gets bored. I've struggled keeping skilled contractors on-board in a past life in a nerd market where if people are paid an extra dollar an hour they move on. Keep it simple, and watch your risk.
+
+
+###Scaling is not as important as you think
+I hear you sceptics chime together like the bells of big ben.... Microsoft won't scale. You're probably correct.  There are significant differences between azure services and native services (for instance SQL Azure maxes out at 250GB per instance). Yes Cassandra will eat SQL Azure for breakfast in size and scalability (if you’re worried about petabytes), but people in the valley want to scale to the size of Google from day one. How relevant is a website that will take petabytes of data if it will take forever to implement? With Microsoft technology you can still be as big as Stack Overflow.  I don’t think I’ll have to worry for at least 2 years before we think of needing to scale beyond that size (here’s hoping). So let’s be honest here, which startup will? We've got the same tech that got  (link:http://nickcraver.com/blog/2013/11/22/what-it-takes-to-run-stack-overflow/ text:Stack Overflow) to millions of users, but we did it in a few weeks. And by the time we do get to user 1,000,001 the challenge of scaling will be a good problem to have.
+
+
+###Outsourcing made easy
+I’ve seen too many startups fail left with unfinished products written by supposed experts in obscure technologies. 
+> Many businesses could have saved themselves from early extinction had they reaped with the apparent misfortune of using 'old technology' which nearly everyone could understand. 
+
+Unless you have your in-house development team, don’t fall into the same trap. Just cast your eyes on the thousands of C# developers available on odesk or freelancer.com as a cheap alternative (C# is consitently in the top 5 most demanded languages  (link:http://lifehacker.com/the-top-programming-languages-ranked-by-job-demand-po-1601752302 text:source)).
+
+
+###Our secret formula
+We’ve got a system which is as complex as the next startup, but we built it in just 3 weeks. How? Without blowing our trumpet too much - I have yet to see someone else locally execute this quickly. We did this by using a combination old and new technology. The backbone for our business critical grunt work utilizes Microsoft’s tried and tested database and internet information services. On top of this foundation we use the frameworks that provide the best user experience on each native platform. For the web we’ve chosen a framework called Ember (link:http://flowpro.io/blog/ember-js-flowpro text:which is another story), that integrates seamlessly with our existing architecture. Thanks to our strong foundations with the Microsoft platform we can now easily expand to native iOS, Android, and Windows apps easily too. 
+
+This makes us happy because we can now concentrate on building our Knowledge Retention business which is what we need to spend time all our time doing (for us building the product was the easy part). We can hand over our code that is super easy to maintain and doesn’t require highly specialized valley experts. We can instead farm our work off to a great number of old-tech outsourcers more cheaply and expect things to be done more quickly. We have large ambitions for our product, and we believe our technology choices are the most pragmatic and the best fit for new staff.
+
+
+###Conclusion
+Yes we drank the kool aid. We went to Microsoft for help and reaped the benefits. We went from initial concept to working product in 3 weeks. Sure we’re okay at development, but we are indebted to the technologies we used. We have a secure roadmap, and a vision to scale.
+Thankfully our Microsoft Azure hosting also comes for free with the (link:http://www.microsoft.com/bizspark/ text:BizSpark) startup subscription (think of it like Amazon Web Services, but easy-to-use and integrated with Visual Studio, SQL, Developer Tools) which lasts for two years.  
+
+>I’d say Microsoft isn't just relevant - in some cases its essential for startups. 
+
+Particularly those with no IT support. Don't bag everything and be pragmatic - unless it’s of course about Windows 8.1 mobile.
