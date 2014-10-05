@@ -1,27 +1,32 @@
+var checkLoginEvent = function () { 
+    UserApp.Token.heartbeat(function(error, result){
+		// Handle error/result
+		var currentRoute = window.location.hash.toLowerCase();
+		if (error && currentRoute.indexOf('login') < 0 && currentRoute.indexOf('signup') < 0) {		
+			UserApp.User.logout();
+			window.location.hash = 'login';
+		}
+	});
+
+};
+
 Ember.Application.initializer({
   name: 'userapp',
   initialize: function(container, application) {
   	Ember.UserApp.setup(application, { appId: '542f6b2c8ea22' });
+	Ember.run.scheduleOnce('sync', App, checkLoginEvent);
   }
 });
 
 App = Ember.Application.create();
 
-var afterRenderEvent = function () {
- 
-    UserApp.Token.heartbeat(function(error, result){
-		// Handle error/result
-		console.log('heartbeat');
-		//Todo transition to #login unless already there
-	});
-
-};
-Ember.View.reopen({
-  didInsertElement : function(){
-    this._super();
-    Ember.run.scheduleOnce('afterRender', App, afterRenderEvent);
-  }
+Ember.Route.reopen({
+  beforeModel : function(transition){
+    Ember.run.scheduleOnce('sync', App, checkLoginEvent);
+    this._super(transition);
+  }  
 });
+
 
 App.Router.map(function() {
   this.route('signup');
@@ -122,6 +127,8 @@ App.ArticleRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {
 		// $.get('/articles.php', function(data) {
 			// App.articlesController.set('content', data);
 		// });
+//	    Ember.run.scheduleOnce('sync', App, afterRenderEvent);
+
 	},
 	model: function() {
 		return  this.store.findAll('article');
