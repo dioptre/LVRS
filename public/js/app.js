@@ -3,8 +3,8 @@ var checkLoginEvent = function () {
 		// Handle error/result
 		var currentRoute = window.location.hash.toLowerCase();
 		if (error && currentRoute.indexOf('login') < 0 && currentRoute.indexOf('signup') < 0) {		
-			UserApp.User.logout();
-			window.location.hash = 'login';
+			//UserApp.User.logout();
+			//window.location.hash = 'login';
 		}
 	});
 
@@ -33,6 +33,9 @@ App.Router.map(function() {
   this.route('login');
   this.route('article');
   this.route('subscribe');
+  this.route('preferences');
+  this.route('transacted');
+  this.route('declined');
 });
 
 App.ApplicationRoute = Ember.Route.extend(Ember.UserApp.ApplicationRouteMixin);
