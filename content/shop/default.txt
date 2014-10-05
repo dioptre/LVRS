@@ -14,15 +14,11 @@ Covertext:
 
 ----
 
-Text: <div id ="sdasdasdasd">
-test
-</div>
-<script type="text/x-handlebars">
-
+Text: <script type="text/x-handlebars">
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Ember & UserApp</a>
+          <a class="navbar-brand" href="#">Verve Shop</a>
         </div>
         <div class="navbar-collapse collapse">
           {{#if user.authenticated}}
@@ -40,8 +36,8 @@ test
           </ul>
         </div>
       </div>
-{{outlet}}
 
+      {{outlet}}
     </div>
   </script>
 
@@ -125,11 +121,25 @@ test
         </form>
   </script>
 
-  <script src="public/js/libs/jquery-1.10.2.js"></script>
-  <script src="public/js/libs/handlebars-1.1.2.js"></script>
-  <script src="public/js/libs/ember.min.js"></script>
-  <script src="public/js/libs/ember-data.min.js"></script>
+   <script type="text/x-handlebars" data-template-name="preferences">
+		<h1>Preferences</h1>
+   </script>
+
+   <script type="text/x-handlebars" data-template-name="transacted">
+		<h1>Succcessful Transaction</h1>
+		{{#link-to 'preferences'}}Now tell us what you'd like to do.{{/link-to}}
+   </script>
+
+   <script type="text/x-handlebars" data-template-name="declined">
+		<h1>Declined</h1>
+   </script>
+   
+  
+  <script src="/public/js/libs/jquery-1.10.2.js"></script>
+  <script src="/public//js/libs/handlebars-1.1.2.js"></script>
+  <script src="/public/js/libs/ember.min.js"></script>
+  <script src="/public/js/libs/ember-data.min.js"></script>
   <script src="https://app.userapp.io/js/userapp.client.js"></script>
   <script src="https://app.userapp.io/js/ember-userapp.js"></script>
-  <script src="public/js/app.js"></script>
+  <script src="/public/js/app.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
