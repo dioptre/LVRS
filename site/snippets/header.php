@@ -27,6 +27,7 @@
       "assets/plugins/flexslider/flexslider.css",
       "assets/plugins/rrssb/css/rrssb.css",
       "assets/css/styles-9.css",
+      "assets/css/styles-10.css",
       "assets/css/custom-verve.css"
     )); ?>
 

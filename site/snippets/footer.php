@@ -39,13 +39,6 @@
                     </div><!--//foooter-col-->
                     <div class="footer-col connect col-md-6 col-sm-12 col-xs-12">
                         <div class="footer-col-inner">
-                            <ul class="social list-inline">
-                                <li><a href="https://twitter.com/3rdwave_themes" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
-                            </ul>
                             <div class="form-container">
                                 <p class="intro">Stay up to date with the latest news and offers from Velocity</p>
                                 <form class="signup-form navbar-form">
@@ -55,6 +48,15 @@
                                     <button type="submit" class="btn btn-cta btn-cta-primary">Subscribe Now</button>
                                 </form>
                             </div><!--//subscription-form-->
+                            <br>
+                            <br>
+                            <ul class="social list-inline">
+                                <li><a href="https://twitter.com/3rdwave_themes" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="row-end"><a href="#"><i class="fa fa-rss"></i></a></li>
+                            </ul>
                         </div><!--//footer-col-inner-->
                     </div><!--//foooter-col-->
                     <div class="clearfix"></div>

@@ -8,25 +8,25 @@ Subtitle: For the same price as an average night out, wouldn’t you rather enjo
 
 Left: ###Regular night out
 
-Time to organise: 2-3 hours
-Venue: Same usual places
-Date: Dinner. The movies. Dinner and movie...
-Price: $300
-Value: $300 
-Satisfaction:  3/5
-Excitement: 2/5
+**Time to organise**: 2-3 hours
+**Venue**: Same usual places
+**Date**: Dinner. The movies. Dinner and movie...
+**Price**: $300
+**Value**: $300 
+**Satisfaction**:  3/5
+**Excitement**: 2/5
 
 ----
 
 Right: ###Verve Experience
 
-Time to organise: 5 minutes
-Venue:  Incredible places chosen by experts
-Date: Magic experiences, surprises & secret gifts.
-Price: $300
-Value: $1000+ 
-Satisfaction:  5/5
-Excitement: 6/5
+**Time to organise**: 5 minutes
+**Venue**:  Incredible places chosen by experts
+**Date**: Magic experiences, surprises & secret gifts.
+**Price**: $300
+**Value**: $1000+ 
+**Satisfaction**:  5/5
+**Excitement**: 6/5
 
 ----
 
