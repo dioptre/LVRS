@@ -1,7 +1,7 @@
 <?php snippet('header') ?>
 <?php snippet('menublog') ?>
 
-<?php $articles = $page->children()->visible()->flip()->paginate(3) ?>
+<?php $articles = $page->children()->visible()->flip()->paginate(10) ?>
 
 
 <script type="text/javascript">
@@ -58,9 +58,12 @@
                                                 echo date('Y', $somedate);
                                             ?>
                                         </li>
-                                        <li class="post-author"> by <a href="#">James Lee</a></li>
+                                        <li class="post-author"> by <a href="#">
+                                            <?php echo $site->users()->find(html($article->author()))->firstname() ?>
+                                            <?php echo $site->users()->find(html($article->author()))->lastname() ?>
+                                        </a></li>
                                         <li class="post-comments-link">
-                                            <a href="blog-single.html#comment-area"><i class="fa fa-comments"></i>8</a>
+                                            <a href="<?php echo $article->url() ?>#comment-area"><i class="fa fa-comments"></i><a href="<?php echo $article->url() ?>#disqus_thread">0</a></a>
                                         </li>
                                     </ul><!--//meta-list-->
                                 </div><!--meta-->
@@ -72,17 +75,21 @@
 
                 </div><!--//blog-list-->
             </div><!--//row-->
-            <div class="pagination-container text-center">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul><!--//pagination-->
-            </div><!--//pagination-container-->
+
+            <!-- Setup Pagination -->
+            <?php if($articles->pagination()->hasPages()): ?>
+                <div class="pagination-container text-center">
+                    <ul class="pagination">
+                        <?php if($articles->pagination()->hasNextPage()): ?>
+                            <li><a href="<?php echo $articles->pagination()->nextPageURL() ?>">Older posts &raquo;</a></li>
+                        <?php endif ?>
+
+                        <?php if($articles->pagination()->hasPrevPage()): ?>
+                            <li><a href="<?php echo $articles->pagination()->prevPageURL() ?>">&laquo; Newer posts</a></li>
+                        <?php endif ?>
+                    </ul><!--//pagination-->
+                </div><!--//pagination-container-->
+            <?php endif ?>
         </div><!--//blog-->
     </div><!--//wrapper-->
 
@@ -91,5 +98,18 @@
 
 
 </div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'verveb'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
 
 <?php snippet('footer') ?>
