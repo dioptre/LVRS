@@ -1,9 +1,9 @@
 <?php snippet('header') ?>
-<?php snippet('menu') ?>
+<?php snippet('menublog') ?>
 
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53b79ccb2c56663e"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5431e7230869c14e" async></script>
 
 <script type="text/javascript">
     $('body').attr("id","blog-page blog-page-single");
@@ -18,88 +18,52 @@
         </div><!--//blog-headline-bg-->
         <div class="blog-entry">
             <article class="post">
-                <header class="blog-entry-heading">
+                <header class="blog-entry-heading" style="background-image: url('<?php echo $page->images()->find('headimage.jpg')->url() ?>');">
                     <div class="container text-center">
-                        <h2 class="title">Ideas are easy, execution is hard</h2>
+                        <h2 class="title"><?php echo html($page->title()) ?></h2>
                         <div class="meta">
                             <ul class="meta-list list-inline">
-                                <li class="post-time">25th May, 2014</li>
-                                <li class="post-author"> by <a href="#">James Lee</a></li>
+                                <li class="post-time">
+                                    <?php
+                                        $somedate = strtotime($page->releasedate());
+                                        echo date("F",mktime(0,0,0,date('m', $somedate),1,2011)) . ' ';
+                                        echo date('n', $somedate) . ', ';
+                                        echo date('Y', $somedate);
+                                    ?>
+                                </li>
+                                <li class="post-author"> by
+                                    <a href="#">
+                                        <?php echo $site->users()->find(html($page->author()))->firstname() ?>
+                                        <?php echo $site->users()->find(html($page->author()))->lastname() ?>
+                                    </a>
+                                </li>
                             </ul><!--//meta-list-->
                         </div><!--meta-->
                     </div><!--//container-->
                     <nav class="post-nav post-nav-top">
-                        <span class="nav-previous"><a href="#" rel="prev"><i class="fa fa-long-arrow-left"></i>Previous post</a></span>
-                        <span class="nav-next"><a href="#" rel="next">Next post<i class="fa fa-long-arrow-right"></i></a></span>
+                        <?php if($page->hasPrevVisible()): ?>
+                            <span class="nav-previous">
+                                <a href="<?php echo $page->prev()->url() ?>" rel="prev">
+                                    <i class="fa fa-long-arrow-left"></i>
+                                    Previous post
+                                    </a>
+                            </span>
+                        <?php endif ?>
+                        <?php if($page->hasNextVisible()): ?>
+                            <span class="nav-next">
+                                <a href="<?php echo $page->next()->url() ?>" rel="next">
+                                    Next post
+                                    <i class="fa fa-long-arrow-right"></i>
+                                </a>
+                            </span>
+                        <?php endif ?>
                     </nav><!--//post-nav-->
                 </header><!--//blog-entry-heading-->
 
                 <div class="container">
                     <div class="row">
                         <div class="blog-entry-content col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis mattis erat, dictum facilisis magna posuere ac. Curabitur consectetur magna mauris, et aliquam lectus ornare nec. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris quis tellus magna.</p>
-
-                            <p>Cras adipiscing ipsum vel molestie cursus. In ultrices tristique vestibulum. Aenean ut dui diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut bibendum ipsum nec sagittis ultrices. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus id ante diam. Pellentesque mauris lacus, dictum sodales elit quis, pulvinar tempus leo. Pellentesque sed leo dignissim, ornare nunc vitae, volutpat quam. Nam pellentesque tortor eu nibh porttitor congue. Sed at porta lectus.</p>
-
-
-                            <h3 class="section-heading">Section Heading Pellentesque</h3>
-
-                            <p>Pellentesque mattis scelerisque nibh eu tincidunt. Phasellus feugiat arcu eget sem tincidunt aliquam. Integer eleifend risus quis venenatis scelerisque. Nulla egestas commodo dignissim. Curabitur vel imperdiet diam. Suspendisse faucibus tincidunt sem, faucibus dictum eros rutrum sit amet. Nulla volutpat bibendum urna, eu dignissim libero elementum in.</p>
-
-                            <figure class="figure">
-                                <img class="img-responsive" src="assets/images/blog/post-content-image-1.jpg" alt="" />
-                                <figcaption class="figure-caption">Image Source: <a href="https://www.flickr.com/photos/techcrunch/sets/72157636973272026" target="_blank">TechCrunch Disrupt Europe Hackathon</a></figcaption>
-                            </figure>
-
-                            <p>Morbi vulputate bibendum fringilla. Sed fermentum nisi laoreet, porttitor ipsum et, vehicula diam. Fusce iaculis turpis dolor, et cursus arcu cursus vel. Ut lobortis tellus ornare ultrices tristique. Praesent cursus, mi ac rutrum ultrices, lectus erat pellentesque urna, at placerat eros nisi vitae ligula. Fusce eget lacus non ipsum vestibulum consequat. Nulla eleifend magna et urna vulputate, vitae volutpat magna varius. Cras pharetra dolor dui, non aliquet diam faucibus sed. Mauris interdum arcu nec rutrum ornare. Suspendisse pharetra quam eu sapien egestas, a egestas tortor rhoncus. Quisque adipiscing tincidunt tellus a vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque ornare lorem elit, a aliquet nisl auctor vitae.</p>
-
-                            <ul class="custom-list-style">
-                               <li><i class="fa fa-check-circle"></i>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                               <li><i class="fa fa-check-circle"></i>Aliquam tincidunt mauris eu risus.</li>
-                               <li><i class="fa fa-check-circle"></i>Vestibulum auctor dapibus neque.</li>
-                               <li><i class="fa fa-check-circle"></i>Sagittis tempus lacus enim ac dui.</li>
-                            </ul>
-
-                            <p>Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-
-                            <blockquote class="custom-quote">
-                                <p><i class="fa fa-quote-left"></i>History is littered with inventors who had “great” ideas but kept them quiet and then poorly executed them. And history is lit up with doers who took ideas that were floating around in the ether and actually made something happen. <strong>In fact, just about every successful venture is based on an unoriginal idea, beautifully executed.</strong></p>
-                                <p>So, if you’ve got ideas, let them go. They’re probably holding you back from the hard work of actually executing.</p>
-                                <p class="source"><span class="name">Seth Godin</span><br><span class="title"><a href="http://sethgodin.typepad.com/seths_blog/2007/09/big-ideas.html" target="_blank"><i class="fa fa-external-link"></i> Big ideas</a></span></p>
-                            </blockquote>
-                            <h3 class="section-heading">Section Heading Curabitur</h3>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.</p>
-                            <ol>
-                               <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                               <li>Aliquam tincidunt mauris eu risus.</li>
-                               <li>Vestibulum auctor dapibus neque.</li>
-                            </ol>
-
-                            <p>Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-                            <p class="video-container">
-                                <iframe src="//player.vimeo.com/video/50134267?color=ffffff&amp;wmode=transparent" width="720" height="405" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                            </p>
-
-                            <p class="box">Cras pharetra dolor dui, non aliquet diam faucibus sed. Mauris interdum arcu nec rutrum ornare. Suspendisse pharetra quam eu sapien egestas, a egestas tortor rhoncus. Quisque adipiscing tincidunt tellus a vehicula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque ornare lorem elit, a aliquet nisl auctor vitae.</p>
-
-
-                            <h3 class="section-heading">Section Heading Proin</h3>
-
-                            <p>Phasellus ligula dolor, fringilla at tincidunt non, fringilla eu justo. Sed hendrerit mauris quis hendrerit mollis. Vivamus vitae ultrices quam. Duis sed mi leo. Curabitur facilisis, erat vel egestas tincidunt, nisi ipsum ultricies velit, non scelerisque magna mi non nibh. Etiam blandit odio quis congue feugiat. Vivamus faucibus eu augue et ultrices. Phasellus nec euismod enim. Proin quis tellus auctor, porta risus vitae, pharetra sem. Curabitur fringilla tellus justo. Vestibulum scelerisque rhoncus blandit. Vivamus cursus bibendum suscipit. Ut vel ornare sapien. Mauris sit amet mollis erat. Phasellus gravida nisi vel consectetur luctus.</p>
-
-                            <ul>
-                               <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-                               <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-                               <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-                               <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-                            </ul>
-
-                            <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.</p>
-
-                            <p>Demo images: courtesy of <a href="https://www.flickr.com/photos/techcrunch/sets/72157636973272026" target="_Blank">TechCrunch</a></p>
-
+                           <?php echo kirbytext($page->text()) ?>
                         </div><!--//blog-entry-content-->
 
                         <!--//Soical media buttons: https://github.com/kni-labs/rrssb (More examples) -->
@@ -192,7 +156,7 @@
                                     </a>
                                 </li>
 
-                                <li class="github">
+                        <!--         <li class="github">
                                     <a href="https://github.com/kni-labs/rrssb">
                                         <span class="icon">
                                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -210,7 +174,7 @@
                                         </span>
                                         <span class="text">github</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                             <!-- Buttons end here -->
                         </div><!--//share-container-->
@@ -228,7 +192,7 @@
                                 <div id="disqus_thread"></div>
                                 <script type="text/javascript">
                                     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                                    var disqus_shortname = '3wmthemes'; // required: replace example with your forum shortname
+                                    var disqus_shortname = 'verveb'; // required: replace example with your forum shortname
 
                                     /* * * DON'T EDIT BELOW THIS LINE * * */
                                     (function() {

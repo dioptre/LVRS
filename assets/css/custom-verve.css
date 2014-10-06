@@ -1,5 +1,10 @@
 body {
     font-family: 'futura';
+    font-family: 'myriad-pro';
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "kepler-std-semicondensed-dis";
 }
 
 .promo .title {
@@ -10,4 +15,9 @@ body {
 section.section.why .quote-profile > img {
     max-width: 70px;
     max-height: 70px;
+}
+
+
+.blog-entry-content img {
+    max-width: 100%;
 }

@@ -11,7 +11,7 @@ fields:
     type:  text
   author:
     label: Author
-    type: text
+    type: user
   releasedate:
     label: Date
     type: date
