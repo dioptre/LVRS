@@ -10,7 +10,7 @@ Step1title: THE BOX
 
 ----
 
-Step1subtitle: Each month a mysterious box is delivered to your door, inside it is everything you will need to craft the perfect date with your partner.t
+Step1subtitle: Each month a mysterious box is delivered to your door, inside it is everything you will need to craft the perfect date with your partner.
 
 ----
 
@@ -26,7 +26,7 @@ Step3title: THE EXPERIENCE
 
 ----
 
-Step3subtitle: All that’s left for you to do is follow our lead  and enjoy an unforgettable evening with the love of your life.t
+Step3subtitle: All that’s left for you to do is follow our lead  and enjoy an unforgettable evening with the love of your life.
 
 ----
 

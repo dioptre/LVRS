@@ -3,7 +3,7 @@
 <header class="header navbar-fixed-top">
             <div class="container">
                 <h1 class="logo">
-                    <a href="/blog">Verve <span class="sub">Blog</span></a>
+                    <a href="/blog"><img src="/assets/VerveLogo.png"></a>
                 </h1><!--//logo-->
                 <nav class="main-nav navbar-right" role="navigation">
                     <div class="navbar-header">

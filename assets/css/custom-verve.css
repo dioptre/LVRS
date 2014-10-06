@@ -20,6 +20,22 @@ h1,h2,h3,h4,h5,h6 {
     font-size: 75px;
 }
 
+/* Navigtation Bar  ---start */
+.header.navbar-fixed-top {
+    background: #000;
+}
+.header.navbar-fixed-top h1.logo a {
+    background: transparent;
+}
+.header.navbar-fixed-top .main-nav .nav .nav-item a {
+    color: #FFFFFF;
+}
+.header h1.logo a {
+    background: transparent;
+}
+/* Navigtation Bar --- end */
+
+
 
 
 @media (min-width: 992px) {
@@ -39,14 +55,54 @@ section.section.why .quote-profile > img {
 }
 
 
-section.steps.section {
-    background: #232529;
-
+/* COMPARISON SECTION */
+.comparison.text-center h3 {
+    letter-spacing: 2px;
+}
+.comparison.text-center h3 {
+letter-spacing: 2px;
 }
 
+
+/* 3 STEPS SECTION BLOCK */
+.steps .step .title .number {
+    font-family: "kepler-std-semicondensed-dis" !important;
+    background: rgba(131, 140, 160, 0);
+    border: 5px solid #808080;
+    color: #fff;
+    padding-top: 7px;
+    padding-left: 5px;
+    font-size: 61px;
+}
+.steps .step .title .text {
+    color: #FFFFFF;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+.steps .title {
+    font-size: 44px;
+    margin-top: 25px;
+}
+section.steps.section {
+    background: #232529;
+}
 section.steps.section {
     color: white;
 }
+
+section.steps .text-below {
+    width: 90%;
+    margin: 30px auto;
+}
+@media (min-width: 992px) {
+section.steps .text-below {
+    padding-top: 60px;
+    width: 45%;
+}
+}
+
+
+
 
 .promo-section {
     margin-bottom: 0px;
@@ -56,6 +112,13 @@ section.steps.section {
 @media (max-width: 767px) {
     .promo {
         height: auto;
+    }
+
+    .promo > .container{
+        padding-bottom: 100px;
+    }
+    .promo .title {
+        font-size: 50px;
     }
 }
 
@@ -82,6 +145,9 @@ section.steps.section {
 }
 
 
+.footer {
+    background: #232529;
+}
 .footer .bottom-bar .container {
     text-align: center;
 }

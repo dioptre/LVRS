@@ -7,14 +7,14 @@
         <p class="intro text-center"><?php echo html($data->subtitle())?></p>
         <div class="row">
              <div class="comparison text-center col-md-6 col-sm-6 col-xs-12">
-                <?php echo kirbytext($data->right())?>
+                <?php echo kirbytext($data->left())?>
              </div><!--//step-->
              <div class="comparison text-center col-md-6 col-sm-6 col-xs-12">
                 <?php echo kirbytext($data->right())?>
              </div><!--//step-->
         </div><!--//row-->
 
-        <div class="text-center">
+        <div class="text-center text-below">
             <?php echo html($data->below())?>
         </div>
 
