@@ -5,10 +5,15 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
     font-family: "kepler-std-semicondensed-dis";
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    text-transform: uppercase;
 }
 
 .promo .title {
     font-size: 60px;
+    font-size: 75px;
 }
 
 
@@ -20,4 +25,25 @@ section.section.why .quote-profile > img {
 
 .blog-entry-content img {
     max-width: 100%;
+}
+
+.promo-section {
+    margin-bottom: 0px;
+    background: grey;
+}
+
+
+.promo-quote-section {
+    padding-left: 85px;
+    padding-right: 85px;
+
+}
+.promo-quote-section .quote {
+    font-size: 44px;
+    font-style: italic;
+}
+
+.promo-quote-section .quote-user {
+    text-align: right;
+
 }

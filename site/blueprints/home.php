@@ -5,6 +5,10 @@ pages:
   template:
     - section
     - sectionwhy
+    - sectioncomparison
+    - sectioncover
+    - sectioncoverquote
+    - section3steps
     - sectionhtml
     - divider
     - title
