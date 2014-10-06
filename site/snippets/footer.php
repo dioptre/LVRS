@@ -14,7 +14,7 @@
                         </div><!--//footer-col-inner-->
                     </div><!--//foooter-col-->
 
-                    <div class="footer-col contact col-md-4 col-sm-12 col-xs-12">
+                    <div class="footer-col contact col-md-5 col-sm-12 col-xs-12">
                         <div class="footer-col-inner">
                             <h3 class="title">Contact us</h3>
                             <div class="row">
@@ -38,7 +38,7 @@
                     </div><!--//contact-->
 
 
-                    <div class="footer-col connect col-md-5 col-sm-12 col-xs-12">
+                    <div class="footer-col connect col-md-4 col-sm-12 col-xs-12">
                         <div class="footer-col-inner">
                             <div class="form-container">
                                 <p class="intro">Stay up to date with the latest news and offers from Verve</p>

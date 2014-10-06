@@ -1,8 +1,12 @@
 body {
     font-family: 'futura';
     font-family: 'myriad-pro';
+    font-size: 18px;
 }
 
+#topcontrol {
+    background: rgba(0, 0, 0, 0.45); /* Up button is looking to blue by default */
+}
 .logo img {
     max-width: 100%;
 }
@@ -13,6 +17,10 @@ h1,h2,h3,h4,h5,h6 {
     text-transform: uppercase;
     letter-spacing: 7px;
     text-transform: uppercase;
+}
+
+p {
+    font-size: 18px;
 }
 
 .promo .title {
@@ -37,7 +45,9 @@ h1,h2,h3,h4,h5,h6 {
 
 
 
-
+.section .intro {
+    font-size: 20px
+}
 @media (min-width: 992px) {
     section.promo.section.section-on-bg {
         padding-top: 189px;
@@ -101,12 +111,17 @@ section.steps .text-below {
 }
 }
 
-
+.steps .step {
+    color: rgb(177, 177, 177);
+}
 
 
 .promo-section {
     margin-bottom: 0px;
     background: grey;
+}
+.promo.section .intro {
+    max-width: 800px;
 }
 
 @media (max-width: 767px) {
@@ -144,12 +159,22 @@ section.steps .text-below {
     }
 }
 
-
+/* FOOTER START */
 .footer {
     background: #232529;
 }
 .footer .bottom-bar .container {
     text-align: center;
 }
-
-
+input#mce-EMAIL {
+    width: 223px;
+}
+.footer .contact p {
+    -webkit-opacity: 0.75;
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+}
+.footer .footer-col a {
+    color: #9AA7BB;
+}
+/* FOOTER END */

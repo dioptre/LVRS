@@ -6,7 +6,7 @@
             <?php echo html($data->title()) ?>
         </h2>
         <p class="intro">
-            <?php echo kirbytext($data->coversubtitle()) ?>
+            <?php echo html($data->coversubtitle()) ?>
         </p>
         <p><a class="btn btn-cta btn-cta-primary" href="<?php echo html($data->coverbtnlink()) ?>">
             <?php echo html($data->coverbtn()) ?>
