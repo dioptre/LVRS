@@ -20,17 +20,16 @@
 	}
 	//echo (string)serialize($user->properties->stripe_id);
 	if(!$valid_token or !isset($_POST['stripeToken'])){
-		//echo "Invalid token";
 		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined');
 		die();
 	}else {
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here https://dashboard.stripe.com/account
-		Stripe::setApiKey("sk_test_VnTLRckG5HMoF2o9ZOEUeuV6");
+		Stripe::setApiKey($GLOBALS['stripe']['secret_key']);
 		$stoken = $_POST['stripeToken'];
 
 		$sid = null;
-		
+		$customer = null;
 		$api = new \UserApp\API($GLOBALS['userAppId'], $GLOBALS['userAppToken']);
 
 		$result = $api->user->get(array(
@@ -39,7 +38,7 @@
 		if (isset($result[0]->properties->stripe_id->value)) {
 			$sid = $result[0]->properties->stripe_id->value;
 		}
-		else {
+		if (!isset($sid) or empty($sid)) {
 			// Get the credit card details submitted by the form
 			$customer = Stripe_Customer::create(array(
 			  'email' => $user->email,
@@ -51,6 +50,11 @@
 				'properties' => array( 'stripe_id' => array ('value' => $sid, 'override' => true))
 			));
 		}
+		else {
+			$customer = Stripe_Customer::retrieve($sid);
+		}
+		
+		$customer->subscriptions->create(array("plan" => "VERVE1"));
 		
 		
 		// $result = $api->property->save(array(
@@ -74,12 +78,13 @@
     // "property_id" => "cMtn9g4KE8aQd8QFElhlFR"
 // ));
 
-		$charge = Stripe_Charge::create(array(
-		  'customer' => $sid,
-		  'amount'   => 25000,
-		  'currency' => 'aud'
-		));
-
+		// $charge = Stripe_Charge::create(array(
+		  // 'customer' => $sid,
+		  // 'plan' => "VERVE1",
+		  // 'amount'   => 25000,
+		  // 'currency' => 'aud'
+		// ));
+		
 		
 		// $customer = Stripe_Customer::create(array(
 		  // "card" => $stoken,
