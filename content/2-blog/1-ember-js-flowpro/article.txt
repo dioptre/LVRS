@@ -1,9 +1,15 @@
 Title: How we created our startup in under a month using ember.js
+
 ----
+
 Author: paul-knittel
+
 ----
+
 Releasedate: 2014-07-08
+
 ----
+
 Text: 1 month ago my co-founder (link:https://twitter.com/andrewgrosser text:@andrewgrosser) and myself sat down with an idea to revolutionize business knowledge by giving it meaning, direction & context. We had a clear vision of what we wanted to build and knew it wasn't going to be easy. With just a small amount of time available to validate our idea, we knew we had to use the best web technology available. 1 month later we completed the challenge! But how did we get there? (image:flowpro-app.png link:http://app.flowpro.io)
  
  ###Choosing EmberJS

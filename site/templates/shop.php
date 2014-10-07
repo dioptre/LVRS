@@ -1,20 +1,8 @@
-Title: shop
+<?php snippet('header') ?>
 
-----
 
-Bodyid: 
 
-----
-
-Coverhero: 
-
-----
-
-Covertext: 
-
-----
-
-Text: <script type="text/x-handlebars">
+<script type="text/x-handlebars">
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -89,7 +77,7 @@ Text: <script type="text/x-handlebars">
       {{/if}}
     </form>
   </script>
-  
+
   <script type="text/x-handlebars" data-template-name="article">
     <div class="row">
       {{#each model}}
@@ -100,9 +88,9 @@ Text: <script type="text/x-handlebars">
       {{/each}}
     </div>
   </script>
-  
+
   <script type="text/x-handlebars" data-template-name="subscribe">
-		<form action="/subscribe.php" method="POST" id="payment-form">
+        <form action="/subscribe.php" method="POST" id="payment-form">
             <div class="form-row">
                 <label>Card Number</label>
                 <input type="text" size="20" autocomplete="off" class="card-number" value="4242424242424242" />
@@ -122,19 +110,19 @@ Text: <script type="text/x-handlebars">
   </script>
 
    <script type="text/x-handlebars" data-template-name="preferences">
-		<h1>Preferences</h1>
+        <h1>Preferences</h1>
    </script>
 
    <script type="text/x-handlebars" data-template-name="transacted">
-		<h1>Succcessful Transaction</h1>
-		{{#link-to 'preferences'}}Now tell us what you'd like to do.{{/link-to}}
+        <h1>Succcessful Transaction</h1>
+        {{#link-to 'preferences'}}Now tell us what you would like to do.{{/link-to}}
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
-		<h1>Declined</h1>
+        <h1>Declined</h1>
    </script>
-   
-  
+
+
   <script src="/public/js/libs/jquery-1.10.2.js"></script>
   <script src="/public//js/libs/handlebars-1.1.2.js"></script>
   <script src="/public/js/libs/ember.min.js"></script>

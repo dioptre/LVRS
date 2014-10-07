@@ -1,9 +1,15 @@
 Title: Why Microsoft is still relevant
+
 ----
-Author: andrew-grosser
+
+Author: paul-knittel
+
 ----
-Releasedate: 2014-07-08
+
+Releasedate: 2014-07-06
+
 ----
+
 Text: I’m sitting in the Microsoft Australian Partner conference with a ticket I swindled from a good friend. I’ve just been asked to leave the lunch table by a group of salespeople from my ex-competitor Oakton. I feel a little uncomfortable and more than a little out of place.
 Businesses here are buzzing about migrating existing off-the shelf box products onto cloud services. It might usher a new era for service providers or it could spell the beginning of the end for them as they migrate themselves out of existence. In truth I hope it's the latter. 
 
