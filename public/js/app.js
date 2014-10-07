@@ -169,3 +169,29 @@ DS.RESTAdapter.reopen({
 App.Article = DS.Model.extend({
   title: DS.attr('string')
 });
+
+App.Preference = DS.Model.extend({
+	partners_firstname: '',
+	dob: '',
+	gender: '',
+	address: '',
+	mobile_phone: '',
+	date_date: '', 
+	date_days: '', 
+	date_duration: '',
+	travel_distance: '',
+	anniversary_date: '',
+	children: '',
+	likes_music: '',
+	likes_alcohol: '',
+	likes_adventure: '',
+	likes_physical: '',
+	likes_food: '',
+	allergies: '',
+	dislikes: ''  
+});
+
+App.Feedback = DS.Model.extent({
+	date_date: '',
+	feedback: ''
+});
