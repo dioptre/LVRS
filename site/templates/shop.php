@@ -119,39 +119,39 @@
    <script type="text/x-handlebars" data-template-name="preference">
 		<h1>Preferences</h1>
 		<h4>Partner's First Name:</h4><br/>
-		{{eui-input placeholder='Partner\'s First Name'}}<br/>
+		{{eui-input placeholder='Partner\'s First Name' value=model.partners_firstname}}<br/>
 		<h4>Your date of birth:</h4><br/>
-		{{eui-input placeholder="dd/mm/yyyy" value=dob error=dobValid}}<br/>
+		{{eui-input placeholder="dd/mm/yyyy" value=model.dob error=dobValid}}<br/>
 		<h4>Gender:</h4><br/>
-		{{eui-select options=genders}}<br/>
+		{{eui-select value=model.gender options=genders}}<br/>
 		<h4>Address:</h4><br/>
-		{{eui-textarea placeholder='Address'}}<br/>
+		{{eui-textarea value=model.address placeholder='Address'}}<br/>
 		<h4>Your mobile number:</h4><br/>
-		{{eui-input value=mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
+		{{eui-input value=model.mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
 		<h4>Date for your first date (approximate):</h4><br/>
-		{{eui-calendar showNextMonth=false}}<br/>
+		{{eui-calendar selection=model.date_date_moment showNextMonth=false}}<br/>
 		<h4>Best Day for your dates (future):</h4><br/>
-		{{eui-select options=days}}<br/>
+		{{eui-select value=model.date_days options=days}}<br/>
 		<h4>Duration for your dates (hours):</h4><br/>
-		{{eui-input placeholder='Ex. 6 hours'}}<br/>
+		{{eui-input value=model.date_duration placeholder='Ex. 6 hours'}}<br/>
 		<h4>Distance willing to travel:</h4><br/>
-		{{eui-input placeholder='Ex. 6 km'}}<br/>
+		{{eui-input value=model.travel_distance placeholder='Ex. 6 km'}}<br/>
 		<h4>Your anniversary date:</h4><br/>
-		{{eui-input placeholder="dd/mm/yyyy" value=anniversary error=anniversaryValid}}<br/>
+		{{eui-input placeholder="dd/mm/yyyy" value=model.anniversary error=anniversaryValid}}<br/>
 		<h4>Number of children:</h4><br/>
-		{{eui-input value=children error=childrenValid placeholder='Ex. 3'}}<br/>
+		{{eui-input value=model.children error=childrenValid placeholder='Ex. 3'}}<br/>
 		<h4>Music Preference:</h4><br/>
-		{{eui-select options=musics}}<br/>
+		{{eui-select value=model.likes_music options=musics}}<br/>
 		<h4>Food Preference:</h4><br/>
-		{{eui-select options=foods}}<br/>
+		{{eui-select value=model.likes_food options=foods}}<br/>
 		<h4>Adventure Preference:</h4><br/>
-		{{eui-select options=adventures}}<br/>
+		{{eui-select value=model.likes_adventure options=adventures}}<br/>
 		<h4>Physical Preference:</h4><br/>
-		{{eui-select options=physicals}}<br/>
+		{{eui-select value=model.likes_physical options=physicals}}<br/>
 		<h4>Alcohol Preference:</h4><br/>
-		{{eui-select options=alcohols}}<br/>
+		{{eui-select value=model.likes_alcohol options=alcohols}}<br/>
 		<h4>Special Needs (Allergies/Dislikes/Eating Requirements):</h4><br/>
-		{{eui-textarea placeholder='Ex. Gluten Free'}}<br/>
+		{{eui-textarea value=model.special_needs placeholder='Ex. Gluten Free'}}<br/>
 		<br/><br/><br/>
 		{{eui-button label='Save Preferences' action="savePreferences"}}
    </script>

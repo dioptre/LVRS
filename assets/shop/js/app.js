@@ -57,14 +57,6 @@ App.SubscribeView = Ember.View.extend({
 				$(".payment-errors").html(response.error.message);
 			} else {
 
-				// UserApp.User.save({
-					// user_id: 'self',
-					// subscription: {
-						// price_list_id: '8OGiDhNcRiCmuQNcGkzZ0A',
-						// plan_id: 'ebgLXRIrR3qDGu_frfNksA'
-					// }
-				// });
-				
 				var form$ = $("#payment-form");
 				// token contains id, last4, and card type
 				var token = response['id'];
@@ -165,7 +157,7 @@ App.Article = DS.Model.extend({
 
 App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {	
 	model: function() {
-		return  null;
+		return  this.store.createRecord('preference', {});
 	}
 });
 
@@ -228,39 +220,53 @@ App.PreferenceController = Ember.ObjectController.extend({
 	  { label: 'Dislike Food', value: 'dfo' }
 	],
 	dobValid: function () {
-		return !moment(this.get('dob'), ["DD/MM/YYYY"], true).isValid()
-	}.property('dob'),
+		return !moment(this.get('model.dob'), ["DD/MM/YYYY"], true).isValid()
+	}.property('model.dob'),
 	anniversaryValid: function () {
-		return !moment(this.get('anniversary'), ["DD/MM/YYYY"], true).isValid()
-	}.property('anniversary'),
+		return !moment(this.get('model.anniversary'), ["DD/MM/YYYY"], true).isValid()
+	}.property('model.anniversary'),
 	childrenValid: function () {
-		return  !/^\d+$/.test(this.get('children'));
-	}.property('children'),
+		return  !/^\d+$/.test(this.get('model.children'));
+	}.property('model.children'),
 	mobileValid: function () {
-		return !/^\d+$/.test(this.get('mobile'));
-	}.property('mobile')
+		return !/^\d+$/.test(this.get('model.mobile'));
+	}.property('model.mobile'),
+	actions: {
+		savePreferences: function () {
+			alert('hi');
+		}
+	}
 });
 
 
 
 App.Preference = DS.Model.extend({
-	partners_firstname: '',
-	dob: '',
-	gender: '',
-	address: '',
-	mobile: '',
-	date_date: '', 
-	date_days: '', 
-	date_duration: '',
-	travel_distance: '',
-	anniversary: '',
-	children: '',
-	likes_music: '',
-	likes_alcohol: '',
-	likes_adventure: '',
-	likes_physical: '',
-	likes_food: '',
-	special_needs: ''  
+	partners_firstname: DS.attr('', {defaultValue: ''}),
+	dob: DS.attr('', {defaultValue: ''}),
+	gender: DS.attr('', {defaultValue: ''}),
+	address: DS.attr('', {defaultValue: ''}),
+	mobile: DS.attr('', {defaultValue: ''}),
+	date_date: DS.attr('', {defaultValue: ''}), 
+	date_days: DS.attr('', {defaultValue: ''}), 
+	date_duration: DS.attr('', {defaultValue: ''}),
+	travel_distance: DS.attr('', {defaultValue: ''}),
+	anniversary: DS.attr('', {defaultValue: ''}),
+	children: DS.attr('', {defaultValue: ''}),
+	likes_music: DS.attr('', {defaultValue: ''}),
+	likes_food: DS.attr('', {defaultValue: ''}),
+	likes_adventure: DS.attr('', {defaultValue: ''}),
+	likes_physical: DS.attr('', {defaultValue: ''}),
+	likes_alcohol: DS.attr('', {defaultValue: ''}),
+	special_needs: DS.attr('', {defaultValue: ''}),
+	date_date_moment: function (key, value, previousValue) {
+		 if (arguments.length > 1) {
+		  this.set('date_date', value.format("DD/MM/YYYY"));
+		}
+		if (moment(this.get('date_date'), ["DD/MM/YYYY"], true).isValid())
+			return moment(this.get('date_date'), ["DD/MM/YYYY"]);
+		else
+			return '';
+	}.property('date_date')
 });
 
 App.Feedback = DS.Model.extend({

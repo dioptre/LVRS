@@ -102,24 +102,26 @@
 		));
 
 		//May not need to do this if stripe integration works
-		$subscription = $customer->subscriptions->create(array("plan" => "VERVE1"));
+		// $subscription = $customer->subscriptions->create(array("plan" => "VERVE1"));
 		
 		
-		$result = $api->charge->save(array(
+		// $result = $api->charge->save(array(
+			// "user_id" => $user->user_id,
+			// "payment_method_id" => $payment_method->payment_method_id,
+			// "invoice_id" => $invoice->invoice_id,
+			// "data" => array('subscription'=>$subscription->id, 'token'=>$stoken),
+			// "amount" => 297,
+			// "currency" => "AUD",
+			// "error" => array()
+		// ));
+		
+		//Update Subscription to Verve1
+		$result = $api->user->save(array(
 			"user_id" => $user->user_id,
-			"payment_method_id" => $payment_method->payment_method_id,
-			"invoice_id" => $invoice->invoice_id,
-			"data" => array('subscription'=>$subscription->id, 'token'=>$stoken),
-			"amount" => 297,
-			"currency" => "AUD",
-			"error" => array()
+			"subscription" => array( 'price_list_id'=> '8OGiDhNcRiCmuQNcGkzZ0A', 'plan_id'=> 'ebgLXRIrR3qDGu_frfNksA'),
 		));
 		
-		
-		
-		
-		
-		
+		/***** Scratch Area *****/
 		// $result = $api->property->save(array(
 			// //"property_id" => $user->user_id . "-stripe",
 			// "name" => "stripe_id",
@@ -130,16 +132,16 @@
 		
 		
 		// $result = $api->property->search(array(
-    // "page" => 1,
-    // "page_size" => 100,
-    // "fields" => "*",
-    // "sort" => "asc"
-// ));
-	// echo (string)serialize($result);
-	
-	// $result = $api->property->remove(array(
-    // "property_id" => "cMtn9g4KE8aQd8QFElhlFR"
-// ));
+			// "page" => 1,
+			// "page_size" => 100,
+			// "fields" => "*",
+			// "sort" => "asc"
+		// ));
+			// echo (string)serialize($result);
+			
+			// $result = $api->property->remove(array(
+			// "property_id" => "cMtn9g4KE8aQd8QFElhlFR"
+		// ));
 
 		// $charge = Stripe_Charge::create(array(
 		  // 'customer' => $sid,
