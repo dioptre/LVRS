@@ -1,4 +1,4 @@
-// Last commit: 278bd97 (2014-08-03 23:35:17 -0400)
+// Last commit: 0bff5bc (2014-04-26 12:06:07 -0500)
 
 
 // ==========================================================================
@@ -90,7 +90,7 @@ function rerender() {
   context = get(this, 'context');
 
   // releases action helpers in contents
-  // this means though that the ListItemView itself can't use classBindings or attributeBindings
+  // this means though that the ListViewItem itself can't use classBindings or attributeBindings
   // need support for rerender contents in ember
   this.triggerRecursively('willClearRender');
 
@@ -125,7 +125,7 @@ function rerender() {
 }
 
 /**
-  The `Ember.ListItemView` view class renders a
+  The `Ember.ListViewItem` view class renders a
   [div](https://developer.mozilla.org/en/HTML/Element/div) HTML element
   with `ember-list-item-view` class. It allows you to specify a custom item
   handlebars template for `Ember.ListView`.
@@ -184,13 +184,9 @@ Ember.ReusableListItemView = Ember.View.extend(Ember.ListItemViewMixin, {
     return !!this.get('context.content');
   }),
   updateContext: function(newContext){
-    var context = get(this._proxyContext, 'content'), state;
-
-    // Support old and new Ember versions
-    state = this._state || this.state;
-
+    var context = get(this._proxyContext, 'content');
     if (context !== newContext) {
-      if (state === 'inDOM') {
+      if (this.state === 'inDOM') {
         this.prepareForReuse(newContext);
       }
 
@@ -325,12 +321,12 @@ function addEmptyView() {
   this.unshiftObject(emptyView);
 }
 
-var domManager = Ember.create(Ember.ContainerView.proto().domManager);
+// var domManager = Ember.create(Ember.ContainerView.proto().domManager);
 
-domManager.prepend = function(view, html) {
-  view.$('.ember-list-container').prepend(html);
-  notifyMutationListeners();
-};
+// domManager.prepend = function(view, html) {
+  // view.$('.ember-list-container').prepend(html);
+  // notifyMutationListeners();
+// };
 
 
 
@@ -364,7 +360,7 @@ Ember.ListViewMixin = Ember.Mixin.create({
   emptyViewClass: Ember.View,
   classNames: ['ember-list-view'],
   attributeBindings: ['style'],
-  domManager: domManager,
+  //domManager: domManager,
   scrollTop: 0,
   bottomPadding: 0,
   _lastEndingIndex: 0,
@@ -939,14 +935,11 @@ Ember.ListViewMixin = Ember.Mixin.create({
   */
   // TODO: refactor
   arrayDidChange: function(content, start, removedCount, addedCount) {
-    var index, contentIndex, state;
+    var index, contentIndex;
 
     removeEmptyView.call(this);
 
-    // Support old and new Ember versions
-    state = this._state || this.state;
-
-    if (state === 'inDOM') {
+    if (this.state === 'inDOM') {
       // ignore if all changes are out of the visible change
       if( start >= this._lastStartingIndex || start < this._lastEndingIndex) {
         index = 0;
@@ -1130,12 +1123,9 @@ Ember.ListView = Ember.ContainerView.extend(Ember.ListViewMixin, {
   }, 'totalHeight'),
 
   _updateScrollableHeight: function () {
-    var height, state;
+    var height;
 
-    // Support old and new Ember versions
-    state = this._state || this.state;
-
-    if (state === 'inDOM') {
+    if (this.state === 'inDOM') {
       // if the list is currently displaying the emptyView, remove the height
       if (this._isChildEmptyView()) {
           height = '';
@@ -1342,10 +1332,7 @@ Ember.VirtualListView = Ember.ContainerView.extend(Ember.ListViewMixin, Ember.Vi
     view = this;
 
     view.scroller = new Scroller(function(left, top, zoom) {
-      // Support old and new Ember versions
-      var state = view._state || view.state;
-
-      if (state !== 'inDOM') { return; }
+      if (view.state !== 'inDOM') { return; }
 
       if (view.listContainerElement) {
         view._scrollerTop = top;

@@ -30,7 +30,7 @@ var define, requireModule, require, requirejs;
 
     this.id       = uuid++;
     this.name     = name;
-    this.deps     = !deps.length && callback.length ? defaultDeps : deps;
+    this.deps     = !deps.length && callback && callback.length ? defaultDeps : deps;
     this.exports  = exports || { };
     this.callback = callback;
     this.state    = undefined;
@@ -112,7 +112,7 @@ var define, requireModule, require, requirejs;
       obj = seen[name] = module;
     }
 
-    if (obj !== null && (typeof obj === 'object' || typeof obj === 'function') && obj['default'] === undefined) {
+    if (obj !== null && typeof obj === 'object' && obj['default'] === undefined) {
       obj['default'] = obj;
     }
 
