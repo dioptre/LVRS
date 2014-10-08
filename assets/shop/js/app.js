@@ -82,14 +82,6 @@ App.SubscribeView = Ember.View.extend({
 				return false; // submit from callback
 			});
 		});      
-	},
-	actions: {
-		likesMusic: function () {
-			UserApp.User.save({"user_id": 'self', properties: { "likes_music": {"value": 1, "override": true }}			
-			}, function (error,result) {
-				//console.log(error, result);
-			});
-		}
 	}
 });
 
@@ -157,7 +149,22 @@ App.Article = DS.Model.extend({
 
 App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {	
 	model: function() {
-		return  this.store.createRecord('preference', {});
+		var _this = this;
+		return new Ember.RSVP.Promise(function(resolve) {
+			UserApp.User.get({
+				"user_id": "self"
+			}, function(error, result){
+				// Handle error/result
+				var m = {};
+				var props = result[0].properties;
+				for(var name in props) {
+					m[name] = props[name].value;
+				}
+				console.log(m);
+				var model = _this.store.createRecord('preference', m);
+				resolve(model);
+			});
+		});		
 	}
 });
 
@@ -233,7 +240,18 @@ App.PreferenceController = Ember.ObjectController.extend({
 	}.property('model.mobile'),
 	actions: {
 		savePreferences: function () {
-			alert('hi');
+			var _this = this;
+			var p = {};
+			$.each(this.get('content.constructor.attributes').keys.list, function (i,v) {
+					p[v] = {"value": _this.get('model.' + v), "override": true };
+			});
+			debugger;
+			UserApp.User.save({
+				"user_id": 'self', 
+				"properties": p
+			}, function (error,result) {
+				//console.log(error, result);
+			});
 		}
 	}
 });
