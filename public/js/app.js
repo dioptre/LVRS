@@ -191,7 +191,7 @@ App.Preference = DS.Model.extend({
 	dislikes: ''  
 });
 
-App.Feedback = DS.Model.extent({
+App.Feedback = DS.Model.extend({
 	date_date: '',
 	feedback: ''
 });

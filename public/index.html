@@ -118,6 +118,7 @@
 
    <script type="text/x-handlebars" data-template-name="preferences">
 		<h1>Preferences</h1>
+		{{eui-button label='Save Preferences' action='savePreferences'}}
    </script>
    
    <script type="text/x-handlebars" data-template-name="feedback">
@@ -142,7 +143,17 @@
   <script src="https://app.userapp.io/js/ember-userapp.js"></script>
   <script src="/public/js/app.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
+  <script src="/public/js/libs/loader.js"></script>
+  <script src="/public/js/libs/ember-resolver.min.js"></script> 
+  <script src="/public/js/libs/list-view-latest.js"></script>
   <script src="/public/js/libs/emberui.js"></script>
+  <script src="/public/js/libs/moment.min.js"></script>
+  <script src="/public/js/libs/twix.min.js"></script>
+  <script src="/public/js/libs/velocity.min.js"></script>
+  <script src="/public/js/libs/velocity.ui.min.js"></script>
+
+
   
 </body>
 </html>
