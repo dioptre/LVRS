@@ -33,7 +33,7 @@ App.Router.map(function() {
   this.route('login');
   this.route('article');
   this.route('subscribe');
-  this.route('preferences');
+  this.route('preference');
   this.route('transacted');
   this.route('declined');
 });
@@ -56,22 +56,14 @@ App.SubscribeView = Ember.View.extend({
 				// show the errors on the form
 				$(".payment-errors").html(response.error.message);
 			} else {
-				UserApp.User.PaymentMethod.save({
-					user_id: 'self',
-					name: 'Stripe',
-					processor: 'stripe',
-					type: 'creditcard',
-					data: { token_id: response.id, amount: 250 }
-				}, function(error, result) {
-					// handle error/result
-				});
-				UserApp.User.save({
-					user_id: 'self',
-					subscription: {
-						price_list_id: '8OGiDhNcRiCmuQNcGkzZ0A',
-						plan_id: 'ebgLXRIrR3qDGu_frfNksA'
-					}
-				});
+
+				// UserApp.User.save({
+					// user_id: 'self',
+					// subscription: {
+						// price_list_id: '8OGiDhNcRiCmuQNcGkzZ0A',
+						// plan_id: 'ebgLXRIrR3qDGu_frfNksA'
+					// }
+				// });
 				
 				var form$ = $("#payment-form");
 				// token contains id, last4, and card type
@@ -170,25 +162,105 @@ App.Article = DS.Model.extend({
   title: DS.attr('string')
 });
 
+
+App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {	
+	model: function() {
+		return  null;
+	}
+});
+
+App.PreferenceController = Ember.ObjectController.extend({
+	genders: [
+	  { label: 'Male', value: 'm' },
+	  { label: 'Female', value: 'f' }
+	],
+	days: [
+	  { label: 'Monday', value: 'mon' },
+	  { label: 'Tuesday', value: 'tue' },
+	  { label: 'Wednesday', value: 'wed' },
+	  { label: 'Thursday', value: 'thu' },
+	  { label: 'Friday', value: 'fri' },
+	  { label: 'Saturday', value: 'sat' },
+	  { label: 'Sunday', value: 'sun' }
+	],
+	musics: [
+	  { label: 'Classical', value: 'cla' },
+	  { label: 'Country', value: 'cnt' },
+	  { label: 'Electro', value: 'elc' },
+	  { label: 'Folk', value: 'flk' },
+	  { label: 'Jazz', value: 'jaz' },
+	  { label: 'RnB', value: 'rnb' },
+	  { label: 'Rock', value: 'rck' },
+	  { label: 'Rockabilly', value: 'rby' },
+	  { label: 'Roots', value: 'rts' },
+	  { label: '60s', value: '60s' },
+	  { label: '70s', value: '70s' },
+	  { label: '80s', value: '80s' },
+	  { label: '90s', value: '90s' },
+	  { label: 'Pop', value: 'pop' },
+	  { label: 'Dislike Music', value: 'dmu' }
+	],
+	alcohols: [
+	  { label: 'Beer', value: 'ber' },
+	  { label: 'Cocktails', value: 'cck' },
+	  { label: 'Shots', value: 'sht' },
+	  { label: 'Whiskey', value: 'whi' },
+	  { label: 'Wine', value: 'win' },
+	  { label: 'Digestifs', value: 'dig' },
+	  { label: 'Dislike Alcohol', value: 'dal' }
+	],
+	adventures: [
+	  { label: 'Water', value: 'wat' },
+	  { label: 'Mountains', value: 'mnt' },
+	  { label: 'Air', value: 'air' },
+	  { label: 'City', value: 'cit' },
+	  { label: 'Dislike Adventure', value: 'dad' }  
+	],
+	physicals: [
+	  { label: 'Upper Body', value: 'ubo' },
+	  { label: 'Lower Body', value: 'lbo' },
+	  { label: 'Dislike Physical Activities', value: 'dph' }
+	],
+	foods: [
+	  { label: 'Ethnic', value: 'eth' },
+	  { label: 'All you can eat', value: 'ace' },
+	  { label: 'Gourmand', value: 'gou' },
+	  { label: 'Dislike Food', value: 'dfo' }
+	],
+	dobValid: function () {
+		return !moment(this.get('dob'), ["DD/MM/YYYY"], true).isValid()
+	}.property('dob'),
+	anniversaryValid: function () {
+		return !moment(this.get('anniversary'), ["DD/MM/YYYY"], true).isValid()
+	}.property('anniversary'),
+	childrenValid: function () {
+		return  !/^\d+$/.test(this.get('children'));
+	}.property('children'),
+	mobileValid: function () {
+		return !/^\d+$/.test(this.get('mobile'));
+	}.property('mobile')
+});
+
+
+
 App.Preference = DS.Model.extend({
 	partners_firstname: '',
 	dob: '',
 	gender: '',
 	address: '',
-	mobile_phone: '',
+	mobile: '',
 	date_date: '', 
 	date_days: '', 
 	date_duration: '',
 	travel_distance: '',
-	anniversary_date: '',
+	anniversary: '',
 	children: '',
 	likes_music: '',
 	likes_alcohol: '',
 	likes_adventure: '',
 	likes_physical: '',
 	likes_food: '',
-	allergies: '',
-	dislikes: ''  
+	special_needs: ''  
 });
 
 App.Feedback = DS.Model.extend({

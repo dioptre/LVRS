@@ -1,8 +1,15 @@
-<?php snippet('header') ?>
-
-
-
-<script type="text/x-handlebars">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ember UserApp Demo</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/shop/css/style.css">
+  <link rel="stylesheet" href="/assets/shop/css/default-theme.css">
+  <link rel="stylesheet" href="/assets/shop/css/emberui.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -77,7 +84,7 @@
       {{/if}}
     </form>
   </script>
-
+  
   <script type="text/x-handlebars" data-template-name="article">
     <div class="row">
       {{#each model}}
@@ -88,9 +95,9 @@
       {{/each}}
     </div>
   </script>
-
+  
   <script type="text/x-handlebars" data-template-name="subscribe">
-        <form action="/subscribe.php" method="POST" id="payment-form">
+		<form action="/subscribe.php" method="POST" id="payment-form">
             <div class="form-row">
                 <label>Card Number</label>
                 <input type="text" size="20" autocomplete="off" class="card-number" value="4242424242424242" />
@@ -109,25 +116,80 @@
         </form>
   </script>
 
-   <script type="text/x-handlebars" data-template-name="preferences">
-        <h1>Preferences</h1>
+   <script type="text/x-handlebars" data-template-name="preference">
+		<h1>Preferences</h1>
+		<h4>Partner's First Name:</h4><br/>
+		{{eui-input placeholder='Partner\'s First Name'}}<br/>
+		<h4>Your date of birth:</h4><br/>
+		{{eui-input placeholder="dd/mm/yyyy" value=dob error=dobValid}}<br/>
+		<h4>Gender:</h4><br/>
+		{{eui-select options=genders}}<br/>
+		<h4>Address:</h4><br/>
+		{{eui-textarea placeholder='Address'}}<br/>
+		<h4>Your mobile number:</h4><br/>
+		{{eui-input value=mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
+		<h4>Date for your first date (approximate):</h4><br/>
+		{{eui-calendar showNextMonth=false}}<br/>
+		<h4>Best Day for your dates (future):</h4><br/>
+		{{eui-select options=days}}<br/>
+		<h4>Duration for your dates (hours):</h4><br/>
+		{{eui-input placeholder='Ex. 6 hours'}}<br/>
+		<h4>Distance willing to travel:</h4><br/>
+		{{eui-input placeholder='Ex. 6 km'}}<br/>
+		<h4>Your anniversary date:</h4><br/>
+		{{eui-input placeholder="dd/mm/yyyy" value=anniversary error=anniversaryValid}}<br/>
+		<h4>Number of children:</h4><br/>
+		{{eui-input value=children error=childrenValid placeholder='Ex. 3'}}<br/>
+		<h4>Music Preference:</h4><br/>
+		{{eui-select options=musics}}<br/>
+		<h4>Food Preference:</h4><br/>
+		{{eui-select options=foods}}<br/>
+		<h4>Adventure Preference:</h4><br/>
+		{{eui-select options=adventures}}<br/>
+		<h4>Physical Preference:</h4><br/>
+		{{eui-select options=physicals}}<br/>
+		<h4>Alcohol Preference:</h4><br/>
+		{{eui-select options=alcohols}}<br/>
+		<h4>Special Needs (Allergies/Dislikes/Eating Requirements):</h4><br/>
+		{{eui-textarea placeholder='Ex. Gluten Free'}}<br/>
+		<br/><br/><br/>
+		{{eui-button label='Save Preferences' action="savePreferences"}}
+   </script>
+   
+   <script type="text/x-handlebars" data-template-name="feedback">
+		<h1>Preferences</h1>
    </script>
 
    <script type="text/x-handlebars" data-template-name="transacted">
-        <h1>Succcessful Transaction</h1>
-        {{#link-to 'preferences'}}Now tell us what you would like to do.{{/link-to}}
+		<h1>Succcessful Transaction</h1>
+		{{#link-to 'preference'}}Now tell us what you'd like to do.{{/link-to}}
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
-        <h1>Declined</h1>
+		<h1>Declined</h1>
    </script>
-
-
-  <script src="/public/js/libs/jquery-1.10.2.js"></script>
-  <script src="/public//js/libs/handlebars-1.1.2.js"></script>
-  <script src="/public/js/libs/ember.min.js"></script>
-  <script src="/public/js/libs/ember-data.min.js"></script>
-  <script src="https://app.userapp.io/js/userapp.client.js"></script>
-  <script src="https://app.userapp.io/js/ember-userapp.js"></script>
-  <script src="/public/js/app.js"></script>
+   
+    
+  <script src="/assets/shop/js/libs/jquery.js"></script>
+  <script src="/assets/shop/js/libs/handlebars.js"></script>
+  <script src="/assets/shop/js/libs/ember.js"></script>
+  <script src="/assets/shop/js/libs/ember-data.min.js"></script>
+  <script src="/assets/shop/js/libs/userapp.client.js"></script>
+  <script src="/assets/shop/js/libs/ember-userapp.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
+<!--   <script src="/assets/shop/js/libs/loader.js"></script>
+  <script src="/assets/shop/js/libs/ember-resolver.min.js"></script> 
+ -->  
+  <script src="/assets/shop/js/libs/list-view.js"></script>
+  <script src="/assets/shop/js/libs/moment.js"></script>
+  <script src="/assets/shop/js/libs/twix.min.js"></script>
+  <script src="/assets/shop/js/libs/velocity.min.js"></script>
+  <script src="/assets/shop/js/libs/velocity.ui.min.js"></script>
+  <script src="/assets/shop/js/libs/emberui.js"></script>
+
+  <script src="/assets/shop/js/app.js"></script>
+
+  
+</body>
+</html>

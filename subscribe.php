@@ -44,17 +44,80 @@
 			  'email' => $user->email,
 			  'card'  => $stoken
 			));
+			
 			$sid = $customer->id;	
 			$result = $api->user->save(array(
 				'user_id' => $user->user_id,
 				'properties' => array( 'stripe_id' => array ('value' => $sid, 'override' => true))
 			));
 		}
-		else {
+		else {			
 			$customer = Stripe_Customer::retrieve($sid);
+			//if (!empty($customer->default_card)) {
+			//	$customer->cards->retrieve($customer->default_card)->delete();
+			//}
+			$result = $customer->cards->create(array("card" => $stoken));
+			$customer->default_card = $result->id; 
+			$customer->save();
+			$result = $api->user->paymentMethod->search(array(
+				 "user_id" => $user->user_id,
+				 "page" => 1,
+				 "page_size" => 100,
+				 "fields" => "*",
+				 "sort" => "asc"
+			 ));
+			foreach ($result->items as $value) {
+				if ($value->name == "Stripe") {
+					$r = $api->user->paymentMethod->remove(array(
+						"user_id" => $user->user_id,
+						"payment_method_id" => $value->payment_method_id
+					));		
+				}
+			}
+			
 		}
 		
-		$customer->subscriptions->create(array("plan" => "VERVE1"));
+		$payment_method = $api->user->paymentMethod->save(array(
+			"user_id" => $user->user_id,
+			"name" => "Stripe",
+			"type" => "creditcard",
+			"processor" => "stripe",
+			"data" => array('card_id' => $customer->default_card, 'customer_id' => $customer->id)
+		));
+
+		$invoice = $api->invoice->save(array(
+			"user_id" => $user->user_id,
+			"payment_method_id" => $payment_method->payment_method_id,
+			"items" => array(
+				array(
+					"id" => "ebgLXRIrR3qDGu_frfNksA",
+					"amount" => 270,
+					"description" => "Monthly Subscription - "."VERVE1"
+				)
+			),
+			"description" => "VERVE1",
+			"state" => "pending",
+			"vat_percentage" => 10,
+			"currency" => "AUD"
+		));
+
+		//May not need to do this if stripe integration works
+		$subscription = $customer->subscriptions->create(array("plan" => "VERVE1"));
+		
+		
+		$result = $api->charge->save(array(
+			"user_id" => $user->user_id,
+			"payment_method_id" => $payment_method->payment_method_id,
+			"invoice_id" => $invoice->invoice_id,
+			"data" => array('subscription'=>$subscription->id, 'token'=>$stoken),
+			"amount" => 297,
+			"currency" => "AUD",
+			"error" => array()
+		));
+		
+		
+		
+		
 		
 		
 		// $result = $api->property->save(array(
