@@ -36,6 +36,9 @@ App.Router.map(function() {
   this.route('preference');
   this.route('transacted');
   this.route('declined');
+  this.route('feedback');
+  this.route('paymentMethod');
+  this.route('invoices');
 });
 
 App.ApplicationRoute = Ember.Route.extend(Ember.UserApp.ApplicationRouteMixin);
@@ -160,7 +163,6 @@ App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {
 				for(var name in props) {
 					m[name] = props[name].value;
 				}
-				console.log(m);
 				var model = _this.store.createRecord('preference', m);
 				resolve(model);
 			});

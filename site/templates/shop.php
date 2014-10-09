@@ -19,6 +19,7 @@
           {{#if user.authenticated}}
             <ul class="nav navbar-nav">
               <li>{{#link-to 'subscribe'}}Subscribe{{/link-to}}</li>
+			  <li>{{#link-to 'preference'}}Preferences{{/link-to}}</li>
             </ul>
           {{/if}}
           <ul class="nav navbar-nav pull-right">
@@ -39,7 +40,12 @@
   <script type="text/x-handlebars" data-template-name="index">
     <div class="jumbotron">
       <h2>Hi {{user.current.first_name}}! Welcome to Ember.js with UserApp</h2>
-      <p>This is a simple demo app that illustrates how to add user authentication to an Ember.js app with UserApp.</p>
+      <p>Membership status </p>
+	  <p>Next Date</p>
+	  <p>Preferences</p>
+	  <p>Update Payment Details</p>
+	  <p>Feedback</p>
+	  <p>Invoices</p>
     </div>
   </script>
 
@@ -157,9 +163,18 @@
    </script>
    
    <script type="text/x-handlebars" data-template-name="feedback">
-		<h1>Preferences</h1>
+		<h1>Feedback</h1>
    </script>
 
+   <script type="text/x-handlebars" data-template-name="paymentMethod">
+		<h1>Payment Method</h1>
+   </script>
+
+   <script type="text/x-handlebars" data-template-name="invoice">
+		<h1>Invoices</h1>
+   </script>
+
+   
    <script type="text/x-handlebars" data-template-name="transacted">
 		<h1>Succcessful Transaction</h1>
 		{{#link-to 'preference'}}Now tell us what you'd like to do.{{/link-to}}
