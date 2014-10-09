@@ -1,8 +1,8 @@
-var checkLoginEvent = function () { 
+var checkLoginEvent = function () {
     UserApp.Token.heartbeat(function(error, result){
 		// Handle error/result
 		var currentRoute = window.location.hash.toLowerCase();
-		if (error && currentRoute.indexOf('login') < 0 && currentRoute.indexOf('signup') < 0) {		
+		if (error && currentRoute.indexOf('login') < 0 && currentRoute.indexOf('signup') < 0) {
 			//UserApp.User.logout();
 			//window.location.hash = 'login';
 		}
@@ -13,7 +13,13 @@ var checkLoginEvent = function () {
 Ember.Application.initializer({
   name: 'userapp',
   initialize: function(container, application) {
-  	Ember.UserApp.setup(application, { appId: '542f6b2c8ea22' });
+  	Ember.UserApp.setup(application, {
+  		appId: '542f6b2c8ea22',
+  		loginRoute: 'login',
+        indexRoute: 'subscribe',
+        heartbeatInterval: 20000,
+        usernameIsEmail: false
+  	});
 	Ember.run.scheduleOnce('sync', App, checkLoginEvent);
   }
 });
@@ -24,9 +30,23 @@ Ember.Route.reopen({
   beforeModel : function(transition){
     Ember.run.scheduleOnce('sync', App, checkLoginEvent);
     this._super(transition);
-  }  
+  }
 });
 
+Ember.Verve = {};
+Ember.Verve.SubscriptionOnlyRouteMixin = Ember.Mixin.create({
+	beforeModel: function(transition) {
+	  if (!this.get('user.authenticated')) {
+	    transition.abort();
+	    this.transitionTo(Ember.UserApp.loginRoute);
+	  }
+	  if (!this.get('user').current.subscription) {
+	  	debugger;
+	    transition.abort();
+	    this.transitionTo(Ember.UserApp.indexRoute);
+	  }
+	}
+});
 
 App.Router.map(function() {
   this.route('signup');
@@ -41,10 +61,11 @@ App.Router.map(function() {
   this.route('invoices');
 });
 
+
 App.ApplicationRoute = Ember.Route.extend(Ember.UserApp.ApplicationRouteMixin);
 App.SignupController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
 App.LoginController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
-App.IndexRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin);
+App.IndexRoute = Ember.Route.extend(Ember.Verve.SubscriptionOnlyRouteMixin);
 
 App.SubscribeRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin);
 App.SubscribeView = Ember.View.extend({
@@ -84,7 +105,7 @@ App.SubscribeView = Ember.View.extend({
 				}, stripeResponseHandler);
 				return false; // submit from callback
 			});
-		});      
+		});
 	}
 });
 
@@ -150,7 +171,7 @@ App.Article = DS.Model.extend({
 });
 
 
-App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {	
+App.PreferenceRoute = Ember.Route.extend(Ember.Verve.SubscriptionOnlyRouteMixin, {
 	model: function() {
 		var _this = this;
 		return new Ember.RSVP.Promise(function(resolve) {
@@ -166,7 +187,7 @@ App.PreferenceRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {
 				var model = _this.store.createRecord('preference', m);
 				resolve(model);
 			});
-		});		
+		});
 	}
 });
 
@@ -215,7 +236,7 @@ App.PreferenceController = Ember.ObjectController.extend({
 	  { label: 'Mountains', value: 'mnt' },
 	  { label: 'Air', value: 'air' },
 	  { label: 'City', value: 'cit' },
-	  { label: 'Dislike Adventure', value: 'dad' }  
+	  { label: 'Dislike Adventure', value: 'dad' }
 	],
 	physicals: [
 	  { label: 'Upper Body', value: 'ubo' },
@@ -249,7 +270,7 @@ App.PreferenceController = Ember.ObjectController.extend({
 			});
 			debugger;
 			UserApp.User.save({
-				"user_id": 'self', 
+				"user_id": 'self',
 				"properties": p
 			}, function (error,result) {
 				//console.log(error, result);
@@ -266,8 +287,8 @@ App.Preference = DS.Model.extend({
 	gender: DS.attr('', {defaultValue: ''}),
 	address: DS.attr('', {defaultValue: ''}),
 	mobile: DS.attr('', {defaultValue: ''}),
-	date_date: DS.attr('', {defaultValue: ''}), 
-	date_days: DS.attr('', {defaultValue: ''}), 
+	date_date: DS.attr('', {defaultValue: ''}),
+	date_days: DS.attr('', {defaultValue: ''}),
 	date_duration: DS.attr('', {defaultValue: ''}),
 	travel_distance: DS.attr('', {defaultValue: ''}),
 	anniversary: DS.attr('', {defaultValue: ''}),
