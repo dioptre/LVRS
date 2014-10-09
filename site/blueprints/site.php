@@ -15,3 +15,9 @@ fields:
   copyright:
     label: Copyright
     type:  textarea
+  loginurl:
+    label: Shop Login URL
+    type:  text
+  signupurl:
+    label: Shop Signup URL
+    type:  text

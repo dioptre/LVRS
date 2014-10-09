@@ -1,0 +1,48 @@
+Title: How we created our startup in under a month using ember.js
+
+----
+
+Author: paul-knittel
+
+----
+
+Releasedate: 2014-07-08
+
+----
+
+Text: 1 month ago my co-founder (link:https://twitter.com/andrewgrosser text:@andrewgrosser) and myself sat down with an idea to revolutionize business knowledge by giving it meaning, direction & context. We had a clear vision of what we wanted to build and knew it wasn't going to be easy. With just a small amount of time available to validate our idea, we knew we had to use the best web technology available. 1 month later we completed the challenge! But how did we get there? (image:flowpro-app.png link:http://app.flowpro.io)
+ 
+ ###Choosing EmberJS
+ There's been a huuuge amount of talk about next-gen (link:http://app.flowpro.io/flow/#/wikipedia/JavaScript text:JavaScript) frameworks like Angular.js and Backbone.js. I don't wanna dive into to much detail how the frameworks are different, but the reason we ended up choosing (link:http://app.flowpro.io/flow/#/wikipedia/Ember.js text:EmberJS) is due to it's underlying fundamental design principle of *convention over configuration*. There is a great (link:https://www.youtube.com/watch?v=jScLjUlLTLI text:talk available on YouTube) by the lead developers of Ember explaining this design philosophy in more detail.
+ 
+ >One of the main advantages of *convention over configuration* is **SPEED**.  Idealistically no reinvention or configuration should be necessary. 
+
+In reality this is not exactly the case, but it does remove the need for huge amounts of repetitive code. However my favourite advantage remains that *convention over configuration* avoids the need to rethink critical design choices over and over again. Everything in Ember is already setup with best practice in mind. This removes lengthy discussions between developers on different implementations, and instead focuses the team on what matters. Getting stuff done. Quickly! If you want to see a great example of a discussion that got out of hand check out   (link: https://github.com/TryGhost/Ghost/issues/2144 text:this discussion on github).
+ (image:speed.png) 
+ 
+ >In short: The well designed patterns the guys at Ember have created obviate the need for constant redesign and boilerplate and help a team focus.
+ 
+ ###Keep your templates sane
+In a large web application the size of (link:http://app.flowpro.io text:FlowPro), there are many different templates for each page . Although this can be easily managed on the server side, if you're starting to mix DOM modification it quickly becomes template hell. With data bindings this is a problem of the past. There are some great examples of this on the (link:http://emberjs.com text:Ember Homepage), but for quick reference I've attached an example below: (image:databindings.png)
+
+
+###Get Pro features without extra work
+ Building our app in ember has given us some fantastic features, which would otherwise have been very difficult to implement. For example we wanted everything in our app to be fully linkable, so people could share exactly what they were looking at. We wanted this to work on the search page as well, including all custom search tags, keywords, pagination and view layout settings. 
+ 
+ > Implementing this using jQuery would have been a nightmare and several hours of work. With Ember this was possible with one line of code.
+ 
+ (image:  oneline.png)
+ 
+This same story occurred to us a few times, including with features like:
+ * API caching (using Ember Data)
+ * Reusable components (Ember Components)
+ * Super fast performance with no page reloading (Ember creates *one-page apps*)
+ * Offline PhoneGap App 
+ 
+ 
+###In Conclusion
+It's been really fun working with Ember over the past few weeks. Although the learning curve was quite steep initially, I can't imagine what we would have done without it. It's certainly a technology I recommend to anyone and the reason I wrote this article. If you're interested in watching a short talk we gave at BrisJS introducing EmberJS, I've embedded it below:
+
+(youtube: http://www.youtube.com/embed/lkzNZxjIoHc)
+
+Please leave a comment below, even if there is anything you disagree with. We're always looking for the next best way we can improve our development process at FlowPro. Also stay tuned for next week, when Andrew will cover the technologies we used on our server side to get this project kicked of in less than 1 month.

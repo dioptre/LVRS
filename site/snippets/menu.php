@@ -61,8 +61,8 @@
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </li><!--//dropdown-->
-                    <li class="nav-item"><a href="login.html">Log in</a></li>
-                    <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="signup.html">Sign Up Free</a></li>
+                    <li class="nav-item"><a href="<?php echo html($site->loginurl()) ?>">Log in</a></li>
+                    <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo html($site->signupurl()) ?>">Sign Up</a></li>
                 </ul><!--//nav-->
             </div><!--//navabr-collapse-->
         </nav><!--//main-nav-->

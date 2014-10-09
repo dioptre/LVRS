@@ -6,7 +6,7 @@ Bodyid: home-page
 
 ----
 
-Coverbtn: Sign me up
+Coverbtn: Sign up now
 
 ----
 

@@ -11,3 +11,11 @@ Description: This is Kirby's Starterkit.
 ----
 
 Copyright: © 2009-(date: Year) (link: http://getkirby.com text: Kirby)
+
+----
+
+Loginurl: shop#/login
+
+----
+
+Signupurl: shop#/signup
