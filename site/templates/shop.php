@@ -9,7 +9,7 @@
 
   <link rel="shortcut icon" href="favicon.ico">
 
-  <script src="//use.typekit.net/yfn4rqv.js"></script>
+  <script src="//use.typekit.net/ojk0fcu.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
 
   <!--

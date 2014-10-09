@@ -12,8 +12,8 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="favicon.ico">
 
-	<script src="//use.typekit.net/yfn4rqv.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
+    <script src="//use.typekit.net/ojk0fcu.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
 
     <!--
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>
