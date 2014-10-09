@@ -34,4 +34,4 @@ Button: I’m interested
 
 ----
 
-Buttonurl: http://verve.dev/shop
+Buttonurl: /shop

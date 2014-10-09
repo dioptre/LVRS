@@ -115,7 +115,7 @@
 			// "error" => array()
 		// ));
 		
-		//Update Subscription to Verve1
+		//Update Subscription to Lvrs1
 		$result = $api->user->save(array(
 			"user_id" => $user->user_id,
 			"subscription" => array( 'price_list_id'=> '8OGiDhNcRiCmuQNcGkzZ0A', 'plan_id'=> 'ebgLXRIrR3qDGu_frfNksA'),

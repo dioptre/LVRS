@@ -15,7 +15,7 @@ fields:
     type: text
   coverbtnlink:
     label: Cover Button Link
-    type: url
+    type: text
   coverpic:
     label: Cover Picture
     type: select

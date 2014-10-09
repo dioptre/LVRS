@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <p class="tel"><i class="fa fa-phone"></i>0481 085 942</p>
-                                    <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@expedit.com.au</a></p>
+                                    <p class="email"><i class="fa fa-envelope-o"></i><a href="mailto:support@lvrs.co">support@lvrs.co</a></p>
                                 </div>
                             </div>
                         </div><!--//footer-col-inner-->
@@ -41,7 +41,7 @@
                     <div class="footer-col connect col-md-4 col-sm-12 col-xs-12">
                         <div class="footer-col-inner">
                             <div class="form-container">
-                                <p class="intro">Stay up to date with the latest news and offers from Verve</p>
+                                <p class="intro">Stay up to date with the latest news and offers from Lvrs</p>
 
                                 <!-- Begin MailChimp Signup Form -->
                                 <div id="mc_embed_signup">
@@ -82,7 +82,7 @@
         </div><!--//footer-content-->
         <div class="bottom-bar">
             <div class="container">
-                <small class="copyright">Copyright @ 2014 Verve</small>
+                <small class="copyright">Copyright @ 2014 Lvrs</small>
             </div><!--//container-->
         </div><!--//bottom-bar-->
     </footer><!--//footer-->
