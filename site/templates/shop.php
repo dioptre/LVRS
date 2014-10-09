@@ -62,9 +62,7 @@
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          {{#link-to 'index' class="navbar-brand"}}
-            <span class="text"><img src="/assets/VerveLogo.png"></span>
-          {{/link-to}}
+          <a href="/" class="navbar-brand active"><span class="text"><img src="/assets/VerveLogo.png"/></span></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav pull-right">
