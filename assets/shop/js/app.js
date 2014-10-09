@@ -29,6 +29,10 @@ App = Ember.Application.create();
 Ember.Route.reopen({
   beforeModel : function(transition){
     Ember.run.scheduleOnce('sync', App, checkLoginEvent);
+	if (this.get('user.authenticated') && (transition.targetName === 'signup' || transition.targetName === 'login')) {
+			transition.abort();
+			this.transitionTo('index');
+	}
     this._super(transition);
   }
 });
@@ -47,14 +51,6 @@ Ember.Lvrs.SubscriptionOnlyRouteMixin = Ember.Mixin.create({
 	}
 });
 
-Ember.UserApp.FormControllerMixin.reopen({
-	beforeModel: function(transition) {
-		if (this.get('user.authenticated')) {
-			transition.abort();
-			this.transitionTo('index');
-		}
-	}
-});
 
 App.Router.map(function() {
   this.route('signup');
