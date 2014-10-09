@@ -92,17 +92,17 @@
 				array(
 					"id" => "ebgLXRIrR3qDGu_frfNksA",
 					"amount" => 270,
-					"description" => "Monthly Subscription - "."VERVE1"
+					"description" => "Monthly Subscription - "."LVRS1"
 				)
 			),
-			"description" => "VERVE1",
+			"description" => "LVRS1",
 			"state" => "pending",
 			"vat_percentage" => 10,
 			"currency" => "AUD"
 		));
 
 		//May not need to do this if stripe integration works
-		// $subscription = $customer->subscriptions->create(array("plan" => "VERVE1"));
+		// $subscription = $customer->subscriptions->create(array("plan" => "LVRS1"));
 		
 		
 		// $result = $api->charge->save(array(
@@ -145,7 +145,7 @@
 
 		// $charge = Stripe_Charge::create(array(
 		  // 'customer' => $sid,
-		  // 'plan' => "VERVE1",
+		  // 'plan' => "LVRS1",
 		  // 'amount'   => 25000,
 		  // 'currency' => 'aud'
 		// ));
@@ -153,7 +153,7 @@
 		
 		// $customer = Stripe_Customer::create(array(
 		  // "card" => $stoken,
-		  // "plan" => "VERVE1",
+		  // "plan" => "LVRS1",
 		  // "email" => "payinguser@example.com")
 		// );
 		
