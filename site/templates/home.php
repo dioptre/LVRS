@@ -20,7 +20,7 @@
         <p class="intro">
             <?php echo html($page->coversubtitle()) ?>
         </p>
-        <p><a class="btn btn-cta btn-cta-primary" href="#">
+        <p><a class="btn btn-cta btn-cta-primary" href="<?php echo html($site->signupurl()) ?>">
             <?php echo html($page->coverbtn()) ?>
         </a></p>
         <!-- <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video"><i class="fa fa-youtube-play"></i> Watch the video</button> -->

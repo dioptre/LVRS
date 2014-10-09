@@ -6,7 +6,7 @@ Bodyid: home-page
 
 ----
 
-Coverbtn: Try for free
+Coverbtn: Sign up now
 
 ----
 

@@ -22,16 +22,16 @@
                                     <p class="adr clearfix">
                                         <i class="fa fa-map-marker pull-left"></i>
                                         <span class="adr-group pull-left">
-                                            <span class="street-address">College Green</span><br>
-                                            <span class="region">56 College Green Road</span><br>
-                                            <span class="postal-code">BS1 XR18</span><br>
-                                            <span class="country-name">UK</span>
+                                            <span class="street-address">80/120 Meiers Rd</span><br>
+                                            <span class="region">Indooroopilly</span><br>
+                                            <span class="postal-code">4068, QLD</span><br>
+                                            <span class="country-name">Australia</span>
                                         </span>
                                     </p>
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <p class="tel"><i class="fa fa-phone"></i>0800 123 4567</p>
-                                    <p class="email"><i class="fa fa-envelope-o"></i><a href="#">enquires@website.com</a></p>
+                                    <p class="tel"><i class="fa fa-phone"></i>0481 085 942</p>
+                                    <p class="email"><i class="fa fa-envelope-o"></i><a href="#">help@expedit.com.au</a></p>
                                 </div>
                             </div>
                         </div><!--//footer-col-inner-->
