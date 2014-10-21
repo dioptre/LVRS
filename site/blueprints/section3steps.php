@@ -33,4 +33,4 @@ fields:
     type:  text
   buttonurl:
     label: Button URL
-    type:  url
+    type:  text

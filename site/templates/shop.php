@@ -29,8 +29,8 @@
     "assets/css/styles-10.css",
     // "assets/shop/css/cyborg-bootstrap-dark-theme.css",
     "assets/shop/css/sandstone-bootstrap-dark-theme.css",
-    "assets/css/custom-verve.css",
-    "assets/shop/css/custom-verve-shop.css",
+    "assets/css/custom-lvrs.css",
+    "assets/shop/css/custom-lvrs-shop.css",
 
   )); ?>
 
@@ -62,7 +62,7 @@
     <div class="container">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-          <a href="/" class="navbar-brand active"><span class="text"><img src="/assets/VerveLogo.png"/></span></a>
+          <a href="/" class="navbar-brand active"><span class="text"><img src="/assets/LvrsLogo.png"/></span></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav pull-right">
@@ -96,14 +96,14 @@
 
   <script type="text/x-handlebars" data-template-name="index">
     <div class="jumbotron">
-      <h2>Hi {{user.current.first_name}}, welcome back to Verve!</h2>
+      <h2>Hi {{user.current.first_name}}, welcome back to Lvrs!</h2>
 
 
       </br></br>
 
       <h3>Status</h3>
       <p>Membership status: <span class="green"><b>ACTIVE</b><span></p>
-  	  <p>Next Date: <b>17/08/2014</b></p>
+  	  <p>Next Date: <b>{{user.current.properties.date_date.value}}</b></p>
 
       </br></br>
 
@@ -256,7 +256,7 @@
 
           <div class="col-xs-12 col-md-8">
             <h3>Price</h3>
-            <p>A Verve subscription costs $297 AUD per month (including GST). Provided is one all-inclusive date with food and drinks per month.</p>
+            <p>A Lvrs subscription costs $297 AUD per month (including GST). Provided is one all-inclusive date with food and drinks per month.</p>
 
             <h3>Security</h3>
             <p>We do not store any credit card information. We use <a href="https://stripe.com/">Stripe</a> for all payment processesing.</p>
@@ -318,8 +318,10 @@
             <div class="col-md-6">
               <h4>Date for your next date (approximate):</h4><br/>
           		{{eui-selectdate selection=model.date_date_moment}}<br/>
-          		<h4>Best Day for your dates (future):</h4><br/>
+          		<h4>Best Day for your dates:</h4><br/>
           		{{eui-select value=model.date_days options=days}}<br/>
+				<h4>Best Time for your dates:</h4><br/>
+          		{{eui-select value=model.date_time options=times}}<br/>
           		<h4>Duration for your dates (hours):</h4><br/>
           		{{eui-input value=model.date_duration placeholder='Ex. 6 hours'}}<br/>
           		<h4>Distance willing to travel:</h4><br/>
@@ -369,11 +371,13 @@
 
    <script type="text/x-handlebars" data-template-name="transacted">
 		<h1>Succcessful Transaction</h1>
-		{{#link-to 'preference'}}Now tell us what you would like to do.{{/link-to}}
+		<p>{{#link-to 'preference'}}Now tell us what you would like to do...{{/link-to}}</p>
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
-		<h1>Declined</h1>
+		<h1>Declined Transaction</h1>
+		<p>{{#link-to 'subscribe'}}Please try again later...{{/link-to}}</p>
+		<p>Or <a href="mailto:support@lvrs.co">contact our support team</a> if you believe there is something has gone wrong.</p>
    </script>
 
 

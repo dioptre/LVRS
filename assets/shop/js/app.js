@@ -29,24 +29,28 @@ App = Ember.Application.create();
 Ember.Route.reopen({
   beforeModel : function(transition){
     Ember.run.scheduleOnce('sync', App, checkLoginEvent);
+	if (this.get('user.authenticated') && (transition.targetName === 'signup' || transition.targetName === 'login')) {
+			transition.abort();
+			this.transitionTo('index');
+	}
     this._super(transition);
   }
 });
 
-Ember.Verve = {};
-Ember.Verve.SubscriptionOnlyRouteMixin = Ember.Mixin.create({
+Ember.Lvrs = {};
+Ember.Lvrs.SubscriptionOnlyRouteMixin = Ember.Mixin.create({
 	beforeModel: function(transition) {
 	  if (!this.get('user.authenticated')) {
 	    transition.abort();
 	    this.transitionTo(Ember.UserApp.loginRoute);
 	  }
-	  if (!this.get('user').current.subscription) {
-	  	debugger;
+	  else if (!this.get('user').current.subscription) {
 	    transition.abort();
 	    this.transitionTo(Ember.UserApp.indexRoute);
 	  }
 	}
 });
+
 
 App.Router.map(function() {
   this.route('signup');
@@ -65,7 +69,7 @@ App.Router.map(function() {
 App.ApplicationRoute = Ember.Route.extend(Ember.UserApp.ApplicationRouteMixin);
 App.SignupController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
 App.LoginController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
-App.IndexRoute = Ember.Route.extend(Ember.Verve.SubscriptionOnlyRouteMixin);
+App.IndexRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin);
 
 App.SubscribeRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin);
 App.SubscribeView = Ember.View.extend({
@@ -171,7 +175,7 @@ App.Article = DS.Model.extend({
 });
 
 
-App.PreferenceRoute = Ember.Route.extend(Ember.Verve.SubscriptionOnlyRouteMixin, {
+App.PreferenceRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin, {
 	model: function() {
 		var _this = this;
 		return new Ember.RSVP.Promise(function(resolve) {
@@ -206,20 +210,21 @@ App.PreferenceController = Ember.ObjectController.extend({
 	  { label: 'Sunday', value: 'sun' }
 	],
 	musics: [
+	  { label: '60s', value: '60s' },
+	  { label: '70s', value: '70s' },
+	  { label: '80s', value: '80s' },
+	  { label: '90s', value: '90s' },
 	  { label: 'Classical', value: 'cla' },
 	  { label: 'Country', value: 'cnt' },
 	  { label: 'Electro', value: 'elc' },
 	  { label: 'Folk', value: 'flk' },
 	  { label: 'Jazz', value: 'jaz' },
+	  { label: 'Pop', value: 'pop' },
+	  { label: 'Rap', value: 'rnb' },
 	  { label: 'RnB', value: 'rnb' },
 	  { label: 'Rock', value: 'rck' },
 	  { label: 'Rockabilly', value: 'rby' },
 	  { label: 'Roots', value: 'rts' },
-	  { label: '60s', value: '60s' },
-	  { label: '70s', value: '70s' },
-	  { label: '80s', value: '80s' },
-	  { label: '90s', value: '90s' },
-	  { label: 'Pop', value: 'pop' },
 	  { label: 'Dislike Music', value: 'dmu' }
 	],
 	alcohols: [
@@ -248,6 +253,12 @@ App.PreferenceController = Ember.ObjectController.extend({
 	  { label: 'All you can eat', value: 'ace' },
 	  { label: 'Gourmand', value: 'gou' },
 	  { label: 'Dislike Food', value: 'dfo' }
+	],
+	times: [
+	  { label: 'Morning', value: 'mor' },
+	  { label: 'Midday', value: 'mid' },
+	  { label: 'Afternoon', value: 'aft' },
+	  { label: 'Evening', value: 'eve' }
 	],
 	dobValid: function () {
 		return !moment(this.get('model.dob'), ["DD/MM/YYYY"], true).isValid()
@@ -287,6 +298,7 @@ App.Preference = DS.Model.extend({
 	gender: DS.attr('', {defaultValue: ''}),
 	address: DS.attr('', {defaultValue: ''}),
 	mobile: DS.attr('', {defaultValue: ''}),
+	date_time: DS.attr('', {defaultValue: ''}),
 	date_date: DS.attr('', {defaultValue: ''}),
 	date_days: DS.attr('', {defaultValue: ''}),
 	date_duration: DS.attr('', {defaultValue: ''}),

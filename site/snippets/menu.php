@@ -2,7 +2,7 @@
 <header id="header" class="header">
     <div class="container">
         <h1 class="logo">
-            <a href="/"><span class="text"><img src="/assets/VerveLogo.png"></span></a>
+            <a href="/"><span class="text"><img src="/assets/LvrsLogo.png"></span></a>
         </h1><!--//logo-->
         <nav class="main-nav navbar-right" role="navigation">
             <div class="navbar-header">

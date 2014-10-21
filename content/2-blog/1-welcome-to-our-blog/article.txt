@@ -2,7 +2,7 @@ Title: Welcome to our blog!
 
 ----
 
-Author: paul-knittel
+Author: paul
 
 ----
 

@@ -2,7 +2,7 @@ Title: ONE BOX, INFINITE POSSIBILITIES
 
 ----
 
-Subtitle: How does it work? Well that’s a bit of a mystery, but here’s a clue.
+Subtitle: How does it work? Well it’s a bit of a secret, but here’s a little clue:
 
 ----
 
@@ -10,7 +10,7 @@ Step1title: THE BOX
 
 ----
 
-Step1subtitle: Each month a mysterious box is delivered to your door, inside it is everything you will need to craft the perfect date with your partner.
+Step1subtitle: Each month we deliver a personalised box to your door, inside it is everything you will need to craft the perfect date with your partner.
 
 ----
 
@@ -30,8 +30,8 @@ Step3subtitle: All that’s left for you to do is follow our lead  and enjoy an 
 
 ----
 
-Button: I’m interested
+Button: Sign up
 
 ----
 
-Buttonurl: http://verve.dev/shop
+Buttonurl: /shop

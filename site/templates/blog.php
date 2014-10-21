@@ -16,7 +16,7 @@
                 <ul class="slides">
                     <li class="slide slide-1">
                         <div class="flex-caption container">
-                            <h3 class="title"><a href="#">Welcome to the Verve Blog</a></h3>
+                            <h3 class="title"><a href="#">Welcome to the Lvrs Blog</a></h3>
                             <div class="meta">Tips and tricks on dating</div>
                             <!-- <div class="meta">16th Oct, 2014</div> -->
                             <!-- <a class="more-link" href="blog-single.html">Read more &rarr;</a> -->
