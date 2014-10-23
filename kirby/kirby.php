@@ -2,8 +2,12 @@
 
 use Kirby\Roots;
 use Kirby\Urls;
+use Kirby\Request;
 
 class Kirby extends Obj {
+
+  static public $version = '2.0.0';
+  static public $instance;
 
   public $roots;
   public $urls;
@@ -16,12 +20,16 @@ class Kirby extends Obj {
   public $site;
   public $page;
   public $plugins;
-
-  static public $instance;
+  public $response;
+  public $request;
 
   static public function instance($class = null) {
     if(!is_null(static::$instance)) return static::$instance;
     return static::$instance = $class ? new $class : new static;
+  }
+
+  static public function version() {
+    return static::$version;
   }
 
   public function __construct() {
@@ -30,6 +38,9 @@ class Kirby extends Obj {
     $this->options = $this->defaults();
     $this->rewrite = false;
     $this->path    = implode('/', (array)url::fragments(detect::path()));
+
+    // make sure the instance is stored / overwritten
+    static::$instance = $this;
   }
 
   public function defaults() {
@@ -45,6 +56,7 @@ class Kirby extends Obj {
       'languages'              => array(),
       'roles'                  => array(),
       'cache'                  => false,
+      'debug'                  => false,
       'cache.driver'           => 'file',
       'cache.options'          => array(),
       'cache.ignore'           => array(),
@@ -399,7 +411,7 @@ class Kirby extends Obj {
 
       // check for modified content within the content folder
       // and auto-expire the page cache in such a case
-      if($this->options['cache.autoupdate']) {
+      if($this->options['cache.autoupdate'] and $this->cache()->exists($cacheId)) {
 
         // get the creation date of the cache file
         $created = $this->cache()->created($cacheId);
@@ -463,12 +475,12 @@ class Kirby extends Obj {
 
   }
 
-  /**
-   * Starts the router, renders the page and returns the response
-   *
-   * @return mixed
-   */
-  public function launch() {
+  public function request() {
+    if(!is_null($this->request)) return $this->request;
+    return $this->request = new Request($this);
+  }
+
+  public function response() {
 
     // this will trigger the configuration
     $site   = $this->site();
@@ -488,17 +500,28 @@ class Kirby extends Obj {
     $response = call($route->action(), $route->arguments());
 
     if(is_string($response)) {
-      return static::render(page($response));
+      $this->response = static::render(page($response));
     } else if(is_array($response)) {
-      return static::render(page($response[0]), $response[1]);
+      $this->response = static::render(page($response[0]), $response[1]);
     } else if(is_a($response, 'Response')) {
-      return $response;
+      $this->response = $response;
     } else if(is_a($response, 'Page')) {
-      return static::render($response);
+      $this->response = static::render($response);
     } else {
-      return null;
+      $this->response = null;
     }
 
+    return $this->response;
+
+  }
+
+  /**
+   * Starts the router, renders the page and returns the response
+   *
+   * @return mixed
+   */
+  public function launch() {
+    return $this->response();
   }
 
   static public function start() {
