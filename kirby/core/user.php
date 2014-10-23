@@ -103,14 +103,20 @@ abstract class UserAbstract {
 
     if(isset($this->cache['avatar'])) return $this->cache['avatar'];
 
-    // try to find the avatar
-    $root = kirby::instance()->roots()->avatars() . DS . $this->username() . '.{jpg,jpeg,png}';
+    // allowed extensions
+    $extensions = array('jpg', 'jpeg', 'png', 'gif');
 
-    if($avatar = a::first((array)glob($root, GLOB_BRACE))) {
-      return $this->cache['avatar'] = new Media($avatar, kirby::instance()->urls()->avatars() . '/' . f::filename($avatar));
-    } else {
-      return $this->cache['avatar'] = false;
+    // try to find the avatar
+    $root = kirby::instance()->roots()->avatars() . DS . $this->username();
+
+    foreach($extensions as $ext) {
+      $file = $root . '.' . $ext;
+      if(file_exists($file)) {
+        return $this->cache['avatar'] = new Media($file, kirby::instance()->urls()->avatars() . '/' . f::filename($file));
+      }
     }
+
+    return $this->cache['avatar'] = false;
 
   }
 
@@ -198,6 +204,10 @@ abstract class UserAbstract {
 
   public function update($data = array()) {
 
+    // sanitize the given data
+    $data = $this->sanitize($data, 'update');
+
+    // validate the updated dataset
     $this->validate($data, 'update');
 
     // don't update the username
@@ -237,6 +247,16 @@ abstract class UserAbstract {
 
   }
 
+  static public function sanitize($data, $mode = 'insert') {
+
+    // all usernames must be lowercase
+    $data['username'] = str::slug(a::get($data, 'username'));
+
+    // return the cleaned up data
+    return $data;
+
+  }
+
   /**
    * Creates a new user
    *
@@ -245,10 +265,11 @@ abstract class UserAbstract {
    */
   static public function create($data = array()) {
 
-    static::validate($data, 'insert');
+    // sanitize the given data for the new user
+    $data = static::sanitize($data, 'insert');
 
-    // all usernames must be lowercase
-    $data['username'] = str::slug($data['username']);
+    // validate the dataset
+    static::validate($data, 'insert');
 
     // create the file root
     $file = kirby::instance()->roots()->accounts() . DS . $data['username'] . '.php';
