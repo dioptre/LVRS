@@ -1,4 +1,4 @@
-Title: Lvrs
+Title: LVRS
 
 ----
 
@@ -6,11 +6,11 @@ Author: Lvrs Startup
 
 ----
 
-Description: This is Kirby's Starterkit.
+Description: LVRS is a monthly subscription service that delivers tailored kits to couples, designed to enrich their relationship.
 
 ----
 
-Copyright: © 2009-(date: Year) (link: http://getkirby.com text: Kirby)
+Copyright: © 2014-(date: Year)
 
 ----
 
