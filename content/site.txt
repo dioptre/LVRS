@@ -22,4 +22,6 @@ Signupurl: shop#/signup
 
 ----
 
-Css:
+Css: div#topcontrol {
+   display: none !important;
+}
