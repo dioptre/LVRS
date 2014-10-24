@@ -10,7 +10,7 @@ Coverbtn: Sign up now
 
 ----
 
-Coverpic: bg-header-1.jpg
+Coverpic: lvrs-site-3.jpg
 
 ----
 
