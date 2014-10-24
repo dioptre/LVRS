@@ -5,7 +5,7 @@
 <div class="bg-slider-wrapper">
     <div class="flexslider bg-slider">
         <ul class="slides">
-            <li class="slide slide-1"></li>
+            <li class="slide slide-1"  style="background-image: url('<?php echo $site->files()->find(html($site->coverpic()))->url() ?>')"></li>
            <!-- <li class="slide slide-2"></li>
             <li class="slide slide-3"></li>-->
         </ul>
