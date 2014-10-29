@@ -1,6 +1,6 @@
 <!-- Sections are never used as visible pages at this point -->
 
-<section class="promo promo-section section section-on-bg" style="background-image: url('<?php echo $data->files()->find(html($data->coverpic()))->url() ?>')">
+<section class="promo promo-section section section-on-bg bg-cover" style="background-image: url('<?php echo $data->files()->find(html($data->coverpic()))->url() ?>')">
     <div class="container text-center">
         <h2 class="title">
             <?php echo html($data->title()) ?>

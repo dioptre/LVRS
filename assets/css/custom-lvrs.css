@@ -113,6 +113,7 @@ section.steps .text-below {
 
 .steps .step {
     color: rgb(177, 177, 177);
+    color: rgb(202, 202, 202);
 }
 
 
@@ -178,3 +179,11 @@ input#mce-EMAIL {
     color: #9AA7BB;
 }
 /* FOOTER END */
+
+
+.bg-cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
