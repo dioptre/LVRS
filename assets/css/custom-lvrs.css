@@ -160,6 +160,17 @@ section.steps .text-below {
     }
 }
 
+
+
+/* SECTION SIMPLE BLOCK START */
+.simpleblock {
+    padding: 0px;
+    padding-bottom: 70px;
+}
+
+/* SECTION SIMPLE BLOCK END */
+
+
 /* FOOTER START */
 .footer {
     background: #232529;
