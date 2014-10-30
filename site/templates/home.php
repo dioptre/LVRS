@@ -5,7 +5,13 @@
 <div class="bg-slider-wrapper">
     <div class="flexslider bg-slider">
         <ul class="slides">
-            <li class="slide slide-1"  style="background-image: url('<?php echo $page->files()->find(html($page->coverpic()))->url() ?>')"></li>
+            <li class="slide slide-1"  style="background-image: url('<?php
+                if ($coverpix = html($page->coverpic())){
+                    if ($coverpixx = $page->files()->find($coverpix)){
+                        echo $coverpixx->url();
+                    }
+                }
+            ?>')"></li>
            <!-- <li class="slide slide-2"></li>
             <li class="slide slide-3"></li>-->
         </ul>

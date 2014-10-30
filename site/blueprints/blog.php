@@ -9,6 +9,7 @@ fields:
   title:
     label: Title
     type:  text
-  text:
-    label: Sidebar Content (html)
-    type: textarea
+  coverpic:
+    label: Cover Picture
+    type: select
+    options: images

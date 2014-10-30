@@ -5,6 +5,7 @@ pages:
   template:
     - section
     - sectionwhy
+    - sectiontimeline
     - sectioncomparison
     - sectioncover
     - sectioncoverquote

@@ -1,5 +1,5 @@
 <?php snippet('header') ?>
-<?php snippet('menublog') ?>
+<?php snippet('menu') ?>
 
 <?php $articles = $page->children()->visible()->flip()->paginate(10) ?>
 
@@ -14,7 +14,16 @@
 
             <div class="flexslider blog-slider">
                 <ul class="slides">
-                    <li class="slide slide-1">
+
+
+                    <li class="slide slide-1"  style="background-image: url('<?php
+                            if ($coverpix = html($page->coverpic())){
+                                if ($coverpixx = $page->files()->find($coverpix)){
+                                    echo $coverpixx->url();
+                                }
+                            }
+                        ?>')">
+
                         <div class="flex-caption container">
                             <h3 class="title"><a href="#">Welcome to the Lvrs Blog</a></h3>
                             <div class="meta">Tips and tricks on dating</div>
@@ -33,12 +42,16 @@
                 <div id="blog-mansonry" class="blog-list">
 
                     <?php foreach($articles as $article): ?>
-                    <?php $author = $pages->find('authors/' . $article->author()) ?>
+
 
                     <article class="post col-md-4 col-sm-6 col-xs-12">
                         <div class="post-inner">
                             <figure class="post-thumb">
-                                <a href="<?php echo $article->url() ?>"><img class="img-responsive" src="<?php echo thumb($article->images()->find('headimage.jpg'), array('width' => 626, 'height' => 310, 'crop' => true), false) ?>" alt="" /></a>
+                                <a href="<?php echo $article->url() ?>">
+                                    <?php if($image = $article->images()->find('headimage.jpg')): ?>
+                                        <img class="img-responsive" src="<?php echo thumb($image, array('width' => 626, 'height' => 310, 'crop' => true), false); ?>" alt="" />
+                                    <?php endif ?>
+                                </a>
                             </figure><!--//post-thumb-->
                             <div class="content">
                                 <h3 class="post-title"><a href="<?php echo $article->url() ?>">
@@ -59,8 +72,15 @@
                                             ?>
                                         </li>
                                         <li class="post-author"> by <a href="#">
-                                            <?php echo $site->users()->find(html($article->author()))->firstname() ?>
-                                            <?php echo $site->users()->find(html($article->author()))->lastname() ?>
+                                            <?php
+                                                $authorName = $article->author()->html();
+                                               if($authorName){
+                                                   if($author = $site->users()->find($authorName)){
+                                                        echo $author->firstname() . ' ' . $author->lastname();
+                                                   }
+
+                                                }
+                                            ?>
                                         </a></li>
                                         <li class="post-comments-link">
                                             <a href="<?php echo $article->url() ?>#comment-area"><i class="fa fa-comments"></i><a href="<?php echo $article->url() ?>#disqus_thread">0</a></a>
