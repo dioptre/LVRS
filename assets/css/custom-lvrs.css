@@ -212,6 +212,10 @@ section.featured-blog-posts.section{
 .blog-slider .flex-caption .title {
     margin-top: 56px;
 }
+.blog-entry {
+    margin-top: -160px;
+}
+
 
 
 /* BLOG HACKS END*/

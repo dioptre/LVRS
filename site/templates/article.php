@@ -1,5 +1,5 @@
 <?php snippet('header') ?>
-<?php snippet('menublog') ?>
+<?php snippet('menu') ?>
 
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
@@ -33,8 +33,15 @@
                                 </li>
                                 <li class="post-author"> by
                                     <a href="#">
-                                        <?php echo $site->users()->find(html($page->author()))->firstname() ?>
-                                        <?php echo $site->users()->find(html($page->author()))->lastname() ?>
+                                        <?php
+                                            $authorName = $page->author()->html();
+                                           if($authorName){
+                                               if($author = $site->users()->find($authorName)){
+                                                    echo $author->firstname() . ' ' . $author->lastname();
+                                               }
+
+                                            }
+                                        ?>
                                     </a>
                                 </li>
                             </ul><!--//meta-list-->
