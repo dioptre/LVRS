@@ -2,8 +2,8 @@ Title: MX
 
 ----
 
-Below: #Feature In
-(image: MX-newspaper-masthead.png)
+Below: #Featured In
+(image: mx.gif)
 MX NEWSPAPER BRISBANE
 <br>
 
@@ -14,4 +14,4 @@ Other cities coming soon, (email: founders@lvrs.co text: let us know) if you wan
 
 ----
 
-Color: #595959
+Color: #232529
