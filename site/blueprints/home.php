@@ -30,6 +30,9 @@ fields:
   coverbtn:
     label: Cover Button Text
     type: text
+  coverbtnlink:
+    label: Link Cover button Uses
+    type: text
   coverpic:
     label: Cover Picture
     type: select

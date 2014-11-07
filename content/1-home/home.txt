@@ -6,7 +6,7 @@ Bodyid: home-page
 
 ----
 
-Coverbtn: Sign up now
+Coverbtn: Learn More
 
 ----
 
@@ -19,3 +19,7 @@ Covertitle: Bring Back The Butterflies
 ----
 
 Coversubtitle: LVRS provides tailored experiences for couples designed to reignite passion in a relationship, delivered to you every month.
+
+----
+
+Coverbtnlink: #1mn3bni

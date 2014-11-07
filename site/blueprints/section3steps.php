@@ -9,25 +9,27 @@ fields:
     type:  text
   subtitle:
     label: Subtitle
-    type:  text
+    type:  textarea
+    help: You can use any html in here :)
   step1title:
     label: Step 1 Title
     type:  text
   step1subtitle:
     label: Step 1 Subitle
-    type:  text
+    type:  textarea
+    help: You can use any html in here :)
   step2title:
     label: Step 2 Title
     type:  text
   step2subtitle:
     label: Step 2 Subitle
-    type:  text
+    type:  textarea
   step3title:
     label: Step 3 Title
     type:  text
   step3subtitle:
     label: Step 3 Subitle
-    type:  text
+    type:  textarea
   button:
     label: Button Text
     type:  text
