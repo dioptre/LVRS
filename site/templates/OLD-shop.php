@@ -1,110 +1,96 @@
-<?php snippet('header') ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><?php echo html($site->title()) ?> | Dashboard</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <script src="//use.typekit.net/ojk0fcu.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  <!--
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+  -->
+
+  <!-- CSS files -->
+  <?php echo css(array(
+    "assets/plugins/bootstrap/css/bootstrap.min.css",
+    "assets/plugins/font-awesome/css/font-awesome.css",
+    "assets/shop/css/emberui-default-theme.css",
+    "assets/shop/css/emberui.css",
+    "assets/plugins/flexslider/flexslider.css",
+    "assets/plugins/rrssb/css/rrssb.css",
+    "assets/css/styles-9.css",
+    "assets/css/styles-10.css",
+    // "assets/shop/css/cyborg-bootstrap-dark-theme.css",
+    "assets/shop/css/sandstone-bootstrap-dark-theme.css",
+    "assets/css/custom-lvrs.css",
+    "assets/shop/css/custom-lvrs-shop.css",
+
+  )); ?>
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <?php echo js(array(
+    "assets/plugins/jquery-1.11.1.min.js",
+    "assets/plugins/jquery-migrate-1.2.1.min.js",
+    "assets/plugins/bootstrap/js/bootstrap.min.js",
+    "assets/plugins/bootstrap-hover-dropdown.min.js",
+    "assets/plugins/back-to-top.js",
+    "assets/plugins/jquery-placeholder/jquery.placeholder.js",
+    "assets/plugins/FitVids/jquery.fitvids.js",
+    "assets/plugins/flexslider/jquery.flexslider-min.js",
+    "assets/plugins/imagesloaded/imagesloaded.pkgd.min.js",
+    "assets/plugins/masonry.pkgd.min.js",
+    "assets/plugins/rrssb/js/rrssb.min.js"
+    //"assets/js/main.js"
+  )); ?>
+</head>
+<body>
+
 
 
   <script type="text/x-handlebars">
-    <!-- ******HEADER****** -->
-    <header id="header" class="header">
-        <div class="container">
-            <h1 class="logo">
-                <a href="/"><span class="text"><img src="/assets/LvrsLogo2.png"></span></a>
-            </h1><!--//logo-->
-            <nav class="main-nav navbar-right" role="navigation">
-                <div class="navbar-header">
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button><!--//nav-toggle-->
-                </div><!--//navbar-header-->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                      <?php foreach($pages->visible() as $p): ?>
-                        <?php if($p->hasVisibleChildren()): ?>
-                          <?php if(false): ?>
-                            <li class="dropdown">
-                              <a class="dropdown-toggle <?php e($p->isOpen(), ' active') ?>" href="<?php echo $p->url() ?>" data-toggle="dropdown">
-                                <?php echo html($p->title()) ?>
-                                <b class="caret"></b>
-                              </a>
-
-                              <ul class="dropdown-menu">
-                                <?php foreach($p->children()->visible() as $p): ?>
-                                  <?php if (!in_array($p->template(), array('title','section','divider'))): ?>
-                                    <li>
-                                      <a href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
-                                    </li>
-                                  <?php endif ?>
-                                <?php endforeach ?>
-                              </ul>
-                            </li>
-                          <?php else: ?>
-                            <li class="nav-item <?php e($p->isOpen(), ' active') ?>">
-                              <a <?php e($p->isOpen(), ' class="active"') ?> href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
-                            </li>
-                          <?php endif ?>
-                        <?php else: ?>
-                          <li class="nav-item <?php e($p->isOpen(), ' active') ?>">
-                            <a <?php e($p->isOpen(), ' class="active"') ?> href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
-                          </li>
-                        <?php endif ?>
-
-                      <?php endforeach ?>
-
-                      {{#unless user.authenticated}}
-                        <li class="nav-item">{{#link-to 'login'}}Log In{{/link-to}}</li>
-                        <li class="nav-item">{{#link-to 'signup'}}Sign Up{{/link-to}}</li>
-                      {{else}}
-                        <li class="nav-item nav-item-cta last"><a href="#">Log Out</a></li>
-                      {{/unless}}
-                    </ul>
-
-
-                      <!--
-                        <li class="nav-item"><a href="http://lvrs.uservoice.com/knowledgebase" target="_blank">FAQ</a></li>
-                        <li class="nav-item"><a href="<?php echo html($site->loginurl()) ?>">Log in</a></li>
-                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo html($site->signupurl()) ?>">Sign Up</a></li>
-                        -->
-                    </ul><!--//nav-->
-                </div><!--//navabr-collapse-->
-            </nav><!--//main-nav-->
-        </div><!--//container-->
-    </header><!--//header-->
-
-    <div class="wrap">
-      {{#if user.authenticated}}
-        <ul class="nav nav-tabs text-center">
-          {{#if user.current.subscription}}
-            {{#link-to 'index' tagName='li'}}
-              <a>
-                <i class="fa fa-dashboard"></i><br>
-                Dashboard
-              </a>
-            {{/link-to}}
+    <div class="container">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand active"><span class="text"><img src="/assets/LvrsLogo.png"/></span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav pull-right">
+            {{#unless user.authenticated}}
+              <li>{{#link-to 'login'}}Log In{{/link-to}}</li>
+              <li>{{#link-to 'signup'}}Sign Up{{/link-to}}</li>
+            {{else}}
+              <li><a href="#" {{ action 'logout' }}>Log Out</a></li>
+            {{/unless}}
+          </ul>
+          {{#if user.authenticated}}
+            <ul class="nav navbar-nav">
+              {{#if user.current.subscription}}
+                <li>{{#link-to 'index'}}Dashboard{{/link-to}}</li>
+              {{/if}}
+              <li>{{#link-to 'subscribe'}}Subscribe{{/link-to}}</li>
+              {{#if user.current.subscription}}
+                <li>{{#link-to 'preference'}}Preferences{{/link-to}}</li>
+              {{/if}}
+            </ul>
           {{/if}}
-
-          {{#link-to 'subscribe' tagName='li'}}
-            <a>
-              <i class="fa fa-money"></i><br>
-              Manage subscription
-            </a>
-          {{/link-to}}
-
-
-          {{#if user.current.subscription}}
-            {{#link-to 'preference' tagName='li' classNames="last"}}
-              <a>
-                <i class="fa fa-cog"></i><br>
-                Preferences
-              </a>
-            {{/link-to}}
-          {{/if}}
-
-        </ul>
-      {{/if}}
+        </div>
+      </div>
       {{outlet}}
     </div>
-
   </script>
 
   <script type="text/x-handlebars" data-template-name="loading">
@@ -112,9 +98,9 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-
-      <h1>Dashboard</h1>
+    <div class="jumbotron">
       <h2>Hi {{user.current.first_name}}, welcome back to Lvrs!</h2>
+
 
       </br></br>
 
@@ -137,11 +123,21 @@
             <p>Update Payment Details</p>
           {{/link-to}}
         </li>
-      </ul>
+{{!--    	  <li>
+          {{#link-to 'preference'}}
+            <p>Feedback</p>
+          {{/link-to}}
+        </li>
+    	  <li>
+          {{#link-to 'preference'}}
+            <p>Invoices</p>
+          {{/link-to}}
+        </li> --}}
+      <ul>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="signup">
-    {{#unless user.authenticated}}
     <div class="userapp">
       <form class="form" {{action signup on='submit'}}>
         <h2 class="form-heading">Please Sign Up</h2>
@@ -163,9 +159,6 @@
         {{/if}}
       </form>
     </div>
-    {{else}}
-      Succcessfully logged in.
-    {{/unless}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="login">
@@ -317,6 +310,8 @@
       		{{eui-textarea value=model.address placeholder='Address'}}<br/>
       		<h4>Your mobile number:</h4><br/>
       		{{eui-input value=model.mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
+          </br></br>
+          {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
         </div>
 
 
@@ -336,6 +331,8 @@
           		{{eui-input value=model.travel_distance placeholder='Ex. 6 km'}}<br/>
           		<h4>Your anniversary date:</h4><br/>
           		{{eui-input placeholder="dd/mm/yyyy" value=model.anniversary error=anniversaryValid}}<br/>
+              <br/><br/>
+              {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
             </div>
             <div class="col-md-6">
               <h4>Number of children:</h4><br/>

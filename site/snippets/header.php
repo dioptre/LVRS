@@ -24,6 +24,8 @@
     <?php echo css(array(
       "assets/plugins/bootstrap/css/bootstrap.min.css",
       "assets/plugins/font-awesome/css/font-awesome.css",
+      "assets/shop/css/emberui-default-theme.css",
+      "assets/shop/css/emberui.css",
       "assets/plugins/flexslider/flexslider.css",
       "assets/plugins/rrssb/css/rrssb.css",
       "assets/css/styles-9.css",
