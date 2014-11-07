@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php echo html($site->description()) ?>" />
     <meta name="author" content="">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <script src="//use.typekit.net/ojk0fcu.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
