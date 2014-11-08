@@ -1962,7 +1962,7 @@ exports["default"] = widthsupport;
 },{}],34:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
@@ -2018,11 +2018,11 @@ function program5(depth0,data) {
   data.buffer.push("\n  </div>\n</div>\n");
   return buffer;
   
-});
+}});
 },{}],35:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
@@ -2098,11 +2098,11 @@ function program3(depth0,data) {
   data.buffer.push("\n</div>\n");
   return buffer;
   
-});
+}});
 },{}],36:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
@@ -2135,11 +2135,11 @@ function program1(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],37:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
@@ -2196,11 +2196,11 @@ function program3(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],38:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
@@ -2248,11 +2248,11 @@ function program3(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],39:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
@@ -2292,11 +2292,11 @@ function program4(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],40:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
@@ -2316,11 +2316,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],41:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1;
@@ -2331,11 +2331,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],42:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
@@ -2375,11 +2375,11 @@ function program3(depth0,data) {
   data.buffer.push("\n</div>\n");
   return buffer;
   
-});
+}});
 },{}],43:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
@@ -2411,11 +2411,11 @@ function program1(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],44:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
@@ -2446,11 +2446,11 @@ function program1(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],45:[function(_dereq_,module,exports){
 "use strict";
 var Ember = window.Ember["default"] || window.Ember;
-exports["default"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+exports["default"] = Ember.Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"], "useData":true, "main":function anonymous(depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
@@ -2497,7 +2497,7 @@ function program3(depth0,data) {
   data.buffer.push("\n");
   return buffer;
   
-});
+}});
 },{}],46:[function(_dereq_,module,exports){
 "use strict";
 /*! jQuery UI - v1.10.4 - 2014-04-28

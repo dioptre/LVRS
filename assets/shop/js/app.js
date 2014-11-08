@@ -1,53 +1,179 @@
-var checkLoginEvent = function () {
-    UserApp.Token.heartbeat(function(error, result){
-		// Handle error/result
-		var currentRoute = window.location.hash.toLowerCase();
-		if (error && currentRoute.indexOf('login') < 0 && currentRoute.indexOf('signup') < 0) {
-			//UserApp.User.logout();
-			//window.location.hash = 'login';
-		}
-	});
 
-};
 
 Ember.Application.initializer({
-  name: 'userapp',
+  name: 'emberfire:firebase',
   initialize: function(container, application) {
-  	Ember.UserApp.setup(application, {
-  		appId: '542f6b2c8ea22',
-  		loginRoute: 'login',
-        indexRoute: 'subscribe',
-        heartbeatInterval: 20000,
-        usernameIsEmail: false
-  	});
-	Ember.run.scheduleOnce('sync', App, checkLoginEvent);
+  	var firebase = new Firebase('https://burning-fire-4834.firebaseio.com/');
+    application.register('emberfire:firebase', firebase, { instantiate: false, singleton: true });
+	      Ember.A(['model', 'controller', 'view', 'route', 'adapter', 'component']).forEach(function(component) {
+	        application.inject(component, 'firebase', 'emberfire:firebase');
+	      });
   }
 });
 
 App = Ember.Application.create();
 
-Ember.Route.reopen({
-  beforeModel : function(transition){
-    Ember.run.scheduleOnce('sync', App, checkLoginEvent);
-	if (this.get('user.authenticated') && (transition.targetName === 'signup' || transition.targetName === 'login')) {
-			transition.abort();
-			this.transitionTo('index');
-	}
-    this._super(transition);
-  }
-});
-
 Ember.Lvrs = {};
+Ember.Lvrs.InjectUser = function (user) {
+	App.register('emberfire:user', user , { instantiate: false, singleton: true });
+	Ember.A(['model', 'controller', 'view', 'route', 'component']).forEach(function(component) {
+  		App.inject(component, 'user', 'emberfire:user');
+	});
+}
 Ember.Lvrs.SubscriptionOnlyRouteMixin = Ember.Mixin.create({
 	beforeModel: function(transition) {
-	  if (!this.get('user.authenticated')) {
-	    transition.abort();
-	    this.transitionTo(Ember.UserApp.loginRoute);
+		var _this = this;
+	    return new Ember.RSVP.Promise(function(resolve, reject) {
+			if (!_this.get('user')) {
+		  		var authData = _this.get('firebase').getAuth();
+				if (authData) {
+					_this.store.find('user', authData.uid).then(function (user) {
+					    Ember.Lvrs.InjectUser(user);
+					    if (!user.get('subscription')) {
+					    	transition.abort();
+			    			_this.transitionTo('index');
+			    			reject('Not a subscriber.')
+					    }
+					    else {
+					    	resolve();
+					    }
+					})
+				}
+				else {
+				    transition.abort();
+				    _this.transitionTo('login');
+				    reject('Not logged in.')
+				}
+			}
+			else if (!_this.get('user.subscription')) {
+			    transition.abort();
+			    _this.transitionTo('index');
+			    reject('Not a subscriber.')
+			}
+			else {
+				resolve();
+			}
+		});
+	}
+});
+Ember.Lvrs.ApplicationRouteMixin = Ember.Mixin.create({
+
+});
+Ember.Lvrs.FormControllerMixin = Ember.Mixin.create({
+	cv : true,
+	credentialsValid: function(key, value, previousValue) {
+		if (arguments.length > 1) {
+      		this.set('cv', value)
+	    }
+	    // getter
+	    return this.get('cv');
+	}.property('email', 'password'),
+	emailValid: function () {
+		if (this.get('email'))
+			return !this.get('email').match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/); //'
+		else return true;
+	}.property('email'),
+	fullNameValid: function () {
+		return (this.get('fullName') && this.get('fullName').length > 0)
+	}.property('fullName'),
+	actions: {
+		login: function() {
+			var _this = this;
+			this.get('firebase').authWithPassword({
+			  email    : this.get('email'),
+			  password : this.get('password')
+			}, function(err, authData) {
+			  if (err) {
+			    switch (err.code) {
+			      case "INVALID_EMAIL":
+			      // handle an invalid email
+			      case "INVALID_PASSWORD":
+			      // handle an invalid password
+			      default:
+			    }
+			    _this.set('cv', false);
+			  } else if (authData) {
+			  	var _authData = authData;
+			    // user authenticated with Firebase
+			    console.log("Logged In! User ID: " + authData.uid);
+			    if (!_this.get('user')) {
+				    _this.store.find('user', authData.uid).then(function (user) {
+				    	Ember.Lvrs.InjectUser(user);
+				    	_this.set('cv', true);
+				    	_this.transitionToRoute('index');
+				    }).catch(function (reason) {
+				    	if (_this.get('fullName')) {
+						    var fullName = _this.get('fullName').split(" ");
+						    var lastName = null;
+						    var firstName = fullName[0];
+						    if (fullName.length > 1)
+						    	lastName = fullName[fullName.length - 1];
+						    user = _this.store.createRecord('user', {id: _authData.uid, firstName: firstName, lastName: lastName});
+						    user.save();
+				    	}
+				    	Ember.Lvrs.InjectUser(user);
+				    	_this.set('cv', true);
+				    	_this.transitionToRoute('index');
+				    });
+				}
+				else {
+					_this.set('cv', true);
+				    _this.transitionToRoute('index');
+				}
+			    
+				
+			  }
+			});
+
+		},
+		signup: function() {
+			var _this = this;
+			this.get('firebase').createUser({
+			  email    : this.get('email'),
+			  password : this.get('password')
+			}, function(error) {
+			  if (error === null) {
+			    console.log("User created successfully");
+			    _this.send('login');
+			  } else {
+			    console.log("Error creating user:", error);
+			  }
+			});
+	  	}
 	  }
-	  else if (!this.get('user').current.subscription) {
-	    transition.abort();
-	    this.transitionTo(Ember.UserApp.indexRoute);
-	  }
+});
+Ember.Lvrs.ProtectedRouteMixin = Ember.Mixin.create({
+	beforeModel: function(transition) {
+		var _this = this;
+	    return new Ember.RSVP.Promise(function(resolve, reject) {
+  			Ember.run.scheduleOnce('sync', App, function() {
+		    	if (!_this.get('user')) {
+		    		var authData = _this.get('firebase').getAuth();
+					if (authData) {
+						_this.store.find('user', authData.uid).then(function (user) {
+						    	Ember.Lvrs.InjectUser(user);
+						    	resolve();
+						}).catch(function (reason) {
+							transition.abort();
+							_this.transitionTo('login');
+							reject('Not valid user - could not fetch details')
+						});
+					}
+					else {
+						_this.transitionTo('login');	
+						reject('Not valid user - not logged in')
+					}	    	
+		    	}
+		    	else {
+		    		if (this.get('user') && (transition.targetName === 'signup' || transition.targetName === 'login')) {
+						transition.abort();
+						this.transitionTo('index');
+					}
+					resolve();
+		    	}
+		    });
+  		});
+
 	}
 });
 
@@ -66,12 +192,12 @@ App.Router.map(function() {
 });
 
 
-App.ApplicationRoute = Ember.Route.extend(Ember.UserApp.ApplicationRouteMixin);
-App.SignupController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
-App.LoginController = Ember.Controller.extend(Ember.UserApp.FormControllerMixin);
-App.IndexRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin);
+App.ApplicationRoute = Ember.Route.extend(Ember.Lvrs.ApplicationRouteMixin);
+App.SignupController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
+App.LoginController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
+App.IndexRoute = Ember.Route.extend(Ember.Lvrs.ProtectedRouteMixin);
 
-App.SubscribeRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin);
+App.SubscribeRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin);
 App.SubscribeView = Ember.View.extend({
 	didInsertElement: function () {
 		// this identifies your website in the createToken call below
@@ -129,7 +255,7 @@ App.ArticleController = Ember.ObjectController.extend({
 
 	// }
 });
-App.ArticleRoute = Ember.Route.extend(Ember.UserApp.ProtectedRouteMixin, {
+App.ArticleRoute = Ember.Route.extend(Ember.Lvrs.ProtectedRouteMixin, {
 	beforeModel: function() {
 		// $.get('/articles.php', function(data) {
 			// App.articlesController.set('content', data);
@@ -159,9 +285,11 @@ DS.RESTAdapter.reopen({
   }
 });
 
-// App.ApplicationAdapter = DS.RESTAdapter.extend({
-    // host: 'http://verve.dev'
-// });
+App.ApplicationAdapter = DS.FirebaseAdapter.extend({
+    //firebase: new Firebase('https://slo2606sr0d.firebaseio-demo.com/')
+});
+
+
 
 // App.ApplicationSerializer = DS.RESTSerializer.extend({
     // primaryKey: 'id',
@@ -177,21 +305,7 @@ App.Article = DS.Model.extend({
 
 App.PreferenceRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin, {
 	model: function() {
-		var _this = this;
-		return new Ember.RSVP.Promise(function(resolve) {
-			UserApp.User.get({
-				"user_id": "self"
-			}, function(error, result){
-				// Handle error/result
-				var m = {};
-				var props = result[0].properties;
-				for(var name in props) {
-					m[name] = props[name].value;
-				}
-				var model = _this.store.createRecord('preference', m);
-				resolve(model);
-			});
-		});
+		return this.get('user');
 	}
 });
 
@@ -274,25 +388,27 @@ App.PreferenceController = Ember.ObjectController.extend({
 	}.property('model.mobile'),
 	actions: {
 		savePreferences: function () {
-			var _this = this;
-			var p = {};
-			$.each(this.get('content.constructor.attributes').keys.list, function (i,v) {
-					p[v] = {"value": _this.get('model.' + v), "override": true };
-			});
-			debugger;
-			UserApp.User.save({
-				"user_id": 'self',
-				"properties": p
-			}, function (error,result) {
-				//console.log(error, result);
-			});
+			this.get('user').save();
+			// var _this = this;
+			// var p = {};
+			// $.each(this.get('content.constructor.attributes').keys.list, function (i,v) {
+			// 		p[v] = {"value": _this.get('model.' + v), "override": true };
+			// });
+			// debugger;
+			// UserApp.User.save({
+			// 	"user_id": 'self',
+			// 	"properties": p
+			// }, function (error,result) {
+			// 	//console.log(error, result);
+			// });
 		}
 	}
 });
 
-
-
-App.Preference = DS.Model.extend({
+App.User = DS.Model.extend({
+	subscription: DS.attr(''),
+	firstName:  DS.attr('', {defaultValue: ''}),
+	lastName:  DS.attr('', {defaultValue: ''}),
 	partners_firstname: DS.attr('', {defaultValue: ''}),
 	dob: DS.attr('', {defaultValue: ''}),
 	gender: DS.attr('', {defaultValue: ''}),

@@ -72,9 +72,9 @@
     </header><!--//header-->
 
     <div class="wrap">
-      {{#if user.authenticated}}
+      {{#if user}}
         <ul class="nav nav-tabs text-center">
-          {{#if user.current.subscription}}
+          {{#if user.subscription}}
             {{#link-to 'index' tagName='li'}}
               <a>
                 <i class="fa fa-dashboard"></i><br>
@@ -91,7 +91,7 @@
           {{/link-to}}
 
 
-          {{#if user.current.subscription}}
+          {{#if user.subscription}}
             {{#link-to 'preference' tagName='li' classNames="last"}}
               <a>
                 <i class="fa fa-cog"></i><br>
@@ -114,7 +114,7 @@
   <script type="text/x-handlebars" data-template-name="index">
 
       <h1>Dashboard</h1>
-      <h2>Hi {{user.current.first_name}}, welcome back to Lvrs!</h2>
+      <h2>Hi {{user.id}}, welcome back to Lvrs!</h2>
 
       </br></br>
 
@@ -143,13 +143,13 @@
   <script type="text/x-handlebars" data-template-name="signup">
     {{#unless user.authenticated}}
     <div class="userapp">
-      <form class="form" {{action signup on='submit'}}>
+      <form class="form" {{action 'signup' on='submit'}}>
         <h2 class="form-heading">Please Sign Up</h2>
         <div class="form-fields">
-          {{input id='name' placeholder='First Name' class='form-control' value=first_name}}
+          {{input id='name' placeholder='Name' class='form-control' value=fullName}}
           {{input id='email' placeholder='Email' class='form-control' value=email}}
-          {{input id='username' placeholder='Username' class='form-control' value=username}}
           {{input id='password' placeholder='Password' class='form-control' type='password' value=password}}
+          <br/>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           {{#if loading}}
@@ -173,9 +173,11 @@
       <form class="form" {{action login on='submit'}}>
         <h2 class="form-heading">Please Log In</h2>
         <div class="form-fields">
-          {{input id='username' placeholder='Username' class='form-control' value=username}}
+          {{input id='email' placeholder='Email' class='form-control' value=email error=emailValid}}
           {{input id='password' placeholder='Password' class='form-control' type='password' value=password}}
+          {{#unless cv}}<p>Bad username/password</p>{{/unless}}
         </div>
+        <br/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           {{#if loading}}
             <img src="https://app.userapp.io/img/ajax-loader-transparent.gif">
@@ -304,13 +306,13 @@
 
   		<h1>Preferences</h1>
 
-      <div class="row">
+     {{!-- <div class="row">
         <div class="col-md-4">
           <h3>Personal details:</h3>
       		<h4>Partner's First Name:</h4><br/>
       		{{eui-input placeholder='Partner\'s First Name' value=model.partners_firstname}}<br/>
       		<h4>Your date of birth:</h4><br/>
-      		{{eui-input placeholder="dd/mm/yyyy" value=model.dob error=dobValid}}<br/>
+      		{{eui-input placeholder="dd/mm/yyyy" value=model.dob error=dateValid}}<br/>
       		<h4>Gender:</h4><br/>
       		{{eui-select value=model.gender options=genders}}<br/>
       		<h4>Address:</h4><br/>
@@ -357,7 +359,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>--}}
 
     </div>
    </script>
@@ -391,8 +393,8 @@
   <script src="/assets/shop/js/libs/handlebars.js"></script>
   <script src="/assets/shop/js/libs/ember.js"></script>
   <script src="/assets/shop/js/libs/ember-data.min.js"></script>
-  <script src="/assets/shop/js/libs/userapp.client.js"></script>
-  <script src="/assets/shop/js/libs/ember-userapp.js"></script>
+  <script src="/assets/shop/js/libs/firebase.js"></script>
+  <script src="/assets/shop/js/libs/emberfire.min.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 
 <!--   <script src="/assets/shop/js/libs/loader.js"></script>
@@ -403,10 +405,9 @@
   <script src="/assets/shop/js/libs/twix.min.js"></script>
   <script src="/assets/shop/js/libs/velocity.min.js"></script>
   <script src="/assets/shop/js/libs/velocity.ui.min.js"></script>
-  <script src="/assets/shop/js/libs/emberui.js"></script>
+  <!-- handlebars 2 killed ember-ui essential for firebase :( <script src="/assets/shop/js/libs/emberui.js"></script>-->
 
   <script src="/assets/shop/js/app.js"></script>
-
 
 </body>
 </html>
