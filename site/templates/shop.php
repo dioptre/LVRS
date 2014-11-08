@@ -72,7 +72,13 @@
     </header><!--//header-->
 
     <div class="wrap">
-      {{#if user}}
+      {{outlet}}
+    </div>
+
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="components/header-tabs">
+  	   {{#if user}}
         <ul class="nav nav-tabs text-center">
           {{#if user.subscription}}
             {{#link-to 'index' tagName='li'}}
@@ -102,9 +108,6 @@
 
         </ul>
       {{/if}}
-      {{outlet}}
-    </div>
-
   </script>
 
   <script type="text/x-handlebars" data-template-name="loading">
@@ -112,9 +115,9 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-
+  	  {{header-tabs user=user}}
       <h1>Dashboard</h1>
-      <h2>Hi {{user.id}}, welcome back to Lvrs!</h2>
+      <h2>Hi {{user.firstName}}, welcome back to Lvrs!</h2>
 
       </br></br>
 
@@ -204,8 +207,8 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="subscribe">
+   {{header-tabs user=user}}
     <h1>Payment Details</h1>
-
     <div class="row">
           <div class="col-xs-12 col-md-4">
             <form action="/subscribe.php" method="POST" id="payment-form">
@@ -302,6 +305,7 @@
   </script>
 
    <script type="text/x-handlebars" data-template-name="preference">
+    {{header-tabs user=user}}
     <div class="form">
 
   		<h1>Preferences</h1>
@@ -365,10 +369,12 @@
    </script>
 
    <script type="text/x-handlebars" data-template-name="feedback">
+   		{{header-tabs user=user}}
 		<h1>Feedback</h1>
    </script>
 
    <script type="text/x-handlebars" data-template-name="paymentMethod">
+		{{header-tabs user=user}}
 		<h1>Payment Method</h1>
    </script>
 
@@ -383,6 +389,7 @@
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
+		{{header-tabs user=user}}
 		<h1>Declined Transaction</h1>
 		<p>{{#link-to 'subscribe'}}Please try again later...{{/link-to}}</p>
 		<p>Or <a href="mailto:support@lvrs.co">contact our support team</a> if you believe there is something has gone wrong.</p>
