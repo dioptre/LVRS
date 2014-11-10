@@ -117,13 +117,24 @@
   <script type="text/x-handlebars" data-template-name="index">
   	  {{header-tabs user=user}}
       <h1>Dashboard</h1>
-      <h2>Hi {{user.firstName}}, welcome back to Lvrs!</h2>
+      <h2>Hi {{user.firstName}}, welcome to LVRS!</h2>
 
       </br></br>
 
       <h3>Status</h3>
-      <p>Membership status: <span class="green"><b>ACTIVE</b><span></p>
-  	  <p>Next Date: <b>{{user.current.properties.date_date.value}}</b></p>
+      <p>Membership status: {{#if user.subscription}}
+      	<span class="green"><b>ACTIVE</b><span>
+      	<p>Next Date: <b>{{user.date_date.value}}</b></p>
+      	{{else}}<span class="pink"><b>INACTIVE</b><span>
+      	<ul>
+        <li>
+      	 {{#link-to 'subscribe'}}
+            <p>Subscribe</p>
+          {{/link-to}}
+        </li>
+        </ul>
+      	{{/if}}</p>
+  	  
 
       </br></br>
 
@@ -150,6 +161,7 @@
         <h2 class="form-heading">Please Sign Up</h2>
         <div class="form-fields">
           {{input id='name' placeholder='Name' class='form-control' value=fullName}}
+          {{input id='mobile' placeholder='Mobile' class='form-control' value=mobile}}
           {{input id='email' placeholder='Email' class='form-control' value=email}}
           {{input id='password' placeholder='Password' class='form-control' type='password' value=password}}
           <br/>
@@ -234,7 +246,7 @@
                         <label for="cardNumber">
                             CARD NUMBER</label>
                         <div class="input-group">
-                            <input type="text" class="form-control card-number" id="cardNumber" placeholder="Valid Card Number"v alue="4242424242424242" required autofocus />
+                            <input type="text" class="form-control card-number" id="cardNumber" placeholder="Valid Card Number" value="4242424242424242" required autofocus />
                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         </div>
                     </div>
@@ -257,6 +269,18 @@
                                 <input type="password" class="form-control card-cvc" id="cvCode" placeholder="CVC" required />
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+
+
+                        <label for="promoCode">
+                            PROMO CODE</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control promoCode" id="promoCode" placeholder="Promotional Code" autofocus />                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="payment-errors"></div>
                     </div>
                 </div>
             </div>

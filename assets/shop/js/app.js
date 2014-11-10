@@ -108,7 +108,7 @@ Ember.Lvrs.FormControllerMixin = Ember.Mixin.create({
 						    var firstName = fullName[0];
 						    if (fullName.length > 1)
 						    	lastName = fullName[fullName.length - 1];
-						    user = _this.store.createRecord('user', {id: _authData.uid, firstName: firstName, lastName: lastName});
+						    user = _this.store.createRecord('user', {id: _authData.uid, firstName: firstName, lastName: lastName, email: _this.get('email'), uid: _authData.uid, mobile: _this.get('mobile')});
 						    user.save();
 				    	}
 				    	Ember.Lvrs.InjectUser(user);
@@ -197,9 +197,10 @@ App.SignupController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
 App.LoginController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
 App.IndexRoute = Ember.Route.extend(Ember.Lvrs.ProtectedRouteMixin);
 
-App.SubscribeRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin);
+App.SubscribeRoute = Ember.Route.extend(Ember.Lvrs.ProtectedRouteMixin);
 App.SubscribeView = Ember.View.extend({
 	didInsertElement: function () {
+		var _this = this;
 		// this identifies your website in the createToken call below
 		Stripe.setPublishableKey('pk_test_eGxKrTUUvwyBCCwUjiwqXCBZ');
 
@@ -216,7 +217,12 @@ App.SubscribeView = Ember.View.extend({
 				var token = response['id'];
 				// insert the token into the form so it gets submitted to the server
 				form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+				form$.append("<input type='hidden' name='uid' value='" + _this.get('user.uid') + "' />");
+				form$.append("<input type='hidden' name='sid' value='" + _this.get('user.sid') + "' />");
+				form$.append("<input type='hidden' name='email' value='" + _this.get('user.email') + "' />");
 				// and submit
+				_this.set('user.stoken', token);
+				_this.get('user').save();
 				form$.get(0).submit();
 			}
 		}
@@ -225,7 +231,6 @@ App.SubscribeView = Ember.View.extend({
 			$("#payment-form").submit(function(event) {
 				// disable the submit button to prevent repeated clicks
 				$('.submit-button').attr("disabled", "disabled");
-
 				// createToken returns immediately - the supplied callback submits the form if there are no errors
 				Stripe.createToken({
 					number: $('.card-number').val(),
@@ -406,27 +411,31 @@ App.PreferenceController = Ember.ObjectController.extend({
 });
 
 App.User = DS.Model.extend({
-	subscription: DS.attr(''),
-	firstName:  DS.attr('', {defaultValue: ''}),
-	lastName:  DS.attr('', {defaultValue: ''}),
-	partners_firstname: DS.attr('', {defaultValue: ''}),
-	dob: DS.attr('', {defaultValue: ''}),
-	gender: DS.attr('', {defaultValue: ''}),
-	address: DS.attr('', {defaultValue: ''}),
-	mobile: DS.attr('', {defaultValue: ''}),
-	date_time: DS.attr('', {defaultValue: ''}),
-	date_date: DS.attr('', {defaultValue: ''}),
-	date_days: DS.attr('', {defaultValue: ''}),
-	date_duration: DS.attr('', {defaultValue: ''}),
-	travel_distance: DS.attr('', {defaultValue: ''}),
-	anniversary: DS.attr('', {defaultValue: ''}),
-	children: DS.attr('', {defaultValue: ''}),
-	likes_music: DS.attr('', {defaultValue: ''}),
-	likes_food: DS.attr('', {defaultValue: ''}),
-	likes_adventure: DS.attr('', {defaultValue: ''}),
-	likes_physical: DS.attr('', {defaultValue: ''}),
-	likes_alcohol: DS.attr('', {defaultValue: ''}),
-	special_needs: DS.attr('', {defaultValue: ''}),
+	subscription: DS.attr('', {defaultValue: null}),
+	firstName:  DS.attr('', {defaultValue: null}),
+	lastName:  DS.attr('', {defaultValue: null}),
+	uid: DS.attr('', {defaultValue: ''}),
+	sid: DS.attr('', {defaultValue: ''}),
+	stoken: DS.attr('', {defaultValue: null}),
+	email: DS.attr('', {defaultValue: null}),
+	partners_firstname: DS.attr('', {defaultValue: null}),
+	dob: DS.attr('', {defaultValue: null}),
+	gender: DS.attr('', {defaultValue: null}),
+	address: DS.attr('', {defaultValue: null}),
+	mobile: DS.attr('', {defaultValue: null}),
+	date_time: DS.attr('', {defaultValue: null}),
+	date_date: DS.attr('', {defaultValue: null}),
+	date_days: DS.attr('', {defaultValue: null}),
+	date_duration: DS.attr('', {defaultValue: null}),
+	travel_distance: DS.attr('', {defaultValue: null}),
+	anniversary: DS.attr('', {defaultValue: null}),
+	children: DS.attr('', {defaultValue: null}),
+	likes_music: DS.attr('', {defaultValue: null}),
+	likes_food: DS.attr('', {defaultValue: null}),
+	likes_adventure: DS.attr('', {defaultValue: null}),
+	likes_physical: DS.attr('', {defaultValue: null}),
+	likes_alcohol: DS.attr('', {defaultValue: null}),
+	special_needs: DS.attr('', {defaultValue: null}),
 	date_date_moment: function (key, value, previousValue) {
 		 if (arguments.length > 1) {
 		  this.set('date_date', value.format("DD/MM/YYYY"));
