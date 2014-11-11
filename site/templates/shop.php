@@ -134,7 +134,7 @@
         </li>
         </ul>
       	{{/if}}</p>
-  	  
+
 
       </br></br>
 
@@ -276,7 +276,7 @@
                         <label for="promoCode">
                             PROMO CODE</label>
                         <div class="input-group">
-                            <input type="text" class="form-control promoCode" id="coupon" placeholder="Promotional Code" autofocus />                            
+                            <input type="text" class="form-control promoCode" id="coupon" placeholder="Promotional Code" autofocus />
                         </div>
                     </div>
                     <div class="form-group">
@@ -285,7 +285,7 @@
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right"><!--<span class="glyphicon glyphicon-usd"></span>-->$ 297 AUD</span> Per Month</a>
+                <li class="active"><span class="badge pull-right"><!--<span class="glyphicon glyphicon-usd"></span>-->$ 297 AUD</span> Per Month
                 </li>
             </ul>
             <br/>
@@ -338,17 +338,17 @@
       <div class="row">
         <div class="col-md-4">
           <h4>Your Mobile</h4>
-          {{input value=user.data.mobile}}      
+          {{input value=user.data.mobile}}
         </div>
         <div class="col-md-4">
           <h4>Your Birthdate</h4>
           {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobd}}
           {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobm}}
-          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}} 
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}}
         </div>
         <div class="col-md-4">
            <h4>Your Gender</h4>
-          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}     
+          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}
         </div>
       </div>
       <div class="row">
@@ -387,7 +387,7 @@
           <h4>Anniversary</h4>
           {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryd}}
           {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversarym}}
-          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}} 
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}}
         </div>
       </div>
       <div class="row">
@@ -398,9 +398,9 @@
       <div class="row">
         <div class="col-md-12">
           <h4>Ideal Cuisines</h4>
-          {{input type='checkbox' checked=user.data.likes_food}} All Food &nbsp; 
-          {{input type='checkbox' checked=user.data.likes_food_asian}} Asian &nbsp; 
-          {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern &nbsp; 
+          {{input type='checkbox' checked=user.data.likes_food}} All Food &nbsp;
+          {{input type='checkbox' checked=user.data.likes_food_asian}} Asian &nbsp;
+          {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern &nbsp;
           {{input type='checkbox' checked=user.data.likes_food_european}} European &nbsp;
         </div>
       </div>
@@ -409,7 +409,7 @@
           <h4>Most Convenient Days For Dates</h4>
           {{input type='checkbox' checked=user.data.date_saturday}} Saturday &nbsp;
           {{input type='checkbox' checked=user.data.date_sunday}} Sunday &nbsp;
-          {{input type='checkbox' checked=user.data.date_monday}} Monday &nbsp; 
+          {{input type='checkbox' checked=user.data.date_monday}} Monday &nbsp;
           {{input type='checkbox' checked=user.data.date_tuesday}} Tuesday &nbsp;
           {{input type='checkbox' checked=user.data.date_wednesday}} Wednesday &nbsp;
           {{input type='checkbox' checked=user.data.date_thursday}} Thursday &nbsp;
@@ -441,7 +441,7 @@
         <br/>
         <button type="submit" class="submit-button btn btn-primary btn-lg btn-block" {{action 'savePreferences'}}>Submit</button>
       </div>
-    
+
 
     </div>
    </script>

@@ -217,7 +217,7 @@ section.featured-blog-posts.section{
 }
 
 /* Make image on blog go background postion center/center */
-header.blog-entry-heading, li.slide.slide-1.flex-active-slide {
+header.blog-entry-heading, li.slide.slide-1.flex-active-slide, .slide {
   background-position: center center;
 }
 
