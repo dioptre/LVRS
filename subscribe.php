@@ -87,6 +87,7 @@
 		    'sid' => $sid,
 		    'mobile' => $_POST['mobile'],
 		    'email' => $_POST['email'],
+		    'stoken' => $_POST['stripeToken'],
 		    'subscribed' => gmdate("Y-m-d\TH:i:s\Z"),
 		    'coupon' => $_POST['coupon'],
 		    'subscription' => "LVRS1"
