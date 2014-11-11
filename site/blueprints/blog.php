@@ -9,6 +9,9 @@ fields:
   title:
     label: Title
     type:  text
+  subtitle:
+    label: Sub Title
+    type:  text
   coverpic:
     label: Cover Picture
     type: select

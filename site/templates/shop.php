@@ -1,93 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title><?php echo html($site->title()) ?> | Dashboard</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="shortcut icon" href="favicon.ico">
-
-  <script src="//use.typekit.net/ojk0fcu.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
-
-  <!--
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
-  -->
-
-  <!-- CSS files -->
-  <?php echo css(array(
-    "assets/plugins/bootstrap/css/bootstrap.min.css",
-    "assets/plugins/font-awesome/css/font-awesome.css",
-    "assets/shop/css/emberui-default-theme.css",
-    "assets/shop/css/emberui.css",
-    "assets/plugins/flexslider/flexslider.css",
-    "assets/plugins/rrssb/css/rrssb.css",
-    "assets/css/styles-9.css",
-    "assets/css/styles-10.css",
-    // "assets/shop/css/cyborg-bootstrap-dark-theme.css",
-    "assets/shop/css/sandstone-bootstrap-dark-theme.css",
-    "assets/css/custom-lvrs.css",
-    "assets/shop/css/custom-lvrs-shop.css",
-
-  )); ?>
+<?php snippet('header') ?>
 
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-
-  <?php echo js(array(
-    "assets/plugins/jquery-1.11.1.min.js",
-    "assets/plugins/jquery-migrate-1.2.1.min.js",
-    "assets/plugins/bootstrap/js/bootstrap.min.js",
-    "assets/plugins/bootstrap-hover-dropdown.min.js",
-    "assets/plugins/back-to-top.js",
-    "assets/plugins/jquery-placeholder/jquery.placeholder.js",
-    "assets/plugins/FitVids/jquery.fitvids.js",
-    "assets/plugins/flexslider/jquery.flexslider-min.js",
-    "assets/plugins/imagesloaded/imagesloaded.pkgd.min.js",
-    "assets/plugins/masonry.pkgd.min.js",
-    "assets/plugins/rrssb/js/rrssb.min.js"
-    //"assets/js/main.js"
-  )); ?>
-</head>
-<body>
   <script type="text/x-handlebars">
-    <div class="container">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <a href="/" class="navbar-brand active"><span class="text"><img src="/assets/LvrsLogo.png"/></span></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav pull-right">
-            {{#unless user.authenticated}}
-              <li>{{#link-to 'login'}}Log In{{/link-to}}</li>
-              <li>{{#link-to 'signup'}}Sign Up{{/link-to}}</li>
-            {{else}}
-              <li><a href="#" {{ action 'logout' }}>Log Out</a></li>
-            {{/unless}}
-          </ul>
-          {{#if user.authenticated}}
-            <ul class="nav navbar-nav">
-              {{#if user.current.subscription}}
-                <li>{{#link-to 'index'}}Dashboard{{/link-to}}</li>
-              {{/if}}
-              <li>{{#link-to 'subscribe'}}Subscribe{{/link-to}}</li>
-              {{#if user.current.subscription}}
-                <li>{{#link-to 'preference'}}Preferences{{/link-to}}</li>
-              {{/if}}
-            </ul>
-          {{/if}}
-        </div>
-      </div>
+    <!-- ******HEADER****** -->
+    <header id="header" class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="/"><span class="text"><img src="/assets/LvrsLogo2.png"></span></a>
+            </h1><!--//logo-->
+            <nav class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                      <?php foreach($pages->visible() as $p): ?>
+                        <?php if($p->hasVisibleChildren()): ?>
+                          <?php if(false): ?>
+                            <li class="dropdown">
+                              <a class="dropdown-toggle <?php e($p->isOpen(), ' active') ?>" href="<?php echo $p->url() ?>" data-toggle="dropdown">
+                                <?php echo html($p->title()) ?>
+                                <b class="caret"></b>
+                              </a>
+
+                              <ul class="dropdown-menu">
+                                <?php foreach($p->children()->visible() as $p): ?>
+                                  <?php if (!in_array($p->template(), array('title','section','divider'))): ?>
+                                    <li>
+                                      <a href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
+                                    </li>
+                                  <?php endif ?>
+                                <?php endforeach ?>
+                              </ul>
+                            </li>
+                          <?php else: ?>
+                            <li class="nav-item <?php e($p->isOpen(), ' active') ?>">
+                              <a <?php e($p->isOpen(), ' class="active"') ?> href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
+                            </li>
+                          <?php endif ?>
+                        <?php else: ?>
+                          <li class="nav-item <?php e($p->isOpen(), ' active') ?>">
+                            <a <?php e($p->isOpen(), ' class="active"') ?> href="<?php echo $p->url() ?>"><?php echo html($p->title()) ?></a>
+                          </li>
+                        <?php endif ?>
+
+                      <?php endforeach ?>
+
+                      {{#unless user.data.authenticated}}
+                        <li class="nav-item">{{#link-to 'login'}}Log In{{/link-to}}</li>
+                        <li class="nav-item">{{#link-to 'signup'}}Sign Up{{/link-to}}</li>
+                      {{else}}
+                        <li class="nav-item nav-item-cta last"><a href="#">Log Out</a></li>
+                      {{/unless}}
+                    </ul>
+
+
+                      <!--
+                        <li class="nav-item"><a href="http://lvrs.uservoice.com/knowledgebase" target="_blank">FAQ</a></li>
+                        <li class="nav-item"><a href="<?php echo html($site->loginurl()) ?>">Log in</a></li>
+                        <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo html($site->signupurl()) ?>">Sign Up</a></li>
+                        -->
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+        </div><!--//container-->
+    </header><!--//header-->
+
+    <div class="wrap">
       {{outlet}}
     </div>
+
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="components/header-tabs">
+  	   {{#if user}}
+        <ul class="nav nav-tabs text-center">
+          {{#if user.data.subscription}}
+            {{#link-to 'index' tagName='li'}}
+              <a>
+                <i class="fa fa-dashboard"></i><br>
+                Dashboard
+              </a>
+            {{/link-to}}
+          {{/if}}
+
+          {{#link-to 'subscribe' tagName='li'}}
+            <a>
+              <i class="fa fa-money"></i><br>
+              Manage subscription
+            </a>
+          {{/link-to}}
+
+
+          {{#if user.data.subscription}}
+            {{#link-to 'setting' tagName='li' classNames="last"}}
+              <a>
+                <i class="fa fa-cog"></i><br>
+                Preferences
+              </a>
+            {{/link-to}}
+          {{/if}}
+
+        </ul>
+      {{/if}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="loading">
@@ -95,15 +115,26 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-    <div class="jumbotron">
-      <h2>Hi {{user.current.first_name}}, welcome back to Lvrs!</h2>
-
+  	  {{header-tabs user=user.data}}
+      <h1>Dashboard</h1>
+      <h2>Hi {{user.data.firstName}}, welcome to LVRS!</h2>
 
       </br></br>
 
       <h3>Status</h3>
-      <p>Membership status: <span class="green"><b>ACTIVE</b><span></p>
-  	  <p>Next Date: <b>{{user.current.properties.date_date.value}}</b></p>
+      <p>Membership status: {{#if user.data.subscription}}
+      	<span class="green"><b>ACTIVE</b><span>
+      	{{#if user.data.date_date.value}}<p>Next Date: <b>{{user.data.date_date.value}}</b></p>{{/if}}
+      	{{else}}<span class="pink"><b>INACTIVE</b><span>
+      	<ul>
+        <li>
+      	 {{#link-to 'subscribe'}}
+            <p>Subscribe</p>
+          {{/link-to}}
+        </li>
+        </ul>
+      	{{/if}}</p>
+
 
       </br></br>
 
@@ -111,7 +142,7 @@
       <h3>Links</h3>
       <ul>
         <li>
-          {{#link-to 'preference'}}
+          {{#link-to 'setting'}}
     	       <p>Preferences</p>
           {{/link-to}}
         </li>
@@ -120,29 +151,20 @@
             <p>Update Payment Details</p>
           {{/link-to}}
         </li>
-{{!--    	  <li>
-          {{#link-to 'preference'}}
-            <p>Feedback</p>
-          {{/link-to}}
-        </li>
-    	  <li>
-          {{#link-to 'preference'}}
-            <p>Invoices</p>
-          {{/link-to}}
-        </li> --}}
-      <ul>
-    </div>
+      </ul>
   </script>
 
   <script type="text/x-handlebars" data-template-name="signup">
+    {{#unless user.data.authenticated}}
     <div class="userapp">
-      <form class="form" {{action signup on='submit'}}>
+      <form class="form" {{action 'signup' on='submit'}}>
         <h2 class="form-heading">Please Sign Up</h2>
         <div class="form-fields">
-          {{input id='name' placeholder='First Name' class='form-control' value=first_name}}
+          {{input id='name' placeholder='Name' class='form-control' value=fullName}}
+          {{input id='mobile' placeholder='Mobile' class='form-control' value=mobile}}
           {{input id='email' placeholder='Email' class='form-control' value=email}}
-          {{input id='username' placeholder='Username' class='form-control' value=username}}
           {{input id='password' placeholder='Password' class='form-control' type='password' value=password}}
+          <br/>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           {{#if loading}}
@@ -156,6 +178,9 @@
         {{/if}}
       </form>
     </div>
+    {{else}}
+      Succcessfully logged in.
+    {{/unless}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="login">
@@ -163,9 +188,11 @@
       <form class="form" {{action login on='submit'}}>
         <h2 class="form-heading">Please Log In</h2>
         <div class="form-fields">
-          {{input id='username' placeholder='Username' class='form-control' value=username}}
+          {{input id='email' placeholder='Email' class='form-control' value=email error=emailValid}}
           {{input id='password' placeholder='Password' class='form-control' type='password' value=password}}
+          {{#unless cv}}<p>Bad username/password</p>{{/unless}}
         </div>
+        <br/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           {{#if loading}}
             <img src="https://app.userapp.io/img/ajax-loader-transparent.gif">
@@ -192,8 +219,8 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="subscribe">
+   {{header-tabs user=user.data}}
     <h1>Payment Details</h1>
-
     <div class="row">
           <div class="col-xs-12 col-md-4">
             <form action="/subscribe.php" method="POST" id="payment-form">
@@ -219,7 +246,7 @@
                         <label for="cardNumber">
                             CARD NUMBER</label>
                         <div class="input-group">
-                            <input type="text" class="form-control card-number" id="cardNumber" placeholder="Valid Card Number"v alue="4242424242424242" required autofocus />
+                            <input type="text" class="form-control card-number" id="cardNumber" placeholder="Valid Card Number" value="4242424242424242" required autofocus />
                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         </div>
                     </div>
@@ -243,10 +270,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+
+
+                        <label for="promoCode">
+                            PROMO CODE</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control promoCode" id="coupon" placeholder="Promotional Code" autofocus />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="payment-errors"></div>
+                    </div>
                 </div>
             </div>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right"><!--<span class="glyphicon glyphicon-usd"></span>-->$ 297 AUD</span> Per Month</a>
+                <li class="active"><span class="badge pull-right"><!--<span class="glyphicon glyphicon-usd"></span>-->$ 297 AUD</span> Per Month
                 </li>
             </ul>
             <br/>
@@ -263,7 +302,7 @@
             <p>Stripe is one of the biggest and most secure payment processors available on the internet. Stripe has been audited by a PCI-certified auditor, and is certified to <a href="http://www.visa.com/splisting/searchGrsp.do?companyNameCriteria=stripe">PCI Service Provider Level 1</a>. This is the most stringent level of certification available.</p>
             <br>
             <h3>Cancelling your subscription</h3>
-            <p>Your subscription is monthly. You will be able to cancel your subscription anytime.</p>
+            <p>Your subscription is monthly. You will be able to cancel your subscription anytime by <a href="mailto:support@lvrs.co">contacting our support team</a>.</p>
 
           </div>
       </div>
@@ -289,78 +328,131 @@
         </form>--}}
   </script>
 
-   <script type="text/x-handlebars" data-template-name="preference">
+   <script type="text/x-handlebars" data-template-name="setting">
+    {{header-tabs user=user.data}}
     <div class="form">
 
   		<h1>Preferences</h1>
-
+      <h2>Please tell us about you and your partner</h2>
+      <h3>Personal Details</h3>
       <div class="row">
         <div class="col-md-4">
-          <h3>Personal details:</h3>
-      		<h4>Partner's First Name:</h4><br/>
-      		{{eui-input placeholder='Partner\'s First Name' value=model.partners_firstname}}<br/>
-      		<h4>Your date of birth:</h4><br/>
-      		{{eui-input placeholder="dd/mm/yyyy" value=model.dob error=dobValid}}<br/>
-      		<h4>Gender:</h4><br/>
-      		{{eui-select value=model.gender options=genders}}<br/>
-      		<h4>Address:</h4><br/>
-      		{{eui-textarea value=model.address placeholder='Address'}}<br/>
-      		<h4>Your mobile number:</h4><br/>
-      		{{eui-input value=model.mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
-          </br></br>
-          {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
+          <h4>Your Mobile</h4>
+          {{input value=user.data.mobile}}
         </div>
-
-
-        <div class="col-md-8">
-          <h3>Date settings:</h3>
-          <div class="row">
-            <div class="col-md-6">
-              <h4>Date for your next date (approximate):</h4><br/>
-          		{{eui-selectdate selection=model.date_date_moment}}<br/>
-          		<h4>Best Day for your dates:</h4><br/>
-          		{{eui-select value=model.date_days options=days}}<br/>
-				<h4>Best Time for your dates:</h4><br/>
-          		{{eui-select value=model.date_time options=times}}<br/>
-          		<h4>Duration for your dates (hours):</h4><br/>
-          		{{eui-input value=model.date_duration placeholder='Ex. 6 hours'}}<br/>
-          		<h4>Distance willing to travel:</h4><br/>
-          		{{eui-input value=model.travel_distance placeholder='Ex. 6 km'}}<br/>
-          		<h4>Your anniversary date:</h4><br/>
-          		{{eui-input placeholder="dd/mm/yyyy" value=model.anniversary error=anniversaryValid}}<br/>
-              <br/><br/>
-              {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
-            </div>
-            <div class="col-md-6">
-              <h4>Number of children:</h4><br/>
-              {{eui-input value=model.children error=childrenValid placeholder='Ex. 3'}}<br/>
-          		<h4>Music Preference:</h4><br/>
-          		{{eui-select value=model.likes_music options=musics}}<br/>
-          		<h4>Food Preference:</h4><br/>
-          		{{eui-select value=model.likes_food options=foods}}<br/>
-          		<h4>Adventure Preference:</h4><br/>
-          		{{eui-select value=model.likes_adventure options=adventures}}<br/>
-          		<h4>Physical Preference:</h4><br/>
-          		{{eui-select value=model.likes_physical options=physicals}}<br/>
-          		<h4>Alcohol Preference:</h4><br/>
-          		{{eui-select value=model.likes_alcohol options=alcohols}}<br/>
-          		<h4>Special Needs (Allergies/Dislikes/Eating Requirements):</h4><br/>
-          		{{eui-textarea value=model.special_needs placeholder='Ex. Gluten Free'}}<br/>
-              <br/><br/>
-              {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
-            </div>
-          </div>
+        <div class="col-md-4">
+          <h4>Your Birthdate</h4>
+          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobd}}
+          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobm}}
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}}
+        </div>
+        <div class="col-md-4">
+           <h4>Your Gender</h4>
+          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Address</h4>
+          {{input value=user.data.addressStreet placeholder='Street Address'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{input value=user.data.addressCity placeholder='City or Suburb'}}
+        </div>
+        <div class="col-md-6">
+          {{input value=user.data.addressState placeholder='State, Region or Province'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{input value=user.data.addressPostcode placeholder='Zip or Postcode'}}
+        </div>
+        <div class="col-md-6">
+          {{input value=user.data.addressCountry placeholder='Country'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Partner Details</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Partner Name</h4>
+          {{input value=user.data.partnerFirstName placeholder=''}}
+        </div>
+        <div class="col-md-6">
+          <h4>Anniversary</h4>
+          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryd}}
+          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversarym}}
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Mutual Preferences</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Ideal Cuisines</h4>
+          {{input type='checkbox' checked=user.data.likes_food}} All Food &nbsp;
+          {{input type='checkbox' checked=user.data.likes_food_asian}} Asian &nbsp;
+          {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern &nbsp;
+          {{input type='checkbox' checked=user.data.likes_food_european}} European &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Most Convenient Days For Dates</h4>
+          {{input type='checkbox' checked=user.data.date_saturday}} Saturday &nbsp;
+          {{input type='checkbox' checked=user.data.date_sunday}} Sunday &nbsp;
+          {{input type='checkbox' checked=user.data.date_monday}} Monday &nbsp;
+          {{input type='checkbox' checked=user.data.date_tuesday}} Tuesday &nbsp;
+          {{input type='checkbox' checked=user.data.date_wednesday}} Wednesday &nbsp;
+          {{input type='checkbox' checked=user.data.date_thursday}} Thursday &nbsp;
+          {{input type='checkbox' checked=user.data.date_friday}} Friday &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Physical Activities You Like</h4>
+          {{input type='checkbox' checked=user.data.physical_water}} Watersports &nbsp;
+          {{input type='checkbox' checked=user.data.physical_outdoors}} Outdoors/Hiking &nbsp;
+          {{input type='checkbox' checked=user.data.physical_extreme}} Extreme &nbsp;
+          {{input type='checkbox' checked=user.data.physical_city}} City Based &nbsp;
+          {{input type='checkbox' checked=user.data.physical_dislike}} We don&#39;t like activities much &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Alcohol Preferences</h4>
+          {{input type='checkbox' checked=user.data.alcohol_beer}} Beer &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_wine}} Wine &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_cocktails}} Cocktails &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_spirits}} Spirits &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_whisky}} Whisky &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_dislike}} We don&#39;t like alcohol&nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <br/>
+        <button type="submit" class="submit-button btn btn-primary btn-lg btn-block" {{action 'savePreferences'}}>Submit</button>
+      </div>
+
 
     </div>
    </script>
 
    <script type="text/x-handlebars" data-template-name="feedback">
+   		{{header-tabs user=user.data}}
 		<h1>Feedback</h1>
    </script>
 
    <script type="text/x-handlebars" data-template-name="paymentMethod">
+		{{header-tabs user=user.data}}
 		<h1>Payment Method</h1>
    </script>
 
@@ -371,11 +463,15 @@
 
    <script type="text/x-handlebars" data-template-name="transacted">
 		<h1>Succcessful Transaction</h1>
-		<p>{{#link-to 'preference'}}Now tell us what you would like to do...{{/link-to}}</p>
+		<p>{{#link-to 'setting'}}Now tell us what you would like to do...{{/link-to}}</p>
+    <p>Redirecting in 5 seconds...</p>
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
+		{{header-tabs user=user.data}}
 		<h1>Declined Transaction</h1>
+    <h2>Error returned from the server:</h2>
+    <p>{{humanError}} Additionally please check your credit card details and/or your coupon code.</p>
 		<p>{{#link-to 'subscribe'}}Please try again later...{{/link-to}}</p>
 		<p>Or <a href="mailto:support@lvrs.co">contact our support team</a> if you believe there is something has gone wrong.</p>
    </script>
@@ -385,8 +481,8 @@
   <script src="/assets/shop/js/libs/handlebars.js"></script>
   <script src="/assets/shop/js/libs/ember.js"></script>
   <script src="/assets/shop/js/libs/ember-data.min.js"></script>
-  <script src="/assets/shop/js/libs/userapp.client.js"></script>
-  <script src="/assets/shop/js/libs/ember-userapp.js"></script>
+  <script src="/assets/shop/js/libs/firebase.js"></script>
+  <script src="/assets/shop/js/libs/emberfire.min.js"></script>
   <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 
 <!--   <script src="/assets/shop/js/libs/loader.js"></script>
@@ -397,10 +493,14 @@
   <script src="/assets/shop/js/libs/twix.min.js"></script>
   <script src="/assets/shop/js/libs/velocity.min.js"></script>
   <script src="/assets/shop/js/libs/velocity.ui.min.js"></script>
-  <script src="/assets/shop/js/libs/emberui.js"></script>
+  <!-- handlebars 2 killed ember-ui essential for firebase :( <script src="/assets/shop/js/libs/emberui.js"></script>-->
+
+  <link rel="stylesheet" type="text/css" href="/assets/shop/css/messenger.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/shop/css/messenger-theme-future.css"/>
+  <script src="/assets/shop/js/libs/messenger.min.js"></script>
+  <script src="/assets/shop/js/libs/messenger-theme-future.js"></script>
 
   <script src="/assets/shop/js/app.js"></script>
-
 
 </body>
 </html>

@@ -216,6 +216,10 @@ section.featured-blog-posts.section{
     margin-top: -160px;
 }
 
+/* Make image on blog go background postion center/center */
+header.blog-entry-heading, li.slide.slide-1.flex-active-slide, .slide {
+  background-position: center center;
+}
 
 
 /* BLOG HACKS END*/
@@ -454,3 +458,63 @@ section.featured-blog-posts.section{
 
 /**/
 
+
+
+/* SPECIAL STYLES FOR HOME START*/
+body.ember-application {
+background: rgb(42, 42, 42);
+background-image: url(http://lvrs.dev/content/1-home/lvrs-site-3.jpg);
+}
+body.ember-application h1 {
+  text-align: center;
+  font-family: 'myriad-pro';
+}
+body.ember-application .wrap h1, body.ember-application .wrap h2, body.ember-application .wrap h3, body.ember-application .wrap h4, body.ember-application .wrap p {
+  font-family: 'myriad-pro';
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+
+.nav-tabs {
+border: none;
+margin: 0 auto;
+display: -webkit-box;
+display: -moz-box;
+display: -ms-flexbox;
+display: -webkit-flex;
+display: flex;
+text-align: center;
+position: relative;
+margin-top: -20px;
+margin-left: -20px;
+margin-right: -21px;
+}
+
+body.ember-application .wrap h1 {
+text-align: center;
+font-family: 'myriad-pro';
+font-weight: bold;
+letter-spacing: normal;
+border-bottom: 1px solid rgb(40, 40, 40);
+padding-bottom: 12px;
+margin-bottom: 40px;
+}
+
+
+.wrap {
+  background: white;
+  max-width: 960px;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-top: 23px;
+  margin-bottom: 62px;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.75);
+
+  overflow: hidden;
+}
+
+/* SPECIAL STYLES FOR HOME END */

@@ -2,25 +2,20 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', '1');	
 
-	use \UserApp\Widget\User;
-	require("app_init.php");
-	
+	require_once("app_init.php");
+	require_once("FirebaseToken.php");
+	require_once('firebaseLib.php');
 
-	$valid_token = false;
 
-	if(isset($_COOKIE["ua_session_token"])){
-		$token = $_COOKIE["ua_session_token"];
+	//$ref = new firebase('https://burning-fire-4834.firebaseio.com/subscriptions.json');
+	//$response = $ref->push( array('user-name' => 'Yop', 'content' => 'Hello firebase', 'auth' => $token ));
 
-		try{
-			$valid_token = User::loginWithToken($token);
-			$user = User::current();
-		}catch(\UserApp\Exceptions\ServiceException $exception){
-			$valid_token = false;
-		}
-	}
+	$sid = null;
+	$customer = null;
+
 	//echo (string)serialize($user->properties->stripe_id);
-	if(!$valid_token or !isset($_POST['stripeToken'])){
-		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined');
+	if(!isset($_POST['email']) or !isset($_POST['stripeToken'])){
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined?error=invalidPost');
 		die();
 	}else {
 		// Set your secret key: remember to change this to your live secret key in production
@@ -28,99 +23,129 @@
 		Stripe::setApiKey($GLOBALS['stripe']['secret_key']);
 		$stoken = $_POST['stripeToken'];
 
-		$sid = null;
-		$customer = null;
-		$api = new \UserApp\API($GLOBALS['userAppId'], $GLOBALS['userAppToken']);
 
-		$result = $api->user->get(array(
-			"user_id" => $user->user_id
-		));
-		if (isset($result[0]->properties->stripe_id->value)) {
-			$sid = $result[0]->properties->stripe_id->value;
+		if (isset($_POST['sid'])) {
+			$sid = $_POST['sid'];
 		}
-		if (!isset($sid) or empty($sid)) {
-			// Get the credit card details submitted by the form
+
+		if (!isset($sid) or empty($sid) or $sid == '') {
+			//echo (string)serialize('asdasx'.$customer.$_POST['email'].$stoken);
+			//die();
+			try {
+// Get the credit card details submitted by the form
 			$customer = Stripe_Customer::create(array(
-			  'email' => $user->email,
+			  'email' => $_POST['email'],
 			  'card'  => $stoken
-			));
+			));} catch (Exception $e) {
+    header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined?error=invalidCard');
+		die();
+}
+
 			
+			//echo (string)serialize('asdas'.$customer.$_POST['email'].$stoken);
+			//die();
 			$sid = $customer->id;	
-			$result = $api->user->save(array(
-				'user_id' => $user->user_id,
-				'properties' => array( 'stripe_id' => array ('value' => $sid, 'override' => true))
-			));
+
 		}
-		else {			
+		else {		
 			$customer = Stripe_Customer::retrieve($sid);
 			//if (!empty($customer->default_card)) {
 			//	$customer->cards->retrieve($customer->default_card)->delete();
 			//}
-			$result = $customer->cards->create(array("card" => $stoken));
+			try {
+				$result = $customer->cards->create(array("card" => $stoken));
+			} catch (Exception $e) {
+				header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined?error=duplicateTransaction');
+				die();
+			}
 			$customer->default_card = $result->id; 
 			$customer->save();
-			$result = $api->user->paymentMethod->search(array(
-				 "user_id" => $user->user_id,
-				 "page" => 1,
-				 "page_size" => 100,
-				 "fields" => "*",
-				 "sort" => "asc"
-			 ));
-			foreach ($result->items as $value) {
-				if ($value->name == "Stripe") {
-					$r = $api->user->paymentMethod->remove(array(
-						"user_id" => $user->user_id,
-						"payment_method_id" => $value->payment_method_id
-					));		
-				}
-			}
 			
 		}
 		
-		$payment_method = $api->user->paymentMethod->save(array(
-			"user_id" => $user->user_id,
-			"name" => "Stripe",
-			"type" => "creditcard",
-			"processor" => "stripe",
-			"data" => array('card_id' => $customer->default_card, 'customer_id' => $customer->id)
-		));
 
-		$invoice = $api->invoice->save(array(
-			"user_id" => $user->user_id,
-			"payment_method_id" => $payment_method->payment_method_id,
-			"items" => array(
-				array(
-					"id" => "ebgLXRIrR3qDGu_frfNksA",
-					"amount" => 270,
-					"description" => "Monthly Subscription - "."LVRS1"
-				)
-			),
-			"description" => "LVRS1",
-			"state" => "pending",
-			"vat_percentage" => 10,
-			"currency" => "AUD"
-		));
+
 
 		//May not need to do this if stripe integration works
-		// $subscription = $customer->subscriptions->create(array("plan" => "LVRS1"));
+		try {
+			if (!isset($_POST['coupon']) or empty($_POST['coupon']))
+				$subscription = $customer->subscriptions->create(array("plan" => "LVRS1"));
+			else
+				$subscription = $customer->subscriptions->create(array("plan" => "LVRS1", "coupon"=>$_POST['coupon']));
+		} catch (Exception $e) {
+			header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/declined?error=invalidSubscription');
+			die();
+		}
 		
+		$tokenGen = new Services_FirebaseTokenGenerator("W91wzxdLOukdO9u5BVaCGrhykCMmENQtfNBtwFtH");
+		$token = $tokenGen->createToken(array("uid" => "simplelogin:19"), array("admin" => True));
+		$firebase = new Firebase('https://burning-fire-4834.firebaseio.com', $token);
+
+		$data = array(
+		    'id' => $_POST['email'],
+		    'uid' => $_POST['uid'],
+		    'sid' => $sid,
+		    'mobile' => $_POST['mobile'],
+		    'email' => $_POST['email'],
+		    'stoken' => $_POST['stripeToken'],
+		    'subscribed' => gmdate("Y-m-d\TH:i:s\Z"),
+		    'coupon' => $_POST['coupon'],
+		    'subscription' => "LVRS1"
+		);
+
+		$res = $firebase->push('/subscriptions', $data);
+
+
+		$to      = 'support@lvrs.co';
+		$subject = 'New LVRS (LVRS1) Client - '.$_POST['firstName'];
+		$message = "Please check:\r\n".$_POST['email']."\r\n".$_POST['mobile']."\r\n".$_POST['uid']."\r\n".$res."\r\n".$sid;
+		// $headers = 'From: support@lvrs.co' . "\r\n" .
+		//     'Reply-To: support@lvrs.co' . "\r\n" .
+		//     'X-Mailer: PHP/' . phpversion();
+
+		// mail($to, $subject, $message, $headers);
 		
-		// $result = $api->charge->save(array(
-			// "user_id" => $user->user_id,
-			// "payment_method_id" => $payment_method->payment_method_id,
-			// "invoice_id" => $invoice->invoice_id,
-			// "data" => array('subscription'=>$subscription->id, 'token'=>$stoken),
-			// "amount" => 297,
-			// "currency" => "AUD",
-			// "error" => array()
-		// ));
-		
-		//Update Subscription to Lvrs1
-		$result = $api->user->save(array(
-			"user_id" => $user->user_id,
-			"subscription" => array( 'price_list_id'=> '8OGiDhNcRiCmuQNcGkzZ0A', 'plan_id'=> 'ebgLXRIrR3qDGu_frfNksA'),
-		));
-		
+
+		$url = 'https://api.sendgrid.com/';
+		$user = 'dioptre';
+		$pass = 'bl4ck5h33p5$';
+
+		$params = array(
+		    'api_user'  => $user,
+		    'api_key'   => $pass,
+		    'to'        => 'support@lvrs.co',
+		    'subject'   => $subject,
+		    //'html'      => 'testing body',
+		    'text'      => $message,
+		    'from'      => 'support@lvrs.co',
+		  );
+
+
+		$request =  $url.'api/mail.send.json';
+
+		// Generate curl request
+		$session = curl_init($request);
+		// Tell curl to use HTTP POST
+		curl_setopt ($session, CURLOPT_POST, true);
+		// Tell curl that this is the body of the POST
+		curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
+		// Tell curl not to return headers, but do return the response
+		curl_setopt($session, CURLOPT_HEADER, false);
+		// Tell PHP not to use SSLv3 (instead opting for TLS)
+		curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+		curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
+
+		// obtain response
+		$response = curl_exec($session);
+		curl_close($session);
+
+		// print everything out
+		print_r($response);
+
+
+
+
+
 		/***** Scratch Area *****/
 		// $result = $api->property->save(array(
 			// //"property_id" => $user->user_id . "-stripe",
@@ -158,7 +183,7 @@
 		// );
 		
 		//echo "Successful Payment";
-		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/transacted');
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/transacted?sid='. $sid.'&stoken='.$stoken.'&subscription=LVRS1');
 		die();
 
 	}
