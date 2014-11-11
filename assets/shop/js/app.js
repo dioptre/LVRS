@@ -204,6 +204,7 @@ App.Router.map(function() {
   this.route('invoices');
 });
 
+
 App.ApplicationRoute = Ember.Route.extend(Ember.Lvrs.ApplicationRouteMixin);
 App.SignupController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
 App.LoginController = Ember.Controller.extend(Ember.Lvrs.FormControllerMixin);
@@ -232,6 +233,9 @@ App.SubscribeView = Ember.View.extend({
 				form$.append("<input type='hidden' name='uid' value='" + _this.get('user.data.uid') + "' />");
 				form$.append("<input type='hidden' name='sid' value='" + _this.get('user.data.sid') + "' />");
 				form$.append("<input type='hidden' name='email' value='" + _this.get('user.data.email') + "' />");
+				form$.append("<input type='hidden' name='mobile' value='" + _this.get('user.data.mobile') + "' />");
+				form$.append("<input type='hidden' name='firstName' value='" + _this.get('user.data.firstName') + "' />");
+				form$.append("<input type='hidden' name='coupon' value='" + $('#coupon').val() + "' />");
 				// and submit
 				_this.set('user.data.stoken', token);
 				_this.get('user.data').save();
@@ -272,17 +276,39 @@ App.TransactedController = Ember.ArrayController.extend({
 
 App.TransactedView = Ember.View.extend({
 	didInsertElement: function () {
+		var _this = this;
 		var user = this.get('user.data');
 		var sid = user.get('sid');
 		var stoken = user.get('stoken');
 		if (!sid)
 			user.set('sid', this.get('controller.sid'));
-		user.set('subscription', this.get('controller.subscription'))
+		user.set('subscription', this.get('controller.subscription'));
+		user.set('subscribed', moment(new Date()).toISOString());
 		user.save();
 		if (stoken !== this.get('controller.stoken'))
-			alert('Please contact support regarding your transaction,\r\n the submitted quote is not identical to the invoice.')
+			alert('Please contact support regarding your transaction,\r\n the submitted quote is not identical to the invoice.');
+		Ember.run.later(this, function () {
+			_this.get('controller').transitionToRoute('setting');
+		}, 3000);
+		
 
 	}
+});
+
+App.DeclinedController = Ember.ArrayController.extend({
+  queryParams: ['error'],
+  error: null,
+  humanError: function() {
+  	var error = this.get('error');
+  	if (error === 'duplicateTransaction')
+  		return 'The transaction was stopped from duplicating. Did you double click the purchase button? If not please contact support.';
+  	if (error === 'invalidPost')
+  		return 'The transaction was stopped from processing as it was malformed. Please contact support.';
+  	if (error === 'invalidCard')
+  		return 'The transaction was already processed at a different time. Did you hit refresh? If not please contact support.';
+  	if (error === 'invalidSubscription')
+  		return 'The transaction could not be processed as the coupon and subscription did not match our records.';
+  }.property()
 });
 
 App.ApplicationAdapter = DS.FirebaseAdapter.extend({
@@ -292,12 +318,28 @@ App.ApplicationAdapter = DS.FirebaseAdapter.extend({
 App.SettingRoute = Ember.Route.extend(Ember.Lvrs.SubscriptionOnlyRouteMixin);
 
 App.SettingController = Ember.ObjectController.extend({
+	init : function() {
+		var years = [{label: '', value: null}];
+		for (var i = 1900; i < 2008; i ++)
+		{
+			years.push({label: i + '', value: i })
+		}
+		this.set('years', years);
+
+		var days = [{label: '', value: null}];
+		for (var i = 1; i < 32; i ++)
+		{
+			days.push({label: i + '', value: i })
+		}
+		this.set('monthDays', days);
+	},
 	genders: [
       { label: '', value: null },
 	  { label: 'Male', value: 'm' },
 	  { label: 'Female', value: 'f' }
 	],
 	days: [
+	  { label: '', value: null },
 	  { label: 'Monday', value: 'mon' },
 	  { label: 'Tuesday', value: 'tue' },
 	  { label: 'Wednesday', value: 'wed' },
@@ -305,6 +347,21 @@ App.SettingController = Ember.ObjectController.extend({
 	  { label: 'Friday', value: 'fri' },
 	  { label: 'Saturday', value: 'sat' },
 	  { label: 'Sunday', value: 'sun' }
+	],
+	months: [
+	  { label: '', value: null },
+	  { label: 'January', value: 1 },
+	  { label: 'Febuary', value: 2 },
+	  { label: 'March', value: 3 },
+	  { label: 'April', value: 4 },
+	  { label: 'May', value: 5 },
+	  { label: 'June', value: 6 },
+	  { label: 'July', value: 7 },
+	  { label: 'August', value: 8 },
+	  { label: 'September', value: 9 },
+	  { label: 'October', value: 10 },
+	  { label: 'November', value: 11 },
+	  { label: 'December', value: 12 }
 	],
 	musics: [
 	  { label: '60s', value: '60s' },
@@ -372,6 +429,7 @@ App.SettingController = Ember.ObjectController.extend({
 	actions: {
 		savePreferences: function () {
 			this.get('user.data').save();
+			Messenger().post('Preferences Updated');
 			// var _this = this;
 			// var p = {};
 			// $.each(this.get('content.constructor.attributes').keys.list, function (i,v) {
@@ -390,16 +448,28 @@ App.SettingController = Ember.ObjectController.extend({
 
 App.User = DS.Model.extend({
 	subscription: DS.attr('', {defaultValue: null}),
+	subscribed: DS.attr('', {defaultValue: null}),
 	firstName:  DS.attr('', {defaultValue: null}),
 	lastName:  DS.attr('', {defaultValue: null}),
 	uid: DS.attr('', {defaultValue: ''}),
 	sid: DS.attr('', {defaultValue: ''}),
 	stoken: DS.attr('', {defaultValue: null}),
 	email: DS.attr('', {defaultValue: null}),
-	partners_firstname: DS.attr('', {defaultValue: null}),
+	partnersFirstName: DS.attr('', {defaultValue: null}),
 	dob: DS.attr('', {defaultValue: null}),
+	doby: DS.attr('', {defaultValue: null}),
+	dobm: DS.attr('', {defaultValue: null}),
+	dobd: DS.attr('', {defaultValue: null}),
 	gender: DS.attr('', {defaultValue: null}),
 	address: DS.attr('', {defaultValue: null}),
+	addressStreet: DS.attr('', {defaultValue: null}),
+	addressCity: DS.attr('', {defaultValue: null}),
+	addressState: DS.attr('', {defaultValue: null}),
+	addressPostcode: DS.attr('', {defaultValue: null}),
+	addressCountry: DS.attr('', {defaultValue: null}),
+	anniversaryy : DS.attr('', {defaultValue: null}),
+	anniversarym : DS.attr('', {defaultValue: null}),
+	anniversaryd : DS.attr('', {defaultValue: null}),
 	mobile: DS.attr('', {defaultValue: null}),
 	date_time: DS.attr('', {defaultValue: null}),
 	date_date: DS.attr('', {defaultValue: null}),

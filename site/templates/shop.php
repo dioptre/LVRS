@@ -276,7 +276,7 @@
                         <label for="promoCode">
                             PROMO CODE</label>
                         <div class="input-group">
-                            <input type="text" class="form-control promoCode" id="promoCode" placeholder="Promotional Code" autofocus />                            
+                            <input type="text" class="form-control promoCode" id="coupon" placeholder="Promotional Code" autofocus />                            
                         </div>
                     </div>
                     <div class="form-group">
@@ -302,7 +302,7 @@
             <p>Stripe is one of the biggest and most secure payment processors available on the internet. Stripe has been audited by a PCI-certified auditor, and is certified to <a href="http://www.visa.com/splisting/searchGrsp.do?companyNameCriteria=stripe">PCI Service Provider Level 1</a>. This is the most stringent level of certification available.</p>
             <br>
             <h3>Cancelling your subscription</h3>
-            <p>Your subscription is monthly. You will be able to cancel your subscription anytime.</p>
+            <p>Your subscription is monthly. You will be able to cancel your subscription anytime by <a href="mailto:support@lvrs.co">contacting our support team</a>.</p>
 
           </div>
       </div>
@@ -342,7 +342,9 @@
         </div>
         <div class="col-md-4">
           <h4>Your Birthdate</h4>
-          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" }}     
+          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobd}}
+          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobm}}
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}} 
         </div>
         <div class="col-md-4">
            <h4>Your Gender</h4>
@@ -375,11 +377,14 @@
    <script type="text/x-handlebars" data-template-name="transacted">
 		<h1>Succcessful Transaction</h1>
 		<p>{{#link-to 'setting'}}Now tell us what you would like to do...{{/link-to}}</p>
+    <p>Redirecting in 5 seconds...</p>
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
 		{{header-tabs user=user.data}}
 		<h1>Declined Transaction</h1>
+    <h2>Error returned from the server:</h2>
+    <p>{{humanError}} Additionally please check your credit card details and/or your coupon code.</p>
 		<p>{{#link-to 'subscribe'}}Please try again later...{{/link-to}}</p>
 		<p>Or <a href="mailto:support@lvrs.co">contact our support team</a> if you believe there is something has gone wrong.</p>
    </script>
@@ -402,6 +407,11 @@
   <script src="/assets/shop/js/libs/velocity.min.js"></script>
   <script src="/assets/shop/js/libs/velocity.ui.min.js"></script>
   <!-- handlebars 2 killed ember-ui essential for firebase :( <script src="/assets/shop/js/libs/emberui.js"></script>-->
+
+  <link rel="stylesheet" type="text/css" href="/assets/shop/css/messenger.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/shop/css/messenger-theme-future.css"/>
+  <script src="/assets/shop/js/libs/messenger.min.js"></script>
+  <script src="/assets/shop/js/libs/messenger-theme-future.js"></script>
 
   <script src="/assets/shop/js/app.js"></script>
 
