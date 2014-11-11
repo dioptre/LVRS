@@ -352,6 +352,93 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-12">
+          <h4>Address</h4>
+          {{input value=user.data.addressStreet placeholder='Street Address'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{input value=user.data.addressCity placeholder='City or Suburb'}}
+        </div>
+        <div class="col-md-6">
+          {{input value=user.data.addressState placeholder='State, Region or Province'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{input value=user.data.addressPostcode placeholder='Zip or Postcode'}}
+        </div>
+        <div class="col-md-6">
+          {{input value=user.data.addressCountry placeholder='Country'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Partner Details</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Partner Name</h4>
+          {{input value=user.data.partnerFirstName placeholder=''}}
+        </div>
+        <div class="col-md-6">
+          <h4>Anniversary</h4>
+          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryd}}
+          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversarym}}
+          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}} 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Mutual Preferences</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Ideal Cuisines</h4>
+          {{input type='checkbox' checked=user.data.likes_food}} All Food &nbsp; 
+          {{input type='checkbox' checked=user.data.likes_food_asian}} Asian &nbsp; 
+          {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern &nbsp; 
+          {{input type='checkbox' checked=user.data.likes_food_european}} European &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Most Convenient Days For Dates</h4>
+          {{input type='checkbox' checked=user.data.date_saturday}} Saturday &nbsp;
+          {{input type='checkbox' checked=user.data.date_sunday}} Sunday &nbsp;
+          {{input type='checkbox' checked=user.data.date_monday}} Monday &nbsp; 
+          {{input type='checkbox' checked=user.data.date_tuesday}} Tuesday &nbsp;
+          {{input type='checkbox' checked=user.data.date_wednesday}} Wednesday &nbsp;
+          {{input type='checkbox' checked=user.data.date_thursday}} Thursday &nbsp;
+          {{input type='checkbox' checked=user.data.date_friday}} Friday &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Physical Activities You Like</h4>
+          {{input type='checkbox' checked=user.data.physical_water}} Watersports &nbsp;
+          {{input type='checkbox' checked=user.data.physical_outdoors}} Outdoors/Hiking &nbsp;
+          {{input type='checkbox' checked=user.data.physical_extreme}} Extreme &nbsp;
+          {{input type='checkbox' checked=user.data.physical_city}} City Based &nbsp;
+          {{input type='checkbox' checked=user.data.physical_dislike}} We don&#39;t like activities much &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Alcohol Preferences</h4>
+          {{input type='checkbox' checked=user.data.alcohol_beer}} Beer &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_wine}} Wine &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_cocktails}} Cocktails &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_spirits}} Spirits &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_whisky}} Whisky &nbsp;
+          {{input type='checkbox' checked=user.data.alcohol_dislike}} We don&#39;t like alcohol&nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <br/>
         <button type="submit" class="submit-button btn btn-primary btn-lg btn-block" {{action 'savePreferences'}}>Submit</button>
       </div>
     
