@@ -51,7 +51,7 @@
 
                       <?php endforeach ?>
 
-                      {{#unless user.authenticated}}
+                      {{#unless user.data.authenticated}}
                         <li class="nav-item">{{#link-to 'login'}}Log In{{/link-to}}</li>
                         <li class="nav-item">{{#link-to 'signup'}}Sign Up{{/link-to}}</li>
                       {{else}}
@@ -80,7 +80,7 @@
   <script type="text/x-handlebars" data-template-name="components/header-tabs">
   	   {{#if user}}
         <ul class="nav nav-tabs text-center">
-          {{#if user.subscription}}
+          {{#if user.data.subscription}}
             {{#link-to 'index' tagName='li'}}
               <a>
                 <i class="fa fa-dashboard"></i><br>
@@ -97,8 +97,8 @@
           {{/link-to}}
 
 
-          {{#if user.subscription}}
-            {{#link-to 'preference' tagName='li' classNames="last"}}
+          {{#if user.data.subscription}}
+            {{#link-to 'setting' tagName='li' classNames="last"}}
               <a>
                 <i class="fa fa-cog"></i><br>
                 Preferences
@@ -115,16 +115,16 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
-  	  {{header-tabs user=user}}
+  	  {{header-tabs user=user.data}}
       <h1>Dashboard</h1>
-      <h2>Hi {{user.firstName}}, welcome to LVRS!</h2>
+      <h2>Hi {{user.data.firstName}}, welcome to LVRS!</h2>
 
       </br></br>
 
       <h3>Status</h3>
-      <p>Membership status: {{#if user.subscription}}
+      <p>Membership status: {{#if user.data.subscription}}
       	<span class="green"><b>ACTIVE</b><span>
-      	<p>Next Date: <b>{{user.date_date.value}}</b></p>
+      	{{#if user.data.date_date.value}}<p>Next Date: <b>{{user.data.date_date.value}}</b></p>{{/if}}
       	{{else}}<span class="pink"><b>INACTIVE</b><span>
       	<ul>
         <li>
@@ -142,7 +142,7 @@
       <h3>Links</h3>
       <ul>
         <li>
-          {{#link-to 'preference'}}
+          {{#link-to 'setting'}}
     	       <p>Preferences</p>
           {{/link-to}}
         </li>
@@ -155,7 +155,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="signup">
-    {{#unless user.authenticated}}
+    {{#unless user.data.authenticated}}
     <div class="userapp">
       <form class="form" {{action 'signup' on='submit'}}>
         <h2 class="form-heading">Please Sign Up</h2>
@@ -219,7 +219,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="subscribe">
-   {{header-tabs user=user}}
+   {{header-tabs user=user.data}}
     <h1>Payment Details</h1>
     <div class="row">
           <div class="col-xs-12 col-md-4">
@@ -328,77 +328,42 @@
         </form>--}}
   </script>
 
-   <script type="text/x-handlebars" data-template-name="preference">
-    {{header-tabs user=user}}
+   <script type="text/x-handlebars" data-template-name="setting">
+    {{header-tabs user=user.data}}
     <div class="form">
 
   		<h1>Preferences</h1>
-
-     {{!-- <div class="row">
+      <h2>Please tell us about you and your partner</h2>
+      <h3>Personal Details</h3>
+      <div class="row">
         <div class="col-md-4">
-          <h3>Personal details:</h3>
-      		<h4>Partner's First Name:</h4><br/>
-      		{{eui-input placeholder='Partner\'s First Name' value=model.partners_firstname}}<br/>
-      		<h4>Your date of birth:</h4><br/>
-      		{{eui-input placeholder="dd/mm/yyyy" value=model.dob error=dateValid}}<br/>
-      		<h4>Gender:</h4><br/>
-      		{{eui-select value=model.gender options=genders}}<br/>
-      		<h4>Address:</h4><br/>
-      		{{eui-textarea value=model.address placeholder='Address'}}<br/>
-      		<h4>Your mobile number:</h4><br/>
-      		{{eui-input value=model.mobile error=mobileValid  placeholder='Your mobile number'}}<br/>
+          <h4>Your Mobile</h4>
+          {{input value=user.data.mobile}}      
         </div>
-
-
-        <div class="col-md-8">
-          <h3>Date settings:</h3>
-          <div class="row">
-            <div class="col-md-6">
-              <h4>Date for your next date (approximate):</h4><br/>
-          		{{eui-selectdate selection=model.date_date_moment}}<br/>
-          		<h4>Best Day for your dates:</h4><br/>
-          		{{eui-select value=model.date_days options=days}}<br/>
-				<h4>Best Time for your dates:</h4><br/>
-          		{{eui-select value=model.date_time options=times}}<br/>
-          		<h4>Duration for your dates (hours):</h4><br/>
-          		{{eui-input value=model.date_duration placeholder='Ex. 6 hours'}}<br/>
-          		<h4>Distance willing to travel:</h4><br/>
-          		{{eui-input value=model.travel_distance placeholder='Ex. 6 km'}}<br/>
-          		<h4>Your anniversary date:</h4><br/>
-          		{{eui-input placeholder="dd/mm/yyyy" value=model.anniversary error=anniversaryValid}}<br/>
-            </div>
-            <div class="col-md-6">
-              <h4>Number of children:</h4><br/>
-              {{eui-input value=model.children error=childrenValid placeholder='Ex. 3'}}<br/>
-          		<h4>Music Preference:</h4><br/>
-          		{{eui-select value=model.likes_music options=musics}}<br/>
-          		<h4>Food Preference:</h4><br/>
-          		{{eui-select value=model.likes_food options=foods}}<br/>
-          		<h4>Adventure Preference:</h4><br/>
-          		{{eui-select value=model.likes_adventure options=adventures}}<br/>
-          		<h4>Physical Preference:</h4><br/>
-          		{{eui-select value=model.likes_physical options=physicals}}<br/>
-          		<h4>Alcohol Preference:</h4><br/>
-          		{{eui-select value=model.likes_alcohol options=alcohols}}<br/>
-          		<h4>Special Needs (Allergies/Dislikes/Eating Requirements):</h4><br/>
-          		{{eui-textarea value=model.special_needs placeholder='Ex. Gluten Free'}}<br/>
-              <br/><br/>
-              {{eui-button label='Save Preferences' action="savePreferences" style="primary"}}
-            </div>
-          </div>
+        <div class="col-md-4">
+          <h4>Your Birthdate</h4>
+          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" }}     
         </div>
-      </div>--}}
+        <div class="col-md-4">
+           <h4>Your Gender</h4>
+          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}     
+        </div>
+      </div>
+      <div class="row">
+        <button type="submit" class="submit-button btn btn-primary btn-lg btn-block" {{action 'savePreferences'}}>Submit</button>
+      </div>
+    
 
     </div>
    </script>
 
    <script type="text/x-handlebars" data-template-name="feedback">
-   		{{header-tabs user=user}}
+   		{{header-tabs user=user.data}}
 		<h1>Feedback</h1>
    </script>
 
    <script type="text/x-handlebars" data-template-name="paymentMethod">
-		{{header-tabs user=user}}
+		{{header-tabs user=user.data}}
 		<h1>Payment Method</h1>
    </script>
 
@@ -409,11 +374,11 @@
 
    <script type="text/x-handlebars" data-template-name="transacted">
 		<h1>Succcessful Transaction</h1>
-		<p>{{#link-to 'preference'}}Now tell us what you would like to do...{{/link-to}}</p>
+		<p>{{#link-to 'setting'}}Now tell us what you would like to do...{{/link-to}}</p>
    </script>
 
    <script type="text/x-handlebars" data-template-name="declined">
-		{{header-tabs user=user}}
+		{{header-tabs user=user.data}}
 		<h1>Declined Transaction</h1>
 		<p>{{#link-to 'subscribe'}}Please try again later...{{/link-to}}</p>
 		<p>Or <a href="mailto:support@lvrs.co">contact our support team</a> if you believe there is something has gone wrong.</p>

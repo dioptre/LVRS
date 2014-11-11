@@ -23,7 +23,7 @@
 		}
 
 		if (!isset($sid) or empty($sid) or $sid == '') {
-			echo (string)serialize('asdasx'.$customer.$_POST['email'].$stoken);
+			//echo (string)serialize('asdasx'.$customer.$_POST['email'].$stoken);
 			//die();
 			try {
 // Get the credit card details submitted by the form
@@ -35,8 +35,8 @@
 }
 
 			
-			echo (string)serialize('asdas'.$customer.$_POST['email'].$stoken);
-			die();
+			//echo (string)serialize('asdas'.$customer.$_POST['email'].$stoken);
+			//die();
 			$sid = $customer->id;	
 
 		}
@@ -95,7 +95,7 @@
 		// );
 		
 		//echo "Successful Payment";
-		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/transacted?sid='. $sid.'&token='.$stoken);
+		header('Location: '.'http://'.$_SERVER['HTTP_HOST'].'/shop/#/transacted?sid='. $sid.'&stoken='.$stoken.'&subscription=LVRS1');
 		die();
 
 	}
