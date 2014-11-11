@@ -81,7 +81,7 @@
 		$token = $tokenGen->createToken(array("uid" => "simplelogin:19"), array("admin" => True));
 		$firebase = new Firebase('https://burning-fire-4834.firebaseio.com', $token);
 
-		$data = [
+		$data = array(
 		    'id' => $_POST['email'],
 		    'uid' => $_POST['uid'],
 		    'sid' => $sid,
@@ -91,7 +91,7 @@
 		    'subscribed' => gmdate("Y-m-d\TH:i:s\Z"),
 		    'coupon' => $_POST['coupon'],
 		    'subscription' => "LVRS1"
-		];
+		);
 
 		$res = $firebase->push('/subscriptions', $data);
 
