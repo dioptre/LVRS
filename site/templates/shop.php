@@ -337,40 +337,59 @@
       <h3>Personal Details</h3>
       <div class="row">
         <div class="col-md-4">
-          <h4>Your Mobile</h4>
-          {{input value=user.data.mobile}}
+          <h4>Phone Number</h4>
+          <div class="form-group">
+            {{input value=user.data.mobile class='form-control'}}
+          </div>
         </div>
         <div class="col-md-4">
           <h4>Your Birthdate</h4>
-          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobd}}
-          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobm}}
-          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}}
+          <div class="row">
+            <div class="col-md-4">
+              <label>Day</label>
+              {{view "select" class='form-control' content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobd}}
+            </div>
+            <div class="col-md-4">
+              <label>Month</label>
+             {{view "select" class='form-control' content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.dobm}}
+            </div>
+            <div class="col-md-4">
+              <label>Year</label>
+              {{view "select" class='form-control' content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.doby}}
+            </div>
+          </div>
         </div>
         <div class="col-md-4">
            <h4>Your Gender</h4>
-          {{view "select" content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}
+          {{view "select"  class='form-control' content=genders optionValuePath="content.value" optionLabelPath="content.label" value=user.data.gender}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
           <h4>Address</h4>
-          {{input value=user.data.addressStreet placeholder='Street Address'}}
+
+          <label>Street Address</label>
+          {{input class='form-control' value=user.data.addressStreet placeholder='Street Address'}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          {{input value=user.data.addressCity placeholder='City or Suburb'}}
+          <label>City</label>
+          {{input class='form-control' value=user.data.addressCity placeholder='City or Suburb'}}
         </div>
         <div class="col-md-6">
-          {{input value=user.data.addressState placeholder='State, Region or Province'}}
+          <label>State</label>
+          {{input class='form-control' value=user.data.addressState placeholder='State, Region or Province'}}
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          {{input value=user.data.addressPostcode placeholder='Zip or Postcode'}}
+          <label>Postcode</label>
+          {{input class='form-control' value=user.data.addressPostcode placeholder='Zip or Postcode'}}
         </div>
         <div class="col-md-6">
-          {{input value=user.data.addressCountry placeholder='Country'}}
+          <label>Country</label>
+          {{input class='form-control' value=user.data.addressCountry placeholder='Country'}}
         </div>
       </div>
       <div class="row">
@@ -381,13 +400,24 @@
       <div class="row">
         <div class="col-md-6">
           <h4>Partner Name</h4>
-          {{input value=user.data.partnerFirstName placeholder=''}}
+          {{input class='form-control' value=user.data.partnerFirstName placeholder=''}}
         </div>
         <div class="col-md-6">
           <h4>Anniversary</h4>
-          {{view "select" content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryd}}
-          {{view "select" content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversarym}}
-          {{view "select" content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}}
+          <div class="row">
+            <div class="col-md-4">
+              <label>Day</label>
+              {{view "select" class='form-control' content=monthDays optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryd}}
+            </div>
+            <div class="col-md-4">
+              <label>Month</label>
+              {{view "select" class='form-control' content=months optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversarym}}
+            </div>
+            <div class="col-md-4">
+              <label>Year</label>
+              {{view "select" class='form-control' content=years optionValuePath="content.value" optionLabelPath="content.label" value=user.data.anniversaryy}}
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -398,43 +428,92 @@
       <div class="row">
         <div class="col-md-12">
           <h4>Ideal Cuisines</h4>
-          {{input type='checkbox' checked=user.data.likes_food}} All Food &nbsp;
-          {{input type='checkbox' checked=user.data.likes_food_asian}} Asian &nbsp;
-          {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern &nbsp;
-          {{input type='checkbox' checked=user.data.likes_food_european}} European &nbsp;
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.likes_food}} All Food
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.likes_food_asian}} Asian
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.likes_food_middle_eastern}} Middle Eastern
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.likes_food_european}} European
+          </label>
         </div>
       </div>
+      <hr>
+
       <div class="row">
         <div class="col-md-12">
           <h4>Most Convenient Days For Dates</h4>
-          {{input type='checkbox' checked=user.data.date_saturday}} Saturday &nbsp;
-          {{input type='checkbox' checked=user.data.date_sunday}} Sunday &nbsp;
-          {{input type='checkbox' checked=user.data.date_monday}} Monday &nbsp;
-          {{input type='checkbox' checked=user.data.date_tuesday}} Tuesday &nbsp;
-          {{input type='checkbox' checked=user.data.date_wednesday}} Wednesday &nbsp;
-          {{input type='checkbox' checked=user.data.date_thursday}} Thursday &nbsp;
-          {{input type='checkbox' checked=user.data.date_friday}} Friday &nbsp;
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_saturday}} Saturday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_sunday}} Sunday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_monday}} Monday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_tuesday}} Tuesday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_wednesday}} Wednesday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_thursday}} Thursday
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.date_friday}} Friday
+          </label>
         </div>
       </div>
+      <hr>
+
       <div class="row">
         <div class="col-md-12">
           <h4>Physical Activities You Like</h4>
-          {{input type='checkbox' checked=user.data.physical_water}} Watersports &nbsp;
-          {{input type='checkbox' checked=user.data.physical_outdoors}} Outdoors/Hiking &nbsp;
-          {{input type='checkbox' checked=user.data.physical_extreme}} Extreme &nbsp;
-          {{input type='checkbox' checked=user.data.physical_city}} City Based &nbsp;
-          {{input type='checkbox' checked=user.data.physical_dislike}} We don&#39;t like activities much &nbsp;
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.physical_water}} Watersports
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.physical_outdoors}} Outdoors/Hiking
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.physical_extreme}} Extreme
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.physical_city}} City Based
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.physical_dislike}} We don&#39;t like activities much
+          </label>
         </div>
       </div>
+      <hr>
       <div class="row">
         <div class="col-md-12">
           <h4>Alcohol Preferences</h4>
-          {{input type='checkbox' checked=user.data.alcohol_beer}} Beer &nbsp;
-          {{input type='checkbox' checked=user.data.alcohol_wine}} Wine &nbsp;
-          {{input type='checkbox' checked=user.data.alcohol_cocktails}} Cocktails &nbsp;
-          {{input type='checkbox' checked=user.data.alcohol_spirits}} Spirits &nbsp;
-          {{input type='checkbox' checked=user.data.alcohol_whisky}} Whisky &nbsp;
-          {{input type='checkbox' checked=user.data.alcohol_dislike}} We don&#39;t like alcohol&nbsp;
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_beer}} Beer
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_wine}} Wine
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_cocktails}} Cocktails
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_spirits}} Spirits
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_whisky}} Whisky
+          </label>
+          <label class="checkbox-inline">
+            {{input type='checkbox' checked=user.data.alcohol_dislike}} We don&#39;t like alcohol
+          </label>
         </div>
       </div>
       <div class="row">

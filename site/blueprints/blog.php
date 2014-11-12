@@ -9,8 +9,11 @@ fields:
   title:
     label: Title
     type:  text
-  subtitle:
-    label: Sub Title
+  cover:
+    label: Cover Text
+    type:  text
+  subcover:
+    label: Sub Cover Text
     type:  text
   coverpic:
     label: Cover Picture

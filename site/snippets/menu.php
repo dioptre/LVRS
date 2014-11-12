@@ -61,7 +61,7 @@
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </li><!--//dropdown-->
-                    <li class="nav-item"><a href="http://lvrs.uservoice.com/knowledgebase" target="_blank">FAQ</a></li>
+                    <!-- <li class="nav-item"><a href="http://lvrs.uservoice.com/knowledgebase" target="_blank">FAQ</a></li> -->
                     <li class="nav-item"><a href="<?php echo html($site->loginurl()) ?>">Log in</a></li>
                     <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-secondary" href="<?php echo html($site->signupurl()) ?>">Sign Up</a></li>
                 </ul><!--//nav-->

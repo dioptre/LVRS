@@ -25,8 +25,8 @@
                         ?>')">
 
                         <div class="flex-caption container">
-                            <h3 class="title"><a href="#">Welcome to the Lvrs Blog</a></h3>
-                            <div class="meta">Tips and tricks on dating</div>
+                            <h3 class="title"><a href="#"><?php echo $page->cover()->html() ?></a></h3>
+                            <div class="meta"><?php echo $page->subcover()->html() ?></div>
                             <!-- <div class="meta">16th Oct, 2014</div> -->
                             <!-- <a class="more-link" href="blog-single.html">Read more &rarr;</a> -->
                         </div><!--//flex-caption-->

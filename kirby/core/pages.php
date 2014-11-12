@@ -62,7 +62,11 @@ abstract class PagesAbstract extends Collection {
   public function not() {
     $collection = clone $this;
     foreach(func_get_args() as $uri) {
-      if(is_a($uri, 'Page')) {
+      if(is_array($uri)) {
+        foreach($uri as $u) {
+          $collection = $collection->not($u);
+        }
+      } else if(is_a($uri, 'Page')) {
         // unset by Page object
         unset($collection->data[$uri->id()]);
       } else if(isset($collection->data[$uri])) {
@@ -203,15 +207,15 @@ abstract class PagesAbstract extends Collection {
       foreach($keys as $key) {
 
         $score = a::get($options['score'], $key, 1);
-
+        
         // check for a match
-        if($matches = preg_match_all($preg, $data[$key])) {
+        if($matches = preg_match_all($preg, $data[$key], $r)) {
 
           $page->searchHits  += $matches;
           $page->searchScore += $matches * $score;
 
           // check for full matches
-          if($matches = preg_match_all('!' . preg_quote($query) . '!i', $data[$key])) {
+          if($matches = preg_match_all('!' . preg_quote($query) . '!i', $data[$key], $r)) {
             $page->searchScore += $matches * $score;
           }
 
