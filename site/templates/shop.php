@@ -579,7 +579,7 @@
   <script src="/assets/shop/js/libs/messenger.min.js"></script>
   <script src="/assets/shop/js/libs/messenger-theme-future.js"></script>
 
-  <script src="/assets/shop/js/app.js"></script>
+  <script src="/assets/shop/js/app.js?v=1"></script>
 
 </body>
 </html>
