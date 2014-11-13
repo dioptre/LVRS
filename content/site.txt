@@ -22,7 +22,9 @@ Signupurl: shop#/signup
 
 ----
 
-Css: div#topcontrol {
+Css: 
+
+div#topcontrol {
    display: none !important;
 }
 
@@ -43,3 +45,6 @@ a.btn-cta-primary, .btn-cta-primary {background:#ec465e; border 1px solid #f87d8
 .blog-entry-wrapper .blog-entry .blog-entry-heading {height:350px; margin-bottom:35px;}
 .blog-entry-wrapper .blog-entry .blog-entry-heading .container {padding-top:100px;}
 .blog-entry-wrapper .blog-entry .blog-entry-heading .post-nav-top {display:none}
+h3.post-title { letter-spacing:2px; }
+.blog-list .post .content .post-title {  font-size:22px;}
+.blog-slider .slide, .blog-slider  { height:300px;}
