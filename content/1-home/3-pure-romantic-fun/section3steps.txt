@@ -34,4 +34,4 @@ Button: Sign up
 
 ----
 
-Buttonurl: /shop
+Buttonurl: /shop#signup
