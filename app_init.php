@@ -4,8 +4,8 @@
 	require_once('./lib/Stripe.php');
 
 	$stripe = array(
-	  "secret_key"      => "sk_test_VnTLRckG5HMoF2o9ZOEUeuV6",
-	  "publishable_key" => "pk_test_eGxKrTUUvwyBCCwUjiwqXCBZ"
+	  "secret_key"      => "sk_live_g9fSE98LDgWTZM3Vv7CccPW6",
+	  "publishable_key" => "pk_live_CPiVhO4rfNcUKZVNXMU7Bfuy"
 	);
 	
 	$GLOBALS['stripe'] = $stripe;

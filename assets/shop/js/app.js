@@ -215,7 +215,7 @@ App.SubscribeView = Ember.View.extend({
 	didInsertElement: function () {
 		var _this = this;
 		// this identifies your website in the createToken call below
-		Stripe.setPublishableKey('pk_test_eGxKrTUUvwyBCCwUjiwqXCBZ');
+		Stripe.setPublishableKey('pk_live_CPiVhO4rfNcUKZVNXMU7Bfuy');
 
 		var stripeResponseHandler = function (status, response) {
 			if (response.error) {
